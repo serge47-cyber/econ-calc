@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Економічні задачі — Інтерактивний калькулятор</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0A0D14;--bg2:#111520;--bg3:#181D2C;--bg4:#1E2436;
+  --line:rgba(255,255,255,0.07);--line2:rgba(255,255,255,0.13);
+  --gold:#D4A843;--gold2:#F0C96A;--gold-dim:rgba(212,168,67,0.12);
+  --teal:#3ECFAA;--red:#E05252;--blue:#5B9CF6;
+  --white:#F4F1EC;--mid:#9A95A8;--muted:#5A5669;
+  --fd:'Fraunces',Georgia,serif;--fb:'DM Sans',sans-serif;--fm:'DM Mono',monospace;
+  --r:10px;--rl:16px;
+}
+body{font-family:var(--fb);background:var(--bg);color:var(--white);min-height:100vh;font-size:14px;line-height:1.6}
+
+.hdr{padding:48px 48px 40px;background:var(--bg2);border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px;position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;top:-120px;right:-80px;width:420px;height:420px;background:radial-gradient(circle,rgba(212,168,67,0.07) 0%,transparent 65%);pointer-events:none}
+.hdr-kick{font-family:var(--fm);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;opacity:.9}
+.hdr-t{font-family:var(--fd);font-size:42px;font-weight:700;line-height:1.05;color:var(--white);letter-spacing:-.5px}
+.hdr-t em{font-style:italic;font-weight:300;color:var(--gold2)}
+.hdr-sub{margin-top:12px;font-size:14px;color:var(--mid);font-weight:300;max-width:480px;line-height:1.7}
+.hdr-tags{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap}
+.tag{font-family:var(--fm);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border-radius:100px;border:1px solid var(--line2);color:var(--mid)}
+.tag.g{border-color:rgba(212,168,67,.35);color:var(--gold);background:var(--gold-dim)}
+.hdr-stat{text-align:right}
+.hdr-sn{font-family:var(--fd);font-size:56px;font-weight:600;color:var(--gold2);line-height:1;letter-spacing:-2px}
+.hdr-sl{font-size:11px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:4px}
+
+.nav{background:var(--bg2);border-bottom:1px solid var(--line);padding:0 48px;display:flex;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.tb{font-family:var(--fb);font-size:12.5px;font-weight:400;color:var(--muted);padding:16px 22px;border:none;background:none;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;display:flex;align-items:center;gap:9px}
+.tb:hover{color:var(--mid)}
+.tb.on{color:var(--white);border-bottom-color:var(--gold);font-weight:500}
+.tb-n{width:20px;height:20px;border-radius:50%;background:var(--bg4);font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center;color:var(--muted);font-family:var(--fm);transition:all .2s;flex-shrink:0}
+.tb.on .tb-n{background:var(--gold);color:var(--bg)}
+
+.wrap{max-width:960px;margin:0 auto;padding:40px 48px 80px}
+@media(max-width:700px){.wrap{padding:24px 20px 60px}.hdr{padding:32px 20px 28px;grid-template-columns:1fr}.nav{padding:0 16px}.hdr-stat{display:none}}
+
+.panel{display:none}.panel.on{display:block}
+
+.sh{margin-bottom:28px}
+.st{font-family:var(--fd);font-size:30px;font-weight:600;color:var(--white);line-height:1.15;margin-bottom:6px}
+.st em{font-style:italic;font-weight:300;color:var(--gold2)}
+.sd{font-size:13px;color:var(--mid);font-weight:300;line-height:1.7}
+
+.fml{background:var(--bg3);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:var(--r);padding:20px 24px;margin-bottom:28px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start}
+.fml-b{font-family:var(--fm);font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;opacity:.8}
+.fml-eq{font-family:var(--fd);font-size:22px;font-weight:300;color:var(--white);letter-spacing:-.3px;line-height:1.4}
+.fml-eq sup,sub{font-size:13px}
+.fml-vs{display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--mid);min-width:190px}
+.fml-v{display:flex;gap:8px;align-items:baseline}
+.fml-v code{font-family:var(--fm);font-size:11px;color:var(--gold2);background:var(--gold-dim);padding:1px 7px;border-radius:4px;min-width:40px;text-align:center;flex-shrink:0}
+
+.ctrls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+@media(max-width:600px){.ctrls{grid-template-columns:1fr}}
+.ctrl{background:var(--bg3);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;transition:border-color .2s}
+.ctrl:hover{border-color:var(--line2)}
+.cl{font-family:var(--fm);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.cs{color:var(--gold);opacity:.9;font-size:11px}
+.cr{display:flex;align-items:center;gap:12px}
+
+input[type=range]{flex:1;-webkit-appearance:none;height:3px;border-radius:2px;background:var(--line2);outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--gold);cursor:pointer;border:2px solid var(--bg);box-shadow:0 0 0 1px var(--gold)}
+.val{font-family:var(--fm);font-size:14px;color:var(--white);min-width:72px;text-align:right}
+
+input[type=number],select{width:100%;font-family:var(--fm);font-size:13px;color:var(--white);background:var(--bg4);border:1px solid var(--line);border-radius:var(--r);padding:8px 12px;outline:none;transition:border-color .2s;margin-top:6px}
+input[type=number]:focus,select:focus{border-color:var(--gold)}
+select option{background:var(--bg3)}
+
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:2px;background:var(--line);border-radius:var(--rl);overflow:hidden;margin-bottom:24px}
+.ri{background:var(--bg3);padding:22px 24px}
+.rl{font-family:var(--fm);font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.rv{font-family:var(--fd);font-size:32px;font-weight:600;line-height:1;color:var(--white);letter-spacing:-1px}
+.rv.gd{color:var(--gold2)}.rv.tl{color:var(--teal)}.rv.rd{color:var(--red)}
+.ru{font-size:11px;color:var(--muted);margin-top:6px}
+
+.tbl{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:24px}
+.th{background:var(--bg4);display:grid;padding:10px 16px;font-family:var(--fm);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);gap:8px}
+.tr{display:grid;padding:10px 16px;font-size:13px;border-top:1px solid var(--line);gap:8px;transition:background .15s}
+.tr:hover{background:var(--bg4)}.tr.hl{background:rgba(212,168,67,.08)!important}
+.n{font-family:var(--fm);color:var(--white)}.n.g{color:var(--teal)}.n.r{color:var(--red)}
+
+.ch{background:var(--bg3);border:1px solid var(--line);border-radius:var(--r);padding:20px;margin-bottom:24px;height:240px}
+.ch canvas{width:100%!important;height:100%!important}
+
+.sens{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:24px}
+.sc{background:var(--bg3);padding:9px 6px;font-family:var(--fm);font-size:11px;text-align:center;color:var(--mid)}
+.sc.hd{background:var(--bg4);color:var(--muted);font-size:10px;letter-spacing:.5px}
+.sc.pp{background:rgba(62,207,170,.18);color:#3ECFAA}.sc.p{background:rgba(62,207,170,.07);color:#3ECFAA}
+.sc.nm{background:rgba(224,82,82,.08);color:#E05252}.sc.nn{background:rgba(224,82,82,.2);color:#E05252}
+
+.bars{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.br{display:flex;align-items:center;gap:14px}
+.bl{width:160px;font-size:12px;color:var(--mid);text-align:right;flex-shrink:0}
+.bt{flex:1;height:30px;background:var(--bg4);border-radius:5px;overflow:hidden}
+.bf{height:100%;border-radius:5px;display:flex;align-items:center;padding-right:12px;justify-content:flex-end;font-family:var(--fm);font-size:12px;font-weight:500;transition:width .5s cubic-bezier(.4,0,.2,1);min-width:50px}
+.bg{background:linear-gradient(90deg,#1A2B4A,#3B6FA0);color:#7BC4F7}
+.bgo{background:linear-gradient(90deg,#7A4800,#D4A843);color:#FFE4A0}
+.bt2{background:linear-gradient(90deg,#0A3D2D,#1F9E75);color:#7EE8CA}
+
+.info{background:rgba(91,156,246,.07);border:1px solid rgba(91,156,246,.15);border-left:3px solid var(--blue);border-radius:var(--r);padding:14px 18px;font-size:13px;color:#8BBFFF;margin-bottom:24px;line-height:1.7}
+.info strong{font-weight:500;color:#A8CEFF}
+.slbl{font-family:var(--fm);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div>
+    <div class="hdr-kick">Кафедра економіки будівництва КНУБА · Інтерактивний посібник · Викладач Шапошнікова І.О. </div>
+    <h1 class="hdr-t">Економічні<br><em>задачі</em></h1>
+    <p class="hdr-sub">Інтерактивний калькулятор для студентів вищих навчальних закладів України — бакалаврат та магістратура</p>
+    <div class="hdr-tags">
+      <span class="tag g">Фінансова математика</span>
+      <span class="tag">Інвестиційний аналіз</span>
+      <span class="tag">Управлінський облік</span>
+    </div>
+  </div>
+  <div class="hdr-stat">
+    <div class="hdr-sn">5</div>
+    <div class="hdr-sl">розділів</div>
+  </div>
+</header>
+
+<nav class="nav">
+  <button class="tb on" onclick="show(0)"><span class="tb-n">1</span>Складні відсотки</button>
+  <button class="tb" onclick="show(1)"><span class="tb-n">2</span>Аннуїтет / Кредит</button>
+  <button class="tb" onclick="show(2)"><span class="tb-n">3</span>ЧПВ / NPV</button>
+  <button class="tb" onclick="show(3)"><span class="tb-n">4</span>Беззбитковість</button>
+  <button class="tb" onclick="show(4)"><span class="tb-n">5</span>Рентабельність</button>
+</nav>
+
+<div class="wrap">
+
+<!-- TAB 1 -->
+<div class="panel on" id="p0">
+  <div class="sh"><h2 class="st">Складні <em>відсотки</em></h2><p class="sd">Нарахування відсотків на відсотки — фундаментальна концепція часової вартості грошей (TVM)</p></div>
+  <div class="fml">
+    <div><div class="fml-b">Формула</div><div class="fml-eq">FV = PV × (1 + r/m)<sup>n·m</sup></div></div>
+    <div class="fml-vs"><div class="fml-v"><code>FV</code><span>майбутня вартість</span></div><div class="fml-v"><code>PV</code><span>початкова сума</span></div><div class="fml-v"><code>r</code><span>річна ставка</span></div><div class="fml-v"><code>m</code><span>нарахувань/рік</span></div><div class="fml-v"><code>n</code><span>кількість років</span></div></div>
+  </div>
+  <div class="ctrls">
+    <div class="ctrl"><div class="cl"><span class="cs">PV</span>Початкова сума</div><div class="cr"><input type="range" id="c_pv" min="1000" max="500000" step="1000" value="50000" oninput="ci()"><span class="val" id="v_pv">50 000 ₴</span></div></div>
+    <div class="ctrl"><div class="cl"><span class="cs">r</span>Річна ставка</div><div class="cr"><input type="range" id="c_r" min="1" max="30" step=".5" value="12" oninput="ci()"><span class="val" id="v_r">12%</span></div></div>
+    <div class="ctrl"><div class="cl"><span class="cs">n</span>Термін (роки)</div><div class="cr"><input type="range" id="c_n" min="1" max="30" step="1" value="5" oninput="ci()"><span class="val" id="v_n">5 р.</span></div></div>
+    <div class="ctrl"><div class="cl"><span class="cs">m</span>Нарахування на рік</div><select id="c_m" onchange="ci()"><option value="1">1 — щорічно</option><option value="2">2 — піврічно</option><option value="4" selected>4 — щоквартально</option><option value="12">12 — щомісяця</option><option value="365">365 — щодня</option></select></div>
+  </div>
+  <div class="res">
+    <div class="ri"><div class="rl">Майбутня вартість</div><div class="rv gd" id="r_fv">—</div><div class="ru">гривень</div></div>
+    <div class="ri"><div class="rl">Дохід від відсотків</div><div class="rv" id="r_int">—</div><div class="ru">гривень</div></div>
+    <div class="ri"><div class="rl">Ефективна ставка EAR</div><div class="rv tl" id="r_ear">—</div><div class="ru">%</div></div>
+    <div class="ri"><div class="rl">Коефіцієнт зросту</div><div class="rv" id="r_mult">—</div><div class="ru">разів</div></div>
+  </div>
+  <div class="tbl" id="t_ci"></div>
+  <div class="ch"><canvas id="g_ci"></canvas></div>
+</div>
+
+<!-- TAB 2 -->
+<div class="panel" id="p1">
+  <div class="sh"><h2 class="st">Аннуїтет та <em>кредитні розрахунки</em></h2><p class="sd">Розрахунок щомісячного платежу за кредитом методом рівних ануїтетних платежів</p></div>
+  <div class="fml">
+    <div><div class="fml-b">Ануїтетний платіж</div><div class="fml-eq">A = PV · r<sub>m</sub> / (1 − (1 + r<sub>m</sub>)<sup>−N</sup>)</div></div>
+    <div class="fml-vs"><div class="fml-v"><code>A</code><span>щомісячний платіж</span></div><div class="fml-v"><code>PV</code><span>сума кредиту</span></div><div class="fml-v"><code>r_m</code><span>місячна ставка r/12</span></div><div class="fml-v"><code>N</code><span>кількість місяців</span></div></div>
+  </div>
+  <div class="ctrls">
+    <div class="ctrl"><div class="cl"><span class="cs">PV</span>Сума кредиту</div><div class="cr"><input type="range" id="a_pv" min="10000" max="2000000" step="10000" value="300000" oninput="an()"><span class="val" id="v_apv">300 000 ₴</span></div></div>
+    <div class="ctrl"><div class="cl"><span class="cs">r</span>Річна ставка</div><div class="cr"><input type="range" id="a_r" min="1" max="30" step=".5" value="18" oninput="an()"><span class="val" id="v_ar">18%</span></div></div>
+    <div class="ctrl"><div class="cl"><span class="cs">n</span>Термін (роки)</div><div class="cr"><input type="range" id="a_n" min="1" max="30" step="1" value="10" oninput="an()"><span class="val" id="v_an">10 р.</span></div></div>
+    <div class="ctrl"><div class="cl"><span class="cs">↓</span>Перший внесок</div><div class="cr"><input type="range" id="a_dp" min="0" max="50" step="5" value="20" oninput="an()"><span class="val" id="v_adp">20%</span></div></div>
+  </div>
+  <div class="res">
+    <div class="ri"><div class="rl">Щомісячний платіж</div><div class="rv gd" id="r_apay">—</div><div class="ru">₴ на місяць</div></div>
+    <div class="ri"><div class="rl">Загальна сума виплат</div><div class="rv" id="r_atot">—</div><div class="ru">гривень</div></div>
+    <div class="ri"><div class="rl">Переплата відсотків</div><div class="rv rd" id="r_aover">—</div><div class="ru">гривень</div></div>
+    <div class="ri"><div class="rl">Тіло кредиту</div><div class="rv" id="r_abody">—</div><div class="ru">гривень</div></div>
+  </div>
+  <div class="tbl" id="t_an"></div>
+  <div class="ch"><canvas id="g_an"></canvas></div>
+</div>
+
+<!-- TAB 3 -->
+<div class="panel" id="p2">
+  <div class="sh"><h2 class="st">Чиста приведена вартість <em>NPV</em></h2><p class="sd">Оцінка інвестиційного проекту методом дисконтування майбутніх грошових потоків</p></div>
+  <div class="fml">
+    <div><div class="fml-b">Формула NPV</div><div class="fml-eq">NPV = −IC + Σ CF<sub>t</sub> / (1 + r)<sup>t</sup></div></div>
+    <div class="fml-vs"><div class="fml-v"><code>IC</code><span>початкові інвестиції</span></div><div class="fml-v"><code>CF_t</code><span>потік у рік t</span></div><div class="fml-v"><code>r</code><span>ставка дисконт.</span></div><div class="fml-v"><code>t</code><span>рік проекту</span></div></div>
+  </div>
+  <div class="ctrls">
+    <div class="ctrl"><div class="cl"><span class="cs">IC</span>Початкові інвестиції (тис. ₴)</div><input type="number" id="n_ic" value="500" min="1" oninput="npv()"></div>
+    <div class="ctrl"><div class="cl"><span class="cs">r</span>Ставка дисконтування</div><div class="cr"><input type="range" id="n_r" min="1" max="40" step="1" value="15" oninput="npv()"><span class="val" id="v_nr">15%</span></div></div>
+    <div class="ctrl"><div class="cl"><span class="cs">CF</span>Потік рік 1–3 (тис. ₴)</div><input type="number" id="n_cf1" value="150" min="0" oninput="npv()"></div>
+    <div class="ctrl"><div class="cl"><span class="cs">CF</span>Потік рік 4–6 (тис. ₴)</div><input type="number" id="n_cf2" value="200" min="0" oninput="npv()"></div>
+  </div>
+  <div class="res">
+    <div class="ri"><div class="rl">NPV (тис. ₴)</div><div class="rv gd" id="r_npv">—</div><div class="ru">тис. гривень</div></div>
+    <div class="ri"><div class="rl">Рішення</div><div class="rv" id="r_ndec" style="font-size:18px">—</div><div class="ru" id="r_nreason">—</div></div>
+    <div class="ri"><div class="rl">Індекс рентаб. PI</div><div class="rv" id="r_npi">—</div><div class="ru">PI = PV / IC</div></div>
+    <div class="ri"><div class="rl">Сума приведених CF</div><div class="rv tl" id="r_npvcf">—</div><div class="ru">тис. гривень</div></div>
+  </div>
+  <div class="tbl" id="t_npv"></div>
+  <div class="slbl">Аналіз чутливості NPV до ставки дисконтування</div>
+  <div class="sens" id="s_npv"></div>
+</div>
+
+<!-- TAB 4 -->
+<div class="panel" id="p3">
+  <div class="sh"><h2 class="st">Точка <em>беззбитковості</em></h2><p class="sd">Break-Even Point — обсяг продажів при якому сукупні доходи дорівнюють сукупним витратам</p></div>
+  <div class="fml">
+    <div><div class="fml-b">Формули BEP</div><div class="fml-eq" style="font-size:19px">Q* = FC / (P − VC)&nbsp;&nbsp;·&nbsp;&nbsp;S* = FC / (1 − VC/P)</div></div>
+    <div class="fml-vs"><div class="fml-v"><code>FC</code><span>постійні витрати</span></div><div class="fml-v"><code>P</code><span>ціна одиниці</span></div><div class="fml-v"><code>VC</code><span>змінні витрати/од.</span></div><div class="fml-v"><code>Q*, S*</code><span>BEP в шт. та ₴</span></div></div>
+  </div>
+  <div class="ctrls">
+    <div class="ctrl"><div class="cl"><span class="cs">FC</span>Постійні витрати (₴/міс)</div><div class="cr"><input type="range" id="b_fc" min="5000" max="500000" step="5000" value="80000" oninput="be()"><span class="val" id="v_bfc">80 000</span></div></div>
+    <div class="ctrl"><div class="cl"><span class="cs">P</span>Ціна одиниці (₴)</div><div class="cr"><input type="range" id="b_p" min="50" max="5000" step="50" value="800" oninput="be()"><span class="val" id="v_bp">800</span></div></div>
+    <div class="ctrl"><div class="cl"><span class="cs">VC</span>Змінні витрати/одиниця (₴)</div><div class="cr"><input type="range" id="b_vc" min="10" max="4000" step="10" value="450" oninput="be()"><span class="val" id="v_bvc">450</span></div></div>
+    <div class="ctrl"><div class="cl"><span class="cs">Q</span>Фактичний обсяг (шт/міс)</div><div class="cr"><input type="range" id="b_q" min="50" max="2000" step="10" value="400" oninput="be()"><span class="val" id="v_bq">400</span></div></div>
+  </div>
+  <div class="res">
+    <div class="ri"><div class="rl">BEP у штуках</div><div class="rv gd" id="r_bq">—</div><div class="ru">штук/місяць</div></div>
+    <div class="ri"><div class="rl">BEP у грошах</div><div class="rv" id="r_bs">—</div><div class="ru">₴ виручки</div></div>
+    <div class="ri"><div class="rl">Маржа безпеки</div><div class="rv tl" id="r_bm">—</div><div class="ru">%</div></div>
+    <div class="ri"><div class="rl">Прибуток / Збиток</div><div class="rv" id="r_bp">—</div><div class="ru" id="r_bpl">₴</div></div>
+  </div>
+  <div class="ch" style="height:260px"><canvas id="g_be"></canvas></div>
+  <div class="tbl" id="t_be"></div>
+</div>
+
+<!-- TAB 5 -->
+<div class="panel" id="p4">
+  <div class="sh"><h2 class="st">Показники <em>рентабельності</em></h2><p class="sd">ROA, ROE, ROS, EBITDA Margin — ключові коефіцієнти оцінки ефективності підприємства</p></div>
+  <div class="fml">
+    <div><div class="fml-b">Основні формули</div><div class="fml-eq" style="font-size:17px;line-height:1.8">ROA = NP / A · 100%&nbsp;&nbsp;·&nbsp;&nbsp;ROE = NP / E · 100%<br>ROS = NP / Rev · 100%</div></div>
+    <div class="fml-vs"><div class="fml-v"><code>NP</code><span>чистий прибуток</span></div><div class="fml-v"><code>A</code><span>активи</span></div><div class="fml-v"><code>E</code><span>власний капітал</span></div><div class="fml-v"><code>Rev</code><span>виручка</span></div></div>
+  </div>
+  <div class="info"><strong>Завдання:</strong> Підприємство «Промтех» має наступні показники фінансової звітності. Розрахуйте показники рентабельності та зробіть висновок про ефективність діяльності порівняно з галузевими орієнтирами.</div>
+  <div class="ctrls">
+    <div class="ctrl"><div class="cl"><span class="cs">Rev</span>Виручка (тис. ₴)</div><input type="number" id="r_rev" value="8500" oninput="rp()"></div>
+    <div class="ctrl"><div class="cl"><span class="cs">NP</span>Чистий прибуток (тис. ₴)</div><input type="number" id="r_np" value="1200" oninput="rp()"></div>
+    <div class="ctrl"><div class="cl"><span class="cs">A</span>Загальні активи (тис. ₴)</div><input type="number" id="r_a" value="12000" oninput="rp()"></div>
+    <div class="ctrl"><div class="cl"><span class="cs">E</span>Власний капітал (тис. ₴)</div><input type="number" id="r_e" value="7000" oninput="rp()"></div>
+    <div class="ctrl"><div class="cl"><span class="cs">EB</span>EBITDA (тис. ₴)</div><input type="number" id="r_eb" value="2100" oninput="rp()"></div>
+    <div class="ctrl"><div class="cl"><span class="cs">CG</span>Собівартість (тис. ₴)</div><input type="number" id="r_cg" value="5800" oninput="rp()"></div>
+  </div>
+  <div class="res">
+    <div class="ri"><div class="rl">ROA</div><div class="rv gd" id="rr_roa">—</div><div class="ru">рентаб. активів</div></div>
+    <div class="ri"><div class="rl">ROE</div><div class="rv" id="rr_roe">—</div><div class="ru">рентаб. капіталу</div></div>
+    <div class="ri"><div class="rl">ROS</div><div class="rv tl" id="rr_ros">—</div><div class="ru">рентаб. продажів</div></div>
+    <div class="ri"><div class="rl">EBITDA Margin</div><div class="rv" id="rr_em">—</div><div class="ru">%</div></div>
+  </div>
+  <div class="bars" id="b_rp"></div>
+  <div class="tbl" id="t_rp"></div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+const f=(n,d=0)=>isNaN(n)?'—':n.toLocaleString('uk-UA',{minimumFractionDigits:d,maximumFractionDigits:d});
+Chart.defaults.color='#5A5669';
+Chart.defaults.borderColor='rgba(255,255,255,0.06)';
+Chart.defaults.font.family='DM Mono';
+
+function show(i){
+  document.querySelectorAll('.tb').forEach((b,j)=>b.classList.toggle('on',i===j));
+  document.querySelectorAll('.panel').forEach((p,j)=>p.classList.toggle('on',i===j));
+  [ci,an,npv,be,rp][i]();
+}
+
+let gCI=null;
+function ci(){
+  const pv=+document.getElementById('c_pv').value,r=+document.getElementById('c_r').value/100;
+  const n=+document.getElementById('c_n').value,m=+document.getElementById('c_m').value;
+  document.getElementById('v_pv').textContent=f(pv)+' ₴';
+  document.getElementById('v_r').textContent=(r*100).toFixed(1)+'%';
+  document.getElementById('v_n').textContent=n+' р.';
+  const fv=pv*Math.pow(1+r/m,n*m),ear=Math.pow(1+r/m,m)-1;
+  document.getElementById('r_fv').textContent=f(fv);
+  document.getElementById('r_int').textContent=f(fv-pv);
+  document.getElementById('r_ear').textContent=(ear*100).toFixed(2)+'%';
+  document.getElementById('r_mult').textContent=(fv/pv).toFixed(3)+'×';
+  const c='50px 1fr 1fr 1fr';
+  let h=`<div class="th" style="grid-template-columns:${c}"><span>Рік</span><span>Початок</span><span>Нараховано</span><span>Кінець</span></div>`;
+  let bal=pv;
+  for(let y=1;y<=Math.min(n,10);y++){const nb=bal*Math.pow(1+r/m,m);h+=`<div class="tr${y===n?' hl':''}" style="grid-template-columns:${c}"><span>${y}</span><span class="n">${f(bal)} ₴</span><span class="n g">+${f(nb-bal)} ₴</span><span class="n">${f(nb)} ₴</span></div>`;bal=nb;}
+  document.getElementById('t_ci').innerHTML=h;
+  const lbls=[],dC=[],dS=[];
+  for(let y=0;y<=n;y++){lbls.push(y);dC.push(+(pv*Math.pow(1+r/m,y*m)).toFixed(0));dS.push(+(pv*(1+r*y)).toFixed(0));}
+  if(gCI)gCI.destroy();
+  gCI=new Chart(document.getElementById('g_ci'),{type:'line',data:{labels:lbls,datasets:[{label:'Складні %',data:dC,borderColor:'#D4A843',backgroundColor:'rgba(212,168,67,0.07)',tension:.4,borderWidth:2,pointRadius:3,pointBackgroundColor:'#D4A843'},{label:'Прості %',data:dS,borderColor:'rgba(255,255,255,0.18)',borderDash:[5,5],backgroundColor:'transparent',tension:0,borderWidth:1.5,pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:11},color:'#9A95A8'}}},scales:{y:{ticks:{callback:v=>f(v/1000,0)+'к',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}},x:{ticks:{font:{size:11}},grid:{display:false}}}}});
+}
+
+let gAN=null;
+function an(){
+  const pvF=+document.getElementById('a_pv').value,r=+document.getElementById('a_r').value/100;
+  const n=+document.getElementById('a_n').value,dp=+document.getElementById('a_dp').value/100;
+  document.getElementById('v_apv').textContent=f(pvF)+' ₴';
+  document.getElementById('v_ar').textContent=(r*100).toFixed(1)+'%';
+  document.getElementById('v_an').textContent=n+' р.';
+  document.getElementById('v_adp').textContent=(dp*100)+'%';
+  const pv=pvF*(1-dp),rm=r/12,N=n*12;
+  const A=rm===0?pv/N:pv*rm/(1-Math.pow(1+rm,-N));
+  const total=A*N+pvF*dp;
+  document.getElementById('r_apay').textContent=f(A);
+  document.getElementById('r_atot').textContent=f(total);
+  document.getElementById('r_aover').textContent=f(total-pvF);
+  document.getElementById('r_abody').textContent=f(pv);
+  const c='44px 1fr 1fr 1fr 1fr';
+  let h=`<div class="th" style="grid-template-columns:${c}"><span>Рік</span><span>Платіж/міс</span><span>Борг</span><span>Відсотки</span><span>Залишок</span></div>`;
+  let bal=pv;const lbls=[],dP=[],dI=[];
+  for(let y=1;y<=Math.min(n,15);y++){let yP=0,yI=0;for(let mo=0;mo<12;mo++){const i=bal*rm;yI+=i;yP+=A-i;bal-=A-i;}lbls.push(y);dP.push(+yP.toFixed(0));dI.push(+yI.toFixed(0));if(y<=10||y===n)h+=`<div class="tr${y===n?' hl':''}" style="grid-template-columns:${c}"><span>${y}</span><span class="n">${f(A)} ₴</span><span class="n g">${f(yP)} ₴</span><span class="n r">${f(yI)} ₴</span><span class="n">${f(Math.max(bal,0))} ₴</span></div>`;}
+  document.getElementById('t_an').innerHTML=h;
+  if(gAN)gAN.destroy();
+  gAN=new Chart(document.getElementById('g_an'),{type:'bar',data:{labels:lbls,datasets:[{label:'Борг',data:dP,backgroundColor:'rgba(91,156,246,0.65)'},{label:'Відсотки',data:dI,backgroundColor:'rgba(212,168,67,0.65)'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:11},color:'#9A95A8'}}},scales:{x:{stacked:true,ticks:{font:{size:10}},grid:{display:false}},y:{stacked:true,ticks:{callback:v=>f(v/1000,0)+'к',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}}}}});
+}
+
+function npv(){
+  const ic=+document.getElementById('n_ic').value||1,r=+document.getElementById('n_r').value/100;
+  const cf1=+document.getElementById('n_cf1').value||0,cf2=+document.getElementById('n_cf2').value||0;
+  document.getElementById('v_nr').textContent=(r*100).toFixed(0)+'%';
+  const cfs=[cf1,cf1,cf1,cf2,cf2,cf2];let pvcf=0;
+  const c='40px 1fr 1fr 1fr';
+  let h=`<div class="th" style="grid-template-columns:${c}"><span>Рік</span><span>Грошовий потік</span><span>Коеф. дисконт.</span><span>Приведена вартість</span></div>`;
+  h+=`<div class="tr" style="grid-template-columns:${c}"><span>0</span><span class="n r">−${f(ic)} тис.</span><span class="n">1.0000</span><span class="n r">−${f(ic)} тис.</span></div>`;
+  for(let t=1;t<=6;t++){const df=1/Math.pow(1+r,t),pv=cfs[t-1]*df;pvcf+=pv;h+=`<div class="tr${t===6?' hl':''}" style="grid-template-columns:${c}"><span>${t}</span><span class="n">${f(cfs[t-1])} тис.</span><span class="n">${df.toFixed(4)}</span><span class="n g">${f(pv,1)} тис.</span></div>`;}
+  document.getElementById('t_npv').innerHTML=h;
+  const nv=pvcf-ic,pi=pvcf/ic;
+  document.getElementById('r_npv').textContent=f(nv,1);
+  document.getElementById('r_npv').className='rv '+(nv>=0?'gd':'rd');
+  document.getElementById('r_npi').textContent=pi.toFixed(3);
+  document.getElementById('r_npvcf').textContent=f(pvcf,1);
+  document.getElementById('r_ndec').textContent=nv>0?'✓ Прийняти':'✗ Відхилити';
+  document.getElementById('r_ndec').style.color=nv>0?'#3ECFAA':'#E05252';
+  document.getElementById('r_nreason').textContent=nv>0?'NPV > 0 — ефективно':'NPV ≤ 0 — неефективно';
+  const rates=[5,10,15,20,25];let s='';
+  rates.forEach(rv=>s+=`<div class="sc hd">${rv}%</div>`);
+  [0.8,0.9,1.0,1.1,1.2].forEach(sc=>{rates.forEach(rv=>{const rc=rv/100;let p2=0;cfs.forEach((c,i)=>p2+=c*sc/Math.pow(1+rc,i+1));const n2=p2-ic;s+=`<div class="sc ${n2>50?'pp':n2>0?'p':n2>-50?'nm':'nn'}">${f(n2,0)}</div>`;});});
+  document.getElementById('s_npv').innerHTML=s;
+}
+
+let gBE=null;
+function be(){
+  const fc=+document.getElementById('b_fc').value,p=+document.getElementById('b_p').value;
+  const vc=+document.getElementById('b_vc').value,q=+document.getElementById('b_q').value;
+  document.getElementById('v_bfc').textContent=f(fc);document.getElementById('v_bp').textContent=f(p);
+  document.getElementById('v_bvc').textContent=f(vc);document.getElementById('v_bq').textContent=f(q);
+  const cm=p-vc;if(cm<=0){document.getElementById('r_bq').textContent='∞';return;}
+  const bq=fc/cm,bs=fc/(1-vc/p),rev=q*p,tc=fc+q*vc,pr=rev-tc,ms=q>bq?(q-bq)/q*100:0;
+  document.getElementById('r_bq').textContent=f(bq,1);document.getElementById('r_bs').textContent=f(bs);
+  document.getElementById('r_bm').textContent=ms.toFixed(1)+'%';
+  document.getElementById('r_bp').textContent=f(Math.abs(pr));
+  document.getElementById('r_bp').className='rv '+(pr>=0?'tl':'rd');
+  document.getElementById('r_bpl').textContent=pr>=0?'₴ прибутку':'₴ збитку';
+  const mx=Math.ceil(bq*2.2/100)*100,st=12,ql=[],rl=[],cl2=[],fl=[];
+  for(let i=0;i<=st;i++){const qi=mx*i/st;ql.push(qi.toFixed(0));rl.push(+(qi*p).toFixed(0));cl2.push(+(fc+qi*vc).toFixed(0));fl.push(fc);}
+  if(gBE)gBE.destroy();
+  gBE=new Chart(document.getElementById('g_be'),{type:'line',data:{labels:ql,datasets:[{label:'Виручка',data:rl,borderColor:'#3ECFAA',backgroundColor:'rgba(62,207,170,0.05)',tension:.1,borderWidth:2,pointRadius:0},{label:'Загальні витрати',data:cl2,borderColor:'#E05252',backgroundColor:'rgba(224,82,82,0.05)',tension:.1,borderWidth:2,pointRadius:0},{label:'Постійні витрати',data:fl,borderColor:'rgba(255,255,255,0.18)',borderDash:[5,5],backgroundColor:'transparent',tension:0,borderWidth:1.5,pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:11},color:'#9A95A8'}}},scales:{x:{ticks:{font:{size:10}},title:{display:true,text:'Обсяг (шт)',color:'#5A5669'},grid:{display:false}},y:{ticks:{callback:v=>f(v/1000,0)+'к',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}}}}});
+  const c='1fr 1fr 1fr 1fr';
+  let h=`<div class="th" style="grid-template-columns:${c}"><span>Показник</span><span>Значення</span><span>На одиницю</span><span>Частка</span></div>`;
+  [['Виручка',f(rev)+' ₴',f(p)+' ₴','100%'],['Змінні витрати',f(q*vc)+' ₴',f(vc)+' ₴',(vc/p*100).toFixed(1)+'%'],['Маржинальний дохід',f(q*cm)+' ₴',f(cm)+' ₴',(cm/p*100).toFixed(1)+'%'],['Постійні витрати',f(fc)+' ₴','—','—'],['Прибуток/Збиток',f(Math.abs(pr))+' ₴','—','—']].forEach((r,i)=>{h+=`<div class="tr${i===4?' hl':''}" style="grid-template-columns:${c}"><span>${r[0]}</span><span class="n ${i===4&&pr<0?'r':i===4?'g':''}">${r[1]}</span><span class="n">${r[2]}</span><span>${r[3]}</span></div>`;});
+  document.getElementById('t_be').innerHTML=h;
+}
+
+function rp(){
+  const rev=+document.getElementById('r_rev').value||1,np=+document.getElementById('r_np').value||0;
+  const a=+document.getElementById('r_a').value||1,e=+document.getElementById('r_e').value||1;
+  const eb=+document.getElementById('r_eb').value||0,cg=+document.getElementById('r_cg').value||0;
+  const roa=np/a*100,roe=np/e*100,ros=np/rev*100,em=eb/rev*100,gm=(rev-cg)/rev*100;
+  document.getElementById('rr_roa').textContent=roa.toFixed(2)+'%';document.getElementById('rr_roe').textContent=roe.toFixed(2)+'%';
+  document.getElementById('rr_ros').textContent=ros.toFixed(2)+'%';document.getElementById('rr_em').textContent=em.toFixed(2)+'%';
+  const mts=[['ROA — рентаб. активів',roa,30,'bg'],['ROE — рентаб. капіталу',roe,50,'bgo'],['ROS — рентаб. продажів',ros,30,'bt2'],['EBITDA margin',em,50,'bg'],['Валова маржа',gm,80,'bgo']];
+  document.getElementById('b_rp').innerHTML=mts.map(([l,v,mx,c])=>`<div class="br"><div class="bl">${l}</div><div class="bt"><div class="bf ${c}" style="width:${Math.min(100,v/mx*100).toFixed(1)}%">${v.toFixed(1)}%</div></div></div>`).join('');
+  const c='1fr 1fr 1fr';let h=`<div class="th" style="grid-template-columns:${c}"><span>Показник</span><span>Значення</span><span>Оцінка</span></div>`;
+  [[roa,'ROA',5,15],[roe,'ROE',10,20],[ros,'ROS',3,10],[em,'EBITDA margin',10,25],[gm,'Валова маржа',20,40]].forEach(([v,nm,lo,hi])=>{
+    const[lbl,col]=v>=hi?['✓ Відмінно','#3ECFAA']:v>=lo?['~ Задовільно','#D4A843']:['✗ Низький','#E05252'];
+    h+=`<div class="tr" style="grid-template-columns:${c}"><span>${nm}</span><span class="n">${v.toFixed(2)}%</span><span style="color:${col};font-weight:500">${lbl}</span></div>`;
+  });
+  document.getElementById('t_rp').innerHTML=h;
+}
+
+ci();
+</script>
+</body>
+</html>
