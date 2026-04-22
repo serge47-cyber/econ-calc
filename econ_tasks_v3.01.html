@@ -124,6 +124,34 @@ select option{background:var(--bg3)}
 .info strong{font-weight:500;color:#A8CEFF}
 .warn{background:rgba(212,168,67,.07);border:1px solid rgba(212,168,67,.2);border-left:3px solid var(--gold);border-radius:var(--r);padding:14px 18px;font-size:13px;color:#D4A843;margin-bottom:24px;line-height:1.7}
 .slbl{font-family:var(--fm);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.learn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.learn-card{background:linear-gradient(180deg,var(--bg3),var(--bg4));border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.learn-k{font-family:var(--fm);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.learn-v{font-family:var(--fd);font-size:28px;line-height:1;color:var(--white);margin-bottom:10px}
+.learn-p{font-size:13px;color:var(--mid);line-height:1.7}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px}
+.flow-step{background:var(--bg3);border:1px solid var(--line);border-radius:var(--r);padding:16px;position:relative}
+.flow-step:not(:last-child)::after{content:'→';position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-family:var(--fd);font-size:24px;color:var(--gold2)}
+.flow-num{font-family:var(--fm);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.flow-step strong{display:block;font-size:14px;color:var(--white);margin-bottom:8px}
+.flow-step span{font-size:12px;color:var(--mid);line-height:1.6}
+.ex-box{background:rgba(62,207,170,.06);border:1px solid rgba(62,207,170,.16);border-left:3px solid var(--teal);border-radius:var(--r);padding:18px;margin-bottom:24px}
+.ex-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.ex-cell{background:var(--bg3);border:1px solid var(--line);border-radius:10px;padding:12px}
+.ex-cell b{display:block;font-family:var(--fm);font-size:10px;letter-spacing:1.5px;color:var(--teal);margin-bottom:6px;text-transform:uppercase}
+.ex-cell span{font-size:13px;color:var(--white)}
+.quiz{background:var(--bg3);border:1px solid var(--line);border-radius:var(--rl);padding:22px 24px;margin-bottom:24px}
+.quiz-item{padding:16px 0;border-top:1px solid var(--line)}
+.quiz-item:first-of-type{border-top:none;padding-top:0}
+.quiz-q{font-size:14px;color:var(--white);margin-bottom:12px}
+.quiz-opts{display:flex;gap:8px;flex-wrap:wrap}
+.quiz-btn{font-family:var(--fm);font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:8px 12px;border-radius:999px;border:1px solid var(--line2);background:none;color:var(--mid);cursor:pointer;transition:all .2s}
+.quiz-btn:hover{color:var(--white);border-color:var(--gold)}
+.quiz-fb{margin-top:10px;font-size:13px;line-height:1.7;color:var(--mid)}
+.quiz-fb.ok{color:#7EECD6}
+.quiz-fb.bad{color:#FF9D9D}
+@media(max-width:900px){.learn-grid,.flow,.ex-grid{grid-template-columns:1fr 1fr}.flow-step:not(:last-child)::after{display:none}}
+@media(max-width:600px){.learn-grid,.flow,.ex-grid{grid-template-columns:1fr}}
 
 .method-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
 .mtb{font-family:var(--fm);font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:7px 16px;border-radius:100px;border:1px solid var(--line2);color:var(--muted);background:none;cursor:pointer;transition:all .2s}
@@ -270,8 +298,74 @@ select option{background:var(--bg3)}
     <div class="ri"><div class="rl">Коефіцієнт зросту</div><div class="rv" id="r_mult">—</div><div class="ru">разів</div></div>
     <div class="ri"><div class="rl">Правило 72 (роки×2)</div><div class="rv bl" id="r_r72">—</div><div class="ru">приблизно</div></div>
   </div>
+  <div class="slbl">Ключові ідеї теми</div>
+  <div class="learn-grid">
+    <div class="learn-card">
+      <div class="learn-k">Що відбувається</div>
+      <div class="learn-v">%</div>
+      <div class="learn-p">У кожному наступному періоді відсотки нараховуються вже не тільки на початковий вклад, а й на раніше зароблені відсотки. Саме це і створює ефект прискореного зростання.</div>
+    </div>
+    <div class="learn-card">
+      <div class="learn-k">Що найбільше впливає</div>
+      <div class="learn-v">r × n × m</div>
+      <div class="learn-p">На результат одночасно впливають ставка, тривалість і частота нарахування. Найпотужніший фактор на довгому горизонті — час, бо складний відсоток працює експоненційно.</div>
+    </div>
+    <div class="learn-card">
+      <div class="learn-k">Для чого це потрібно</div>
+      <div class="learn-v">TVM</div>
+      <div class="learn-p">Через формули складних відсотків порівнюють депозити, кредити, інвестиції, облігації та будь-які рішення, де гроші рознесені в часі.</div>
+    </div>
+  </div>
+  <div class="slbl">Алгоритм розв’язання</div>
+  <div class="flow">
+    <div class="flow-step"><div class="flow-num">Крок 1</div><strong>З’ясуйте, що дано</strong><span>Випишіть `PV`, річну ставку `r`, строк `n` і частоту нарахування `m`.</span></div>
+    <div class="flow-step"><div class="flow-num">Крок 2</div><strong>Переведіть ставку</strong><span>Для одного періоду використайте `r/m`, а кількість періодів дорівнює `n·m`.</span></div>
+    <div class="flow-step"><div class="flow-num">Крок 3</div><strong>Порахуйте FV</strong><span>Підставте дані у формулу `FV = PV × (1 + r/m)^(n·m)`.</span></div>
+    <div class="flow-step"><div class="flow-num">Крок 4</div><strong>Інтерпретуйте</strong><span>Окремо знайдіть дохід, EAR і оцініть, за скільки років сума приблизно подвоїться.</span></div>
+  </div>
   <div class="tbl" id="t_ci"></div>
   <div class="ch"><canvas id="g_ci"></canvas></div>
+  <div class="ex-box">
+    <div class="slbl" style="margin-bottom:6px;color:#7EECD6">Розбір прикладу</div>
+    <div class="learn-p">Нехай студент інвестує <strong>50 000 ₴</strong> під <strong>12% річних</strong> на <strong>5 років</strong> з <strong>щоквартальним</strong> нарахуванням. Тоді ставка за квартал становить `12% / 4 = 3%`, а кількість періодів дорівнює `5 × 4 = 20`.</div>
+    <div class="ex-grid">
+      <div class="ex-cell"><b>1. Дані</b><span>PV = 50 000, r = 12%, n = 5, m = 4</span></div>
+      <div class="ex-cell"><b>2. Період</b><span>r/m = 3% за квартал</span></div>
+      <div class="ex-cell"><b>3. Кількість</b><span>n·m = 20 кварталів</span></div>
+      <div class="ex-cell"><b>4. Результат</b><span>FV ≈ 90 306 ₴, дохід ≈ 40 306 ₴</span></div>
+    </div>
+    <div class="learn-p" style="margin-top:14px">Інтерпретація: вклад збільшується приблизно у <strong>1.81 раза</strong>. Якщо порівняти з простими відсотками, складний відсоток дає більший результат, бо кожен квартал база для нарахування росте.</div>
+  </div>
+  <div class="quiz">
+    <div class="slbl">Тест на засвоєння</div>
+    <div class="quiz-item">
+      <div class="quiz-q">1. Що є головною відмінністю складних відсотків від простих?</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" type="button" onclick="ciQuiz('ciq1',false)">Ставка завжди нижча</button>
+        <button class="quiz-btn" type="button" onclick="ciQuiz('ciq1',true)">Відсотки нараховуються на відсотки</button>
+        <button class="quiz-btn" type="button" onclick="ciQuiz('ciq1',false)">Формула не враховує час</button>
+      </div>
+      <div class="quiz-fb" id="ciq1"></div>
+    </div>
+    <div class="quiz-item">
+      <div class="quiz-q">2. Якщо збільшити частоту нарахування з 1 разу на рік до 12 разів, то за інших рівних умов:</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" type="button" onclick="ciQuiz('ciq2',true)">Майбутня вартість трохи зросте</button>
+        <button class="quiz-btn" type="button" onclick="ciQuiz('ciq2',false)">Майбутня вартість зменшиться</button>
+        <button class="quiz-btn" type="button" onclick="ciQuiz('ciq2',false)">Нічого не зміниться</button>
+      </div>
+      <div class="quiz-fb" id="ciq2"></div>
+    </div>
+    <div class="quiz-item">
+      <div class="quiz-q">3. Для чого використовують правило 72?</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" type="button" onclick="ciQuiz('ciq3',false)">Щоб знайти точну EAR</button>
+        <button class="quiz-btn" type="button" onclick="ciQuiz('ciq3',true)">Щоб швидко оцінити строк подвоєння суми</button>
+        <button class="quiz-btn" type="button" onclick="ciQuiz('ciq3',false)">Щоб перевести річну ставку у квартальну</button>
+      </div>
+      <div class="quiz-fb" id="ciq3"></div>
+    </div>
+  </div>
 </div>
 
 <!-- ═══════════════════════ TAB 2 — Аннуїтет ═══════════════════════ -->
@@ -818,17 +912,57 @@ const MODAL_DATA = {
   ci: {
     title: 'Складні відсотки (TVM)',
     body: `<h3>Часова вартість грошей</h3>
-<p>Гроші сьогодні коштують більше, ніж та ж сума в майбутньому — через можливість інвестування та інфляцію. Цей принцип є основою фінансової математики.</p>
-<h3>Складні vs прості відсотки</h3>
-<p>При <strong>простих відсотках</strong> база нарахування не змінюється: I = PV × r × n.</p>
-<p>При <strong>складних відсотках</strong> відсотки нараховуються на відсотки — кожен наступний період база збільшується.</p>
+<p>Гроші сьогодні коштують більше, ніж така сама сума завтра, бо їх можна інвестувати, зберегти від інфляції або використати в обороті. Саме тому у фінансах суми з різних моментів часу не можна порівнювати без перерахунку.</p>
+<h3>Суть складного відсотка</h3>
+<p>При <strong>простих відсотках</strong> дохід кожного періоду рахують від однієї й тієї самої бази: <code>PV</code>. При <strong>складних відсотках</strong> база зростає, тому кожен наступний період приносить відсотки вже і на попередні відсотки.</p>
 <div class="mf">FV = PV × (1 + r/m)<sup>n·m</sup></div>
+<p>Це означає:</p>
+<ul>
+<li><strong>PV</strong> — сума, яку маємо сьогодні</li>
+<li><strong>r</strong> — номінальна річна ставка</li>
+<li><strong>m</strong> — скільки разів на рік відбувається нарахування</li>
+<li><strong>n</strong> — кількість років</li>
+</ul>
+<h3>Як читати формулу</h3>
+<p>Спочатку річну ставку ділять на кількість нарахувань: отримують ставку за один період. Потім визначають кількість періодів. Далі множать початкову суму на коефіцієнт зростання в степені кількості періодів.</p>
+<div class="mf">Періодична ставка = r / m &nbsp;&nbsp;·&nbsp;&nbsp; Кількість періодів = n × m</div>
 <h3>Ефективна річна ставка (EAR)</h3>
-<p>Чим частіше нараховуються відсотки, тим вища реальна прибутковість. EAR дозволяє порівнювати вклади з різною частотою нарахування:</p>
+<p>Номінальна ставка 12% не означає однаковий результат за різної частоти нарахування. Якщо відсотки нараховують частіше, реальна дохідність буде вищою.</p>
 <div class="mf">EAR = (1 + r/m)<sup>m</sup> − 1</div>
+<p><strong>EAR</strong> потрібна для чесного порівняння банківських продуктів, депозитів, кредитів та інвестиційних варіантів.</p>
+<h3>Покроковий приклад</h3>
+<p>Нехай <code>PV = 50 000 ₴</code>, <code>r = 12%</code>, <code>n = 5</code>, <code>m = 4</code>.</p>
+<ul>
+<li>Ставка за квартал: <code>12% / 4 = 3%</code></li>
+<li>Кількість періодів: <code>5 × 4 = 20</code></li>
+<li>Майбутня вартість: <code>FV = 50 000 × (1.03)^20 ≈ 90 306 ₴</code></li>
+<li>Дохід від відсотків: <code>≈ 40 306 ₴</code></li>
+</ul>
+<p>Отже, за п’ять років вклад збільшується приблизно в <strong>1.81 раза</strong>.</p>
+<h3>Чому частота нарахування важлива</h3>
+<p>Якщо одна й та сама номінальна ставка 12% нараховується:</p>
+<ul>
+<li>раз на рік — ефект найменший</li>
+<li>щокварталу — дохідність вища</li>
+<li>щомісяця — ще трохи вища</li>
+<li>щодня — приріст уже близький до безперервного нарахування</li>
+</ul>
+<p>Різниця не завжди величезна на коротких строках, але на довгих горизонтах вона накопичується.</p>
 <h3>Правило 72</h3>
-<p>Проста оцінка: кількість років для подвоєння суми ≈ 72 / (r у відсотках).</p>
-<div class="note">📌 Приклад: вклад 50 000 ₴ під 12% щоквартально (m=4) за 5 років дасть EAR ≈ 12.55%, а FV ≈ 90 635 ₴.</div>`
+<p>Це швидка наближена оцінка, а не точний розрахунок:</p>
+<div class="mf">Строк подвоєння ≈ 72 / r%</div>
+<p>Наприклад, за ставки 12% сума приблизно подвоїться за <code>72 / 12 = 6</code> років. Це зручно для усної перевірки реалістичності результату.</p>
+<h3>Типові помилки студентів</h3>
+<ul>
+<li>підставляють <code>12</code> замість <code>0.12</code></li>
+<li>забувають ділити ставку на <code>m</code></li>
+<li>беруть степінь <code>n</code> замість <code>n·m</code></li>
+<li>плутають номінальну ставку з ефективною</li>
+<li>не відокремлюють <strong>майбутню вартість</strong> від <strong>доходу</strong></li>
+</ul>
+<h3>Де це застосовується</h3>
+<p>Тема є базовою для депозитів, кредитів, облігацій, пенсійних накопичень, інвестиційних проектів і будь-яких моделей, де гроші змінюють цінність у часі.</p>
+<div class="note">📌 Корисна перевірка: якщо збільшити строк або частоту нарахування, результат не повинен зменшуватися. Якщо зменшується — у формулах, імовірно, помилка.</div>`
   },
   an: {
     title: 'Ануїтет і кредитні розрахунки',
@@ -958,6 +1092,27 @@ function closeModal(e){
   document.body.style.overflow='';
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal({target:document.getElementById('modal')});});
+
+function ciQuiz(targetId,isCorrect){
+  const el=document.getElementById(targetId);
+  if(!el)return;
+  const answers={
+    ciq1:{
+      ok:'Правильно. Складні відсотки означають, що нові відсотки нараховуються і на початкову суму, і на вже зароблені відсотки.',
+      bad:'Ні. Головна суть складних відсотків у тому, що відсотки нараховуються на відсотки.'
+    },
+    ciq2:{
+      ok:'Правильно. Частіше нарахування підвищує ефективну річну ставку, тому майбутня вартість трохи зростає.',
+      bad:'Ні. Якщо частота нарахування зростає, майбутня вартість зазвичай теж трохи зростає.'
+    },
+    ciq3:{
+      ok:'Правильно. Правило 72 допомагає швидко приблизно оцінити строк подвоєння суми.',
+      bad:'Ні. Правило 72 не шукає точну EAR, а дає швидку оцінку строку подвоєння.'
+    }
+  };
+  el.className='quiz-fb '+(isCorrect?'ok':'bad');
+  el.textContent=isCorrect?answers[targetId].ok:answers[targetId].bad;
+}
 
 /* ──────────────────────────────────────── NAV ─────────────────────── */
 const FM_ROUTES=['compound-interest','annuity-credit','npv-irr','depreciation','break-even','profitability','liquidity'];
