@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Лекція 2 — Види проєктів розвитку компанії</title>
+<meta name="description" content="Лекція 2. Види проєктів розвитку компанії: класифікація за змістом, масштабом, методологією та фінансуванням.">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --bg:#f6f4ef;
+  --paper:#fffdf8;
+  --ink:#17202a;
+  --muted:#5f6b75;
+  --line:#d9d4c7;
+  --brand:#1b6b63;
+  --brand2:#b66a2c;
+  --deep:#22324a;
+  --soft:#e8f1ee;
+  --accent:#fff1d9;
+  --r:8px;
+}
+body{margin:0;font-family:Arial,"Helvetica Neue",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+a{color:inherit}
+.top{border-bottom:1px solid var(--line);background:rgba(255,253,248,.92);position:sticky;top:0;z-index:10;backdrop-filter:blur(10px)}
+.top-inner{max-width:1060px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-weight:700;color:var(--deep);text-decoration:none}
+.nav{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.nav a{font-size:14px;text-decoration:none;padding:8px 11px;border-radius:var(--r);color:var(--muted)}
+.nav a:hover{background:var(--soft);color:var(--ink)}
+.hero{max-width:1060px;margin:0 auto;padding:50px 24px 24px}
+.kicker{font-size:12px;letter-spacing:1.8px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:12px}
+h1{font-size:clamp(31px,4.4vw,52px);line-height:1.06;margin:0;color:var(--deep);letter-spacing:0}
+.lead{font-size:18px;color:var(--muted);max-width:780px;margin:16px 0 0}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 15px;border-radius:var(--r);font-weight:700;text-decoration:none;border:1px solid var(--brand);color:var(--brand)}
+.btn.primary{background:var(--brand);color:white}
+.content{max-width:1060px;margin:0 auto;padding:20px 24px 72px;display:grid;grid-template-columns:280px minmax(0,1fr);gap:22px}
+.aside,.article{background:var(--paper);border:1px solid var(--line);border-radius:var(--r)}
+.aside{padding:18px;height:max-content;position:sticky;top:76px}
+.aside h2{font-size:18px;margin:0 0 12px;color:var(--deep)}
+.aside a{display:block;text-decoration:none;color:var(--muted);padding:9px 0;border-top:1px solid var(--line)}
+.aside a:hover{color:var(--brand)}
+.aside .nav-section{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--brand);font-weight:700;padding:14px 0 4px;border-top:none;margin-top:4px}
+.article{padding:28px}
+.meta{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:24px}
+.meta div{background:var(--soft);padding:13px 15px}
+.meta strong{display:block;color:var(--deep);margin-bottom:4px}
+section{border-top:1px solid var(--line);padding-top:24px;margin-top:24px}
+section:first-of-type{border-top:none;margin-top:0;padding-top:0}
+h2{font-size:27px;line-height:1.2;margin:0 0 12px;color:var(--deep)}
+h3{font-size:19px;margin:20px 0 8px;color:var(--deep)}
+h4{font-size:16px;margin:16px 0 6px;color:var(--deep)}
+p{color:var(--muted);margin:0 0 13px}
+ul,ol{margin:0 0 14px;padding-left:22px;color:var(--muted)}
+li{margin:7px 0}
+.note{background:var(--accent);border-left:4px solid var(--brand2);border-radius:var(--r);padding:14px 16px;margin:16px 0;color:var(--deep)}
+.note strong{display:block;margin-bottom:4px}
+.callout{background:var(--soft);border-left:4px solid var(--brand);border-radius:var(--r);padding:14px 16px;margin:16px 0}
+.callout strong{display:block;color:var(--deep);margin-bottom:6px}
+.callout p{margin:4px 0;color:var(--ink);font-size:15px}
+.warn{background:#fff4df;border-left:4px solid var(--brand2);border-radius:var(--r);padding:14px 16px;margin:16px 0}
+.warn strong{display:block;color:var(--brand2);margin-bottom:6px}
+.warn p{margin:4px 0;color:var(--ink);font-size:15px}
+table{width:100%;border-collapse:collapse;margin:16px 0 8px;background:white;font-size:15px}
+th,td{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}
+th{background:var(--soft);color:var(--deep);font-weight:700}
+.table-caption{font-size:13px;color:var(--muted);margin-bottom:18px;font-style:italic}
+.summary-box{background:var(--soft);border:1px solid rgba(27,107,99,.3);border-radius:var(--r);padding:18px;margin-top:18px}
+.summary-box strong{display:block;color:var(--deep);margin-bottom:8px;font-size:16px}
+.summary-box ul{margin:0}
+.nav-lec{display:flex;gap:12px;margin-top:28px;padding-top:20px;border-top:1px solid var(--line)}
+.nav-lec a{flex:1;background:var(--soft);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;text-decoration:none}
+.nav-lec a span{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
+.nav-lec a strong{color:var(--deep)}
+.nav-lec a:hover{border-color:var(--brand)}
+.footer{border-top:1px solid var(--line);padding:22px 24px;color:var(--muted);font-size:14px}
+.footer-inner{max-width:1060px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media(max-width:860px){
+  .top-inner{align-items:flex-start;flex-direction:column}
+  .nav{justify-content:flex-start}
+  .content{grid-template-columns:1fr}
+  .aside{position:static}
+  .meta{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .top-inner,.hero,.content{padding-left:18px;padding-right:18px}
+  .actions{flex-direction:column}
+  .btn{width:100%}
+  .article{padding:20px}
+  .nav-lec{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="index.html">Економіка будівництва</a>
+    <nav class="nav" aria-label="Основна навігація">
+      <a href="index.html">Головна</a>
+      <a href="materials.html">Учбові матеріали</a>
+      <a href="economic-tasks.html">Економічні задачі</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="kicker">Лекція 2</div>
+    <h1>Види проєктів розвитку компанії</h1>
+    <p class="lead">Класифікація проєктів за змістом, масштабом, методологією та джерелами фінансування. Кейси українських та міжнародних компаній 2022–2025 рр.</p>
+    <div class="actions">
+      <a class="btn primary" href="Лекція_2_Види_проєктів_розвитку.docx">Завантажити повну лекцію DOCX</a>
+      <a class="btn" href="materials.html">Назад до матеріалів</a>
+    </div>
+  </section>
+
+  <div class="content">
+    <aside class="aside">
+      <h2>Зміст лекції</h2>
+      <a href="#why">Навіщо класифікувати</a>
+      <span class="nav-section">За змістом</span>
+      <a href="#market">Ринкові проєкти</a>
+      <a href="#product">Продуктові проєкти</a>
+      <a href="#tech">Технологічні проєкти</a>
+      <a href="#org">Організаційні проєкти</a>
+      <a href="#crisis">Антикризові проєкти</a>
+      <span class="nav-section">Інші класифікації</span>
+      <a href="#scale">За масштабом</a>
+      <a href="#method">За методологією</a>
+      <a href="#finance">За фінансуванням</a>
+      <a href="#system">Системний погляд</a>
+      <a href="#tasks">Питання і завдання</a>
+      <a href="#literature">Література</a>
+    </aside>
+
+    <article class="article">
+      <div class="meta">
+        <div><strong>Тема</strong>Класифікація проєктів розвитку: за змістом, масштабом, методологією та джерелами фінансування.</div>
+        <div><strong>Для кого</strong>Студенти 1–2 курсу магістратури економічних спеціальностей.</div>
+        <div><strong>Головна ідея</strong>Різні типи проєктів потребують різних підходів до управління — класифікація є відправною точкою для будь-яких управлінських рішень.</div>
+        <div><strong>Формат</strong>Навчальна лекція з таблицями, кейсами, статистикою PMI 2024/2025 та практичними завданнями.</div>
+      </div>
+
+      <!-- 2.1 -->
+      <section id="why">
+        <h2>2.1. Навіщо класифікувати проєкти розвитку?</h2>
+        <p>Уявіть, що керівник компанії отримує одночасно три ініціативи: відкрити новий офіс у Варшаві, впровадити нову ERP-систему та запустити лінійку органічних продуктів. Усі три є проєктами розвитку — але кожен із них потребує принципово різного підходу до управління, різної команди, різного бюджету й різних критеріїв успіху.</p>
+        <p>Класифікація проєктів — це не бюрократичний ритуал, а практичний управлінський інструмент. Вона дозволяє обрати правильну методологію, сформувати відповідну команду, визначити реалістичні критерії успіху і коректно розподілити ресурси.</p>
+
+        <div class="callout">
+          <strong>📊 Дані PMI Pulse of the Profession 2025 (2 841 респондент глобально)</strong>
+          <p>— Лише 50% проєктів у світі визнаються успішними; 13% завершуються повним провалом.</p>
+          <p>— Проєкти з чітко визначеними критеріями успіху мають значно вищий показник результативності.</p>
+          <p>— Фахівці з високою бізнес-компетентністю досягають цілей проєкту у 83% випадків проти 78% у колег з нижчою компетентністю.</p>
+          <p style="font-size:13px;color:var(--muted);margin-top:8px">Джерело: PMI. Pulse of the Profession 2025. Project Management Institute, 2025.</p>
+        </div>
+
+        <div class="summary-box">
+          <strong>✅ Ключові висновки розділу 2.1</strong>
+          <ul>
+            <li>Класифікація проєктів — управлінський інструмент, а не формальність.</li>
+            <li>Різні типи проєктів потребують різних підходів: команди, методологій, критеріїв успіху.</li>
+            <li>Ключовий стандарт: PMBoK 7th ed. (PMI, 2021) — підхід до управління є ситуативним.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 2.2 -->
+      <section id="content-class">
+        <h2>2.2. Класифікація за змістом і метою проєкту</h2>
+        <p>Найбільш природна класифікація проєктів розвитку — за їхнім змістом: що саме змінює або створює проєкт? Виокремлюють п'ять основних видів.</p>
+
+        <h3 id="market">2.2.1. Ринкові проєкти</h3>
+        <p>Ринкові проєкти спрямовані на зміну позиції компанії на існуючих або нових ринках: розширення ринкової частки, вихід на нові географічні або клієнтські сегменти, підвищення впізнаваності бренду. Ринковий проєкт не обов'язково передбачає зміну продукту — часто достатньо змінити канали дистрибуції, цінову стратегію або маркетинговий підхід.</p>
+
+        <div class="note">
+          <strong>📌 Кейс. MHP: вихід на ринок ЄС</strong>
+          MHP — один із найбільших виробників курятини в Україні та Європі — реалізував масштабний ринковий проєкт із сертифікації виробництва за стандартами ЄС та виходу на ринки Великої Британії і Нідерландів. Проєкт охоплював сертифікацію за GlobalGAP, BRC та Halal-стандартами, адаптацію упаковки, побудову каналів дистрибуції. Результат: частка експортного доходу зросла до понад 35% загальної виручки групи.
+        </div>
+
+        <h3 id="product">2.2.2. Продуктові проєкти</h3>
+        <p>Продуктові проєкти спрямовані на створення нового або суттєве вдосконалення існуючого продукту чи послуги. Акцент — не на тому, де продавати, а на тому, <em>що</em> продавати. Особливо характерні для галузей із швидкою зміною споживчих вподобань: фармацевтика, харчова промисловість, фінтех, IT.</p>
+
+        <div class="note">
+          <strong>📌 Кейс. «Нова Пошта»: продуктові інновації під час воєнного часу (2022–2025)</strong>
+          Компанія реалізувала серію продуктових проєктів: NP Shopping — власна e-commerce платформа; NovaPay — фінансовий продукт із функціями онлайн-оплати та переказів; автоматизовані відділення з роботами Deus Robotics. Це дозволило вийти далеко за межі традиційної логістики.
+        </div>
+
+        <h3 id="tech">2.2.3. Технологічні проєкти</h3>
+        <p>Технологічні проєкти спрямовані на зміну способу виконання роботи всередині компанії. Результат — нова або суттєво оновлена технологічна інфраструктура: програмне забезпечення, обладнання, автоматизовані процеси, цифрові платформи. У 2024–2025 роках саме технологічні проєкти стали домінуючим типом ініціатив розвитку у великих компаніях.</p>
+
+        <div class="callout">
+          <strong>📊 Цифрова трансформація в Україні (2024–2025)</strong>
+          <p>— Застосунок Дія станом на 2024 рік: 21,7 млн користувачів; понад 60 послуг у мобільному застосунку.</p>
+          <p>— 64% громадян у 2024 році використовували державні електронні послуги — проти 53% у 2020 році.</p>
+          <p>— DTEK реалізував ERP для управління ресурсами та HR для понад 20 000 співробітників.</p>
+          <p style="font-size:13px;color:var(--muted);margin-top:8px">Джерело: VoxUkraine, 2025; IT Ukraine Association, 2026.</p>
+        </div>
+
+        <h3 id="org">2.2.4. Організаційні проєкти</h3>
+        <p>Організаційні проєкти спрямовані на зміну структури, ролей, процесів або культури управління. Вони є найбільш складними, оскільки їхній «продукт» нематеріальний, а результат залежить від поведінки людей. Ключова передумова успіху — сильне спонсорство на рівні топ-менеджменту та системна робота зі змінами (Change Management).</p>
+
+        <div class="warn">
+          <strong>⚠️ Типова управлінська помилка</strong>
+          <p>Організаційні зміни без проєктного підходу: нові назви посад при збереженні старих моделей поведінки, саботаж змін з боку середньої ланки, втрата довіри персоналу. Правило: будь-яка системна організаційна зміна, що охоплює більше одного підрозділу або займає понад 3 місяці, — це проєкт, яким потрібно управляти відповідно.</p>
+        </div>
+
+        <h3 id="crisis">2.2.5. Антикризові проєкти</h3>
+        <p>Антикризові проєкти виникають як реакція на зовнішні загрози або внутрішні кризи. Їхня мета — не зростання, а виживання або відновлення. В умовах повномасштабного вторгнення антикризові проєкти стали для більшості українських компаній пріоритетним типом ініціатив.</p>
+
+        <div class="note">
+          <strong>📌 Кейс. Українські IT-компанії: антикризова релокація (2022)</strong>
+          GlobalLogic, EPAM, Intellias, SoftServe реалізували масштабні проєкти релокації персоналу та інфраструктури. GlobalLogic перемістив 5 000+ фахівців, не перервавши жодного клієнтського контракту. Парадокс: те, що починалося як виживання, стало трансформацією — розподілена модель підвищила операційну гнучкість і дала доступ до нових ринків талантів.
+        </div>
+
+        <h3>Зведена класифікація за змістом</h3>
+        <table>
+          <thead>
+            <tr><th>Вид проєкту</th><th>Мета</th><th>Типовий результат</th><th>Приклад</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Ринковий</td><td>Зміна позиції на ринку</td><td>Нова частка ринку, нові клієнти, новий канал</td><td>Вихід MHP на ринок ЄС</td></tr>
+            <tr><td>Продуктовий</td><td>Нова або вдосконалена пропозиція</td><td>Новий продукт / послуга / функціональність</td><td>NovaPay від «Нової Пошти»</td></tr>
+            <tr><td>Технологічний</td><td>Зміна способу роботи</td><td>Нова IT-система, автоматизація, цифровізація</td><td>ERP у DTEK для 20 000+ осіб</td></tr>
+            <tr><td>Організаційний</td><td>Зміна структури та культури</td><td>Нова org-структура, система управління</td><td>Впровадження OKR у компанії</td></tr>
+            <tr><td>Антикризовий</td><td>Збереження стійкості бізнесу</td><td>Нові постачальники, нові ринки, релокація</td><td>Релокація IT-компаній у 2022</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">Таблиця 2.1. Класифікація проєктів за змістом і метою. Джерело: авторська розробка на основі PMBoK 7th ed. (PMI, 2021).</p>
+
+        <div class="summary-box">
+          <strong>✅ Ключові висновки розділу 2.2</strong>
+          <ul>
+            <li>5 видів проєктів розвитку за змістом: ринкові, продуктові, технологічні, організаційні, антикризові.</li>
+            <li>Один і той самий проєкт може поєднувати елементи кількох видів.</li>
+            <li>Правильна ідентифікація типу проєкту — умова вибору правильної методології управління.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 2.3 -->
+      <section id="scale">
+        <h2>2.3. Класифікація за масштабом і складністю</h2>
+        <p>Два проєкти можуть бути однаково «технологічними», але один — впровадження бухгалтерського модуля у відділі, а інший — глобальна цифрова трансформація для 10 000 співробітників. Управляти ними за однаковими підходами — принципова помилка.</p>
+
+        <table>
+          <thead>
+            <tr><th>Параметр</th><th>Малий</th><th>Середній</th><th>Великий</th><th>Мегапроєкт</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Бюджет</td><td>До 1 млн грн</td><td>1–20 млн грн</td><td>20–200 млн грн</td><td>Понад 200 млн грн</td></tr>
+            <tr><td>Тривалість</td><td>До 3 місяців</td><td>3–12 місяців</td><td>1–3 роки</td><td>Понад 3 роки</td></tr>
+            <tr><td>Команда</td><td>2–7 осіб</td><td>7–30 осіб</td><td>30–200 осіб</td><td>200+ осіб</td></tr>
+            <tr><td>Приклад</td><td>Оновлення сайту відділу</td><td>Запуск нового продукту</td><td>Впровадження ERP</td><td>Цифрова трансформація ДТЕК</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">Таблиця 2.2. Класифікація проєктів за масштабом. Джерело: адаптовано з PMBoK 7th ed. (PMI, 2021).</p>
+
+        <h3>Програми та портфелі проєктів</h3>
+        <p><strong>Програма</strong> — група взаємопов'язаних проєктів, що управляються скоординовано для досягнення загальної стратегічної мети. Результат програми перевищує суму результатів окремих проєктів.</p>
+        <p><strong>Портфель проєктів</strong> — сукупність проєктів і програм, якими компанія управляє з метою досягнення стратегічних цілей за оптимального використання ресурсів. Без системи пріоритизації виникає «проєктна інфляція»: всі проєкти вважаються важливими, жоден не забезпечений достатніми ресурсами.</p>
+
+        <div class="callout">
+          <strong>💡 Важливо: проєкт vs. програма</strong>
+          <p><strong>Проєкт</strong> — одна ініціатива з конкретним результатом і датою завершення.</p>
+          <p><strong>Програма</strong> — набір взаємопов'язаних проєктів із єдиним куратором і спільною стратегічною метою. Управляє залежностями між проєктами та розподіляє спільні ресурси.</p>
+        </div>
+      </section>
+
+      <!-- 2.4 -->
+      <section id="method">
+        <h2>2.4. Класифікація за методологією управління</h2>
+        <p>Методологія управління — набір принципів і практик, що визначають, як плануються, виконуються та контролюються роботи. Вибір неправильної методології може звести нанівець навіть добре сплановані ініціативи.</p>
+
+        <table>
+          <thead>
+            <tr><th>Критерій</th><th>Предиктивний (Waterfall)</th><th>Адаптивний (Agile)</th><th>Гібридний</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Рівень визначеності вимог</td><td>Високий — вимоги зафіксовані</td><td>Низький — вимоги уточнюються</td><td>Змішаний</td></tr>
+            <tr><td>Горизонт планування</td><td>Весь проєкт до початку</td><td>Ітерація (1–4 тижні)</td><td>Рамки фіксовані, деталі гнучкі</td></tr>
+            <tr><td>Реакція на зміни</td><td>Складна — формальна зміна</td><td>Вбудована — зміни очікувані</td><td>Контрольована гнучкість</td></tr>
+            <tr><td>Типовий контекст</td><td>Будівництво, виробниче обладнання</td><td>IT-продукти, digital, R&amp;D</td><td>Корпоративні трансформації</td></tr>
+            <tr><td>Частота застосування (PMI 2024)</td><td>—</td><td>63% Agile-практики</td><td>52% (найпоширеніший, +57% з 2020)</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">Таблиця 2.3. Порівняння підходів до управління. Джерело: PMI Pulse of the Profession 2024.</p>
+
+        <div class="note">
+          <strong>📌 Кейс. Kernel: гібридне управління проєктом цифровізації агровиробництва</strong>
+          Kernel — один із найбільших агропромислових холдингів України — реалізував програму цифровізації за гібридним підходом: рамки програми визначалися предиктивно на рівні топ-менеджменту, а розробка digital-рішень для агрономів (мобільний застосунок, AI-аналітика врожайності) велась за Agile. Це забезпечило як передбачуваність фінансового планування, так і гнучкість у розробці продукту.
+        </div>
+
+        <div class="summary-box">
+          <strong>✅ Ключові висновки розділу 2.4</strong>
+          <ul>
+            <li>Три підходи: предиктивний (Waterfall), адаптивний (Agile), гібридний.</li>
+            <li>Вибір залежить від рівня невизначеності вимог і контексту — немає «найкращого» підходу для всіх ситуацій.</li>
+            <li>Гібридний підхід — найпоширеніший: 52% організацій (PMI 2024), зростання на 57% з 2020 року.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 2.5 -->
+      <section id="finance">
+        <h2>2.5. Класифікація за джерелами фінансування</h2>
+        <p>Джерело фінансування проєкту визначає вимоги до обґрунтування, процедури звітності, рівень автономії команди і методологію оцінки результатів.</p>
+
+        <table>
+          <thead>
+            <tr><th>Джерело</th><th>Тип проєктів</th><th>Переваги</th><th>Обмеження</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Власні кошти (CAPEX)</td><td>Корпоративні проєкти будь-якого типу</td><td>Автономія рішень, швидкість старту</td><td>Обмеженість ресурсів, конкуренція за бюджет</td></tr>
+            <tr><td>Кредити / облігації</td><td>Великі виробничі, будівельні проєкти</td><td>Великий обсяг фінансування</td><td>Вимога cash flow, обслуговування боргу</td></tr>
+            <tr><td>Equity / венчур</td><td>Інноваційні, tech-проєкти, стартапи</td><td>Немає боргового навантаження</td><td>Втрата частки, тиск на зростання</td></tr>
+            <tr><td>Гранти / міжнародна допомога</td><td>Соціальні, інноваційні, відновлювальні</td><td>Безповоротність, додатковий ресурс</td><td>Жорсткі умови звітності, цільове використання</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">Таблиця 2.4. Класифікація за джерелами фінансування. Джерело: авторська розробка; Forbes Ukraine, 2024.</p>
+
+        <div class="callout">
+          <strong>📊 Гранти для бізнесу в Україні: ключові програми (2024–2026)</strong>
+          <p>— Seeds of Bravery (EU): гранти для інноваційних стартапів, 20 000–50 000 євро.</p>
+          <p>— Google for Startups: хмарні кредити до $350 000 для AI та Web3 проєктів.</p>
+          <p>— EU4Business: для малого та середнього бізнесу на розвиток та відбудову.</p>
+          <p>— Horizon Europe: до 2,5 млн євро на R&amp;D проєкти у партнерстві з ЄС-організаціями.</p>
+          <p style="font-size:13px;color:var(--muted);margin-top:8px">Джерело: Forbes Ukraine, 2024; Eurasia Foundation, 2025.</p>
+        </div>
+      </section>
+
+      <!-- 2.6 -->
+      <section id="system">
+        <h2>2.6. Взаємозв'язок між видами проєктів: системний погляд</h2>
+        <p>На практиці більшість значущих ініціатив розвитку є складними — вони поєднують ознаки кількох типів одночасно. Цифрова трансформація — це і технологічний, і організаційний, і ринковий, і продуктовий проєкт одночасно.</p>
+
+        <div class="note">
+          <strong>📌 Кейс. «Держава у смартфоні» (Diia) — мегапрограма національного масштабу</strong>
+          Проєкт Міністерства цифрової трансформації (2019–2024) поєднав всі типи проєктів: <strong>технологічний</strong> — розробка застосунку, хмарна інфраструктура; <strong>організаційний</strong> — реформа процесів надання послуг; <strong>продуктовий</strong> — 60+ цифрових послуг, перший у світі цифровий паспорт; <strong>антикризовий</strong> — після 24.02.2022 негайна хмарна міграція, цифрові документи для переселенців. Результат: 21,7 млн користувачів (64% дорослого населення). Програма отримала визнання OECD і Давоського форуму.
+        </div>
+
+        <table>
+          <thead>
+            <tr><th></th><th>Малий / простий</th><th>Середній</th><th>Великий / складний</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Ринковий</strong></td><td>Нова промо-кампанія</td><td>Вихід у новий регіон</td><td>Вихід на ринок ЄС</td></tr>
+            <tr><td><strong>Продуктовий</strong></td><td>Оновлення упаковки</td><td>Запуск нового продукту</td><td>Нова продуктова лінійка</td></tr>
+            <tr><td><strong>Технологічний</strong></td><td>Нова версія сайту</td><td>Впровадження CRM</td><td>ERP для 10 000+ осіб</td></tr>
+            <tr><td><strong>Організаційний</strong></td><td>Нові KPI для відділу</td><td>Реструктуризація підрозділу</td><td>Корпоративна трансформація</td></tr>
+            <tr><td><strong>Антикризовий</strong></td><td>Пошук нового постачальника</td><td>Релокація відділу</td><td>Релокація компанії, реструктуризація</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">Таблиця 2.5. Матриця типів проєктів і рівнів складності. Джерело: авторська розробка.</p>
+      </section>
+
+      <!-- Tasks -->
+      <section id="tasks">
+        <h2>Питання для обговорення та практичні завдання</h2>
+        <ol>
+          <li>Проаналізуйте будь-яку відому вам компанію (Nova Poshta, ДТЕК, Kernel, Lifecell). Ідентифікуйте три проєкти розвитку за останні 3 роки. Класифікуйте кожен за змістом, масштабом та методологією. Обґрунтуйте свою класифікацію.</li>
+          <li>Топ-менеджер IT-компанії стверджує: «Усі наші проєкти ведуться за Agile — це найефективніший підхід». Чи погоджуєтесь ви? Які типи проєктів у цій компанії можуть бути некоректно управляти за Agile?</li>
+          <li>Компанія розглядає грант ЄС на $500 000 для модернізації виробничої лінії. Які переваги та ризики несе грантове фінансування порівняно з банківським кредитом?</li>
+          <li><strong>Практичне завдання:</strong> оберіть одну компанію з лекції та побудуйте гіпотетичний «проєктний портфель» із 5 ініціатив різних типів. Визначте джерела фінансування для кожного проєкту.</li>
+          <li>Чи є «цифрова трансформація» окремим видом проєкту розвитку, чи це програма? Наведіть аргументи.</li>
+        </ol>
+      </section>
+
+      <!-- Literature -->
+      <section id="literature">
+        <h2>Рекомендована література</h2>
+        <h3>Основна</h3>
+        <ol>
+          <li>Project Management Institute. <em>A Guide to the Project Management Body of Knowledge (PMBoK Guide). 7th ed.</em> — Newtown Square: PMI, 2021.</li>
+          <li>ISO 21500:2021. <em>Project, Programme and Portfolio Management — Context and Concepts.</em> — Geneva: ISO, 2021.</li>
+          <li>PMI. <em>Pulse of the Profession 2025.</em> — Newtown Square: PMI, 2025.</li>
+          <li>PMI. <em>Pulse of the Profession 2024.</em> — Newtown Square: PMI, 2024.</li>
+        </ol>
+        <h3>Додаткова та онлайн</h3>
+        <ol>
+          <li>VoxUkraine. <em>Digital Transformation Under the Pressure of Circumstances.</em> 2025. — <a href="https://voxukraine.org" style="color:var(--brand)">voxukraine.org</a></li>
+          <li>IT Ukraine Association. <em>Digital Transformation 2025.</em> — <a href="https://itukraine.org.ua" style="color:var(--brand)">itukraine.org.ua</a></li>
+          <li>Forbes Ukraine. <em>Гранти для бізнесу в Україні 2024.</em> — <a href="https://forbes.ua" style="color:var(--brand)">forbes.ua</a></li>
+        </ol>
+      </section>
+
+      <!-- Nav between lectures -->
+      <div class="nav-lec">
+        <a href="lecture-1-projects.html">
+          <span>← Попередня</span>
+          <strong>Лекція 1. Проєкти розвитку компанії</strong>
+        </a>
+        <a href="materials.html" style="text-align:right">
+          <span>Усі матеріали →</span>
+          <strong>Повернутись до розділу</strong>
+        </a>
+      </div>
+
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Лекція 2 — Види проєктів розвитку компанії</span>
+    <span>Курс: Обґрунтування проєктів розвитку компанії · КНУБА</span>
+  </div>
+</footer>
+</body>
+</html>
