@@ -1,0 +1,26 @@
+{
+  "name": "econ-calc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/serge47-cyber/econ-calc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/serge47-cyber/econ-calc/issues"
+  },
+  "homepage": "https://github.com/serge47-cyber/econ-calc#readme",
+  "dependencies": {
+    "@openai/codex": "^0.128.0",
+    "dotenv": "^17.4.2",
+    "openai": "^6.36.0"
+  }
+}

@@ -160,5 +160,29 @@ h2{font-size:28px;line-height:1.15;margin:0;color:var(--deep)}
     <span>Матеріали можна оновлювати по мірі розвитку курсу</span>
   </div>
 </footer>
+<div class="calculator-section" style="margin-top: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 8px;">
+    <h3>📊 Розрахунок точки беззбитковості</h3>
+    <input type="number" id="fixedCosts" placeholder="Постійні витрати (грн)">
+    <input type="number" id="pricePerUnit" placeholder="Ціна за одиницю (грн)">
+    <input type="number" id="variableCosts" placeholder="Змінні витрати на од. (грн)">
+    <button onclick="calculateBreakEven()">Розрахувати</button>
+    <p id="breakEvenResult" style="font-weight: bold; color: #2c3e50;"></p>
+</div>
+
+<script>
+function calculateBreakEven() {
+    const fc = parseFloat(document.getElementById('fixedCosts').value);
+    const p = parseFloat(document.getElementById('pricePerUnit').value);
+    const vc = parseFloat(document.getElementById('variableCosts').value);
+    
+    if (p <= vc) {
+        document.getElementById('breakEvenResult').innerText = "Ціна має бути більшою за змінні витрати!";
+        return;
+    }
+    
+    const result = fc / (p - vc);
+    document.getElementById('breakEvenResult').innerText = `Вам потрібно продати: ${Math.ceil(result)} шт.`;
+}
+</script>
 </body>
 </html>
