@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Лекція 3 — Класифікація проєктів розвитку компанії (продовження)</title>
+<meta name="description" content="Лекція 3. Моно-, мульти- та мегапроєкти, внутрішні та зовнішні проєкти, адаптивні та проактивні проєкти розвитку.">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --bg:#f6f4ef;
+  --paper:#fffdf8;
+  --ink:#17202a;
+  --muted:#5f6b75;
+  --line:#d9d4c7;
+  --brand:#1b6b63;
+  --brand2:#b66a2c;
+  --deep:#22324a;
+  --soft:#e8f1ee;
+  --accent:#fff1d9;
+  --r:8px;
+}
+body{margin:0;font-family:Arial,"Helvetica Neue",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+a{color:inherit}
+.top{border-bottom:1px solid var(--line);background:rgba(255,253,248,.92);position:sticky;top:0;z-index:10;backdrop-filter:blur(10px)}
+.top-inner{max-width:1060px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-weight:700;color:var(--deep);text-decoration:none}
+.nav{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.nav a{font-size:14px;text-decoration:none;padding:8px 11px;border-radius:var(--r);color:var(--muted)}
+.nav a:hover{background:var(--soft);color:var(--ink)}
+.hero{max-width:1060px;margin:0 auto;padding:50px 24px 24px}
+.kicker{font-size:12px;letter-spacing:1.8px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:12px}
+h1{font-size:clamp(31px,4.4vw,52px);line-height:1.06;margin:0;color:var(--deep)}
+.lead{font-size:18px;color:var(--muted);max-width:780px;margin:16px 0 0}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 15px;border-radius:var(--r);font-weight:700;text-decoration:none;border:1px solid var(--brand);color:var(--brand)}
+.btn.primary{background:var(--brand);color:white}
+.content{max-width:1060px;margin:0 auto;padding:20px 24px 72px;display:grid;grid-template-columns:280px minmax(0,1fr);gap:22px}
+.aside,.article{background:var(--paper);border:1px solid var(--line);border-radius:var(--r)}
+.aside{padding:18px;height:max-content;position:sticky;top:76px}
+.aside h2{font-size:18px;margin:0 0 12px;color:var(--deep)}
+.aside a{display:block;text-decoration:none;color:var(--muted);padding:9px 0;border-top:1px solid var(--line)}
+.aside a:hover{color:var(--brand)}
+.aside .nav-section{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--brand);font-weight:700;padding:14px 0 4px;border-top:none;margin-top:4px}
+.article{padding:28px}
+.meta{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:24px}
+.meta div{background:var(--soft);padding:13px 15px}
+.meta strong{display:block;color:var(--deep);margin-bottom:4px}
+section{border-top:1px solid var(--line);padding-top:24px;margin-top:24px}
+section:first-of-type{border-top:none;margin-top:0;padding-top:0}
+h2{font-size:27px;line-height:1.2;margin:0 0 12px;color:var(--deep)}
+h3{font-size:19px;margin:20px 0 8px;color:var(--deep)}
+h4{font-size:16px;margin:16px 0 6px;color:var(--deep)}
+p{color:var(--muted);margin:0 0 13px}
+ul,ol{margin:0 0 14px;padding-left:22px;color:var(--muted)}
+li{margin:7px 0}
+.note{background:var(--accent);border-left:4px solid var(--brand2);border-radius:var(--r);padding:14px 16px;margin:16px 0;color:var(--deep)}
+.note strong{display:block;margin-bottom:4px}
+.callout{background:var(--soft);border-left:4px solid var(--brand);border-radius:var(--r);padding:14px 16px;margin:16px 0}
+.callout strong{display:block;color:var(--deep);margin-bottom:6px}
+.callout p{margin:4px 0;color:var(--ink);font-size:15px}
+.warn{background:#fff4df;border-left:4px solid var(--brand2);border-radius:var(--r);padding:14px 16px;margin:16px 0}
+.warn strong{display:block;color:var(--brand2);margin-bottom:6px}
+.warn p{margin:4px 0;color:var(--ink);font-size:15px}
+table{width:100%;border-collapse:collapse;margin:16px 0 8px;background:white;font-size:15px}
+th,td{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}
+th{background:var(--soft);color:var(--deep);font-weight:700}
+.table-caption{font-size:13px;color:var(--muted);margin-bottom:18px;font-style:italic}
+.summary-box{background:var(--soft);border:1px solid rgba(27,107,99,.3);border-radius:var(--r);padding:18px;margin-top:18px}
+.summary-box strong{display:block;color:var(--deep);margin-bottom:8px;font-size:16px}
+.summary-box ul{margin:0}
+.nav-lec{display:flex;gap:12px;margin-top:28px;padding-top:20px;border-top:1px solid var(--line)}
+.nav-lec a{flex:1;background:var(--soft);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;text-decoration:none}
+.nav-lec a span{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
+.nav-lec a strong{color:var(--deep)}
+.nav-lec a:hover{border-color:var(--brand)}
+.footer{border-top:1px solid var(--line);padding:22px 24px;color:var(--muted);font-size:14px}
+.footer-inner{max-width:1060px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media(max-width:860px){
+  .top-inner{align-items:flex-start;flex-direction:column}
+  .nav{justify-content:flex-start}
+  .content{grid-template-columns:1fr}
+  .aside{position:static}
+  .meta{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .top-inner,.hero,.content{padding-left:18px;padding-right:18px}
+  .actions{flex-direction:column}
+  .btn{width:100%}
+  .article{padding:20px}
+  .nav-lec{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="index.html">Економіка будівництва</a>
+    <nav class="nav" aria-label="Основна навігація">
+      <a href="index.html">Головна</a>
+      <a href="materials.html">Учбові матеріали</a>
+      <a href="economic-tasks.html">Економічні задачі</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="kicker">Лекція 3</div>
+    <h1>Класифікація проєктів розвитку компанії (продовження)</h1>
+    <p class="lead">Моно-, мульти- та мегапроєкти; внутрішні та зовнішні проєкти; адаптивні та проактивні ініціативи. Кейси Grammarly, Nova Post Europe, Microsoft 365, Rozetka/Amazon.</p>
+    <div class="actions">
+      <a class="btn primary" href="Лекція_3_Класифікація_продовження.docx">Завантажити повну лекцію DOCX</a>
+      <a class="btn" href="materials.html">Назад до матеріалів</a>
+    </div>
+  </section>
+
+  <div class="content">
+    <aside class="aside">
+      <h2>Зміст лекції</h2>
+      <span class="nav-section">За розміром і часом</span>
+      <a href="#mono">Моно-проєкти</a>
+      <a href="#multi">Мультипроєкти (програми)</a>
+      <a href="#mega">Мегапроєкти</a>
+      <a href="#duration">Класифікація за тривалістю</a>
+      <span class="nav-section">За спрямованістю</span>
+      <a href="#internal">Внутрішні проєкти</a>
+      <a href="#external">Зовнішні проєкти</a>
+      <span class="nav-section">За природою виникнення</span>
+      <a href="#adaptive">Адаптивні проєкти</a>
+      <a href="#proactive">Проактивні проєкти</a>
+      <a href="#tasks">Питання і завдання</a>
+      <a href="#literature">Література</a>
+    </aside>
+
+    <article class="article">
+      <div class="meta">
+        <div><strong>Тема</strong>Класифікація проєктів за розміром, спрямованістю та природою виникнення.</div>
+        <div><strong>Для кого</strong>Студенти 1–2 курсу магістратури економічних спеціальностей.</div>
+        <div><strong>Головна ідея</strong>Розуміння «скільки», «куди» і «чому» — не менш важливе, ніж розуміння «що» у класифікації проєктів розвитку.</div>
+        <div><strong>Формат</strong>Навчальна лекція з таблицями, кейсами, статистикою Oxford/PMI та практичними завданнями.</div>
+      </div>
+
+      <!-- 3.1 -->
+      <section id="size">
+        <h2>3.1. Розмір і тривалість проєктів розвитку</h2>
+        <p>Попередня лекція познайомила нас із класифікацією проєктів за змістом. Проте одного лише розуміння «що» недостатньо для ефективного управління. Не менш важливо розуміти «скільки» і «як довго»: масштаб і тривалість проєкту принципово визначають підходи до управління, рівень ризиків і вимоги до команди.</p>
+
+        <h3 id="mono">3.1.1. Моно-проєкти</h3>
+        <p>Моно-проєкт — відносно невелика ініціатива з однією чіткою метою, одним напрямком роботи та обмеженим периметром. Одна команда відповідає за весь результат. Типовий контекст — «швидкі перемоги» (quick wins): запуск нової функції в застосунку, впровадження навчального курсу, перехід на нову систему оплати.</p>
+
+        <div class="note">
+          <strong>📌 Кейс. Grammarly: від моно-проєкту до глобальної платформи</strong>
+          Grammarly — українська за походженням компанія — починала з типового моно-проєкту: браузерного розширення для перевірки граматики. Одна функція, одна платформа, одна команда. Далі — серія взаємопов'язаних проєктів: інтеграція з Google Docs та MS Word, мобільний застосунок, AI-движок для стилістичних порад, вихід на корпоративний ринок (Grammarly Business). Оцінка компанії — понад $13 млрд (2024).
+        </div>
+
+        <h3 id="multi">3.1.2. Мультипроєкти (програми)</h3>
+        <p>Мультипроєкт, або програма — сукупність взаємопов'язаних ініціатив, що в сукупності дають більшу цінність, ніж кожна окремо. Менеджер програми координує залежності між проєктами, розподіляє спільні ресурси та вирішує конфлікти пріоритетів.</p>
+
+        <div class="note">
+          <strong>📌 Кейс. Nova Post: програма європейської експансії (2022–2026)</strong>
+          Nova Post розпочала вихід на ринок ЄС у 2022 як реакцію на потоки переселенців, а у 2023–2026 це перетворилося на повноцінну програму: вихід у 16 держав, 800 відділень, побудова регіональних команд, партнерська мережа PUDO, локалізація IT-систем, ребрендинг у Nova Post. Результат: прибутковість у Польщі, Молдові, Чехії та Латвії вже у Q4 2025; консолідований дохід групи — 54,2 млрд грн (+24% у 2024).
+        </div>
+
+        <h3 id="mega">3.1.3. Мегапроєкти</h3>
+        <p>Мегапроєкт — велика, довготривала, капіталомістка ініціатива стратегічної або публічної важливості. Ключова управлінська характеристика — домінування ризиків масштабу: політичні та регуляторні обмеження, перебої в ланцюгах постачання, проблеми з фінансуванням.</p>
+
+        <div class="callout">
+          <strong>📊 Статистика мегапроєктів (Oxford Global Projects, 2024)</strong>
+          <p>— 91,5% великих інфраструктурних проєктів виходять за рамки бюджету або строків.</p>
+          <p>— Середнє перевищення бюджету: +62% від початкової оцінки.</p>
+          <p>— Середнє перевищення строків: +38% від первісного графіка.</p>
+          <p>— Лише 8,5% мегапроєктів завершуються в рамках строків, бюджету та обсягу одночасно.</p>
+          <p style="font-size:13px;color:var(--muted);margin-top:8px">Джерело: Flyvbjerg B., Gardner D. How Big Things Get Done. Currency, 2023.</p>
+        </div>
+
+        <div class="warn">
+          <strong>⚠️ «Феномен оптимізму» у мегапроєктах</strong>
+          <p>Дослідник Бент Фліфберг (Оксфорд) назвав це «залізним законом мегапроєктів»: вони перевищують бюджет, строки та складність, але недовиконують очікувані вигоди. Причина — когнітивна: команди систематично недооцінюють складність і переоцінюють вигоди (optimism bias). Рецепт: reference class forecasting — базуватися на статистиці аналогічних проєктів у минулому.</p>
+        </div>
+
+        <h3 id="duration">3.1.4. Класифікація за тривалістю</h3>
+        <ul>
+          <li><strong>Короткострокові (до 6–9 місяців)</strong> — «швидкі перемоги» і пілотні ініціативи. Перевіряють гіпотези, формують довіру до процесу змін.</li>
+          <li><strong>Середньострокові (9–24 місяці)</strong> — основний «хребет» трансформацій: нові продукти, автоматизація, зміна оргструктури.</li>
+          <li><strong>Довгострокові (2–5 років і більше)</strong> — трансформації бізнес-моделі. Ключовий принцип: розбивати на «версії» з видимими проміжними результатами.</li>
+        </ul>
+
+        <table>
+          <thead>
+            <tr><th>Характеристика</th><th>Моно-проєкт</th><th>Мультипроєкт (програма)</th><th>Мегапроєкт</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Кількість ініціатив</td><td>1</td><td>3–15 взаємопов'язаних</td><td>Багато, від кількох організацій</td></tr>
+            <tr><td>Тривалість</td><td>До 12 місяців</td><td>1–3 роки</td><td>3–10+ років</td></tr>
+            <tr><td>Бюджет</td><td>До 20 млн грн</td><td>20–500 млн грн</td><td>Понад 500 млн грн / $</td></tr>
+            <tr><td>Ключовий ризик</td><td>Виконання</td><td>Координація між проєктами</td><td>Масштаб і зовнішні чинники</td></tr>
+            <tr><td>Типовий приклад</td><td>Запуск нової функції застосунку</td><td>Програма цифрової трансформації</td><td>Будівництво заводу, мегапрограма Diia</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">Таблиця 3.1. Порівняльна характеристика моно-, мульти- та мегапроєктів. Джерело: авторська розробка на основі PMBoK 7th ed. (PMI, 2021).</p>
+
+        <div class="summary-box">
+          <strong>✅ Ключові висновки розділу 3.1</strong>
+          <ul>
+            <li>Три рівні за розміром: моно-проєкти, програми, мегапроєкти — кожен потребує якісно різного управління.</li>
+            <li>91,5% мегапроєктів виходять за рамки бюджету або строків — оптимістичне планування є системною проблемою.</li>
+            <li>Тривалість визначає управлінські підходи; для довгострокових — обов'язково розбивати на «версії».</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 3.2 -->
+      <section id="direction">
+        <h2>3.2. Внутрішні та зовнішні проєкти розвитку</h2>
+        <p>Будь-яка компанія існує у двох вимірах: всередині себе і зовні. Класифікація за спрямованістю дозволяє збалансувати інвестиції між «підготовкою» і «зростанням», між ефективністю і доходами.</p>
+
+        <h3 id="internal">3.2.1. Внутрішні проєкти розвитку</h3>
+        <p>Внутрішні проєкти спрямовані на вдосконалення самої компанії: процесів, систем, людей і ресурсів. Клієнт може навіть не помітити цих змін — але саме вони формують операційний фундамент, без якого зовнішнє зростання є крихким.</p>
+        <ul>
+          <li><strong>Операційна ефективність:</strong> Lean/Six Sigma, скорочення часу виконання замовлень, усунення дублювання.</li>
+          <li><strong>Цифровізація та автоматизація:</strong> ERP, CRM, RPA (Robotic Process Automation), хмарна інфраструктура.</li>
+          <li><strong>Розвиток персоналу:</strong> корпоративні академії, upskilling, reskilling, менторські системи.</li>
+          <li><strong>Інфраструктура та безпека:</strong> модернізація виробництва, кібербезпека, дата-центри.</li>
+        </ul>
+
+        <h3 id="external">3.2.2. Зовнішні проєкти розвитку</h3>
+        <p>Зовнішні проєкти виходять за межі організації і орієнтовані на ринок, клієнтів і нові джерела доходу. Якщо внутрішні відповідають на питання «як ми стаємо кращими?», то зовнішні — «де ми зростаємо?».</p>
+        <ul>
+          <li><strong>Географічна/сегментна експансія:</strong> вихід на новий ринок, перехід від B2B до B2C.</li>
+          <li><strong>Нові продукти та послуги:</strong> власний R&amp;D або придбані технології.</li>
+          <li><strong>Ребрендинг і маркетинг:</strong> нове позиціонування, нові цифрові канали.</li>
+          <li><strong>Партнерства та екосистеми:</strong> стратегічні альянси, франчайзинг, технологічні партнерства.</li>
+        </ul>
+
+        <div class="note">
+          <strong>📌 Кейс. Rozetka та Amazon: синергія внутрішніх і зовнішніх проєктів</strong>
+          Rozetka будувала автоматизовані склади та IT-системи управління (внутрішні) і паралельно розширювала асортимент від електроніки до продуктів, відкривала маркетплейс для сторонніх продавців (зовнішні). Amazon робив те саме: роботизовані склади (внутрішні) + AWS, Prime, Alexa (зовнішні). Результат: Amazon Web Services генерує більше операційного прибутку, ніж весь роздрібний бізнес. <strong>Урок:</strong> без внутрішніх проєктів зовнішнє зростання «ламає» процеси. Без зовнішніх — компанія стагнує попри ідеальну ефективність.
+        </div>
+
+        <div class="callout">
+          <strong>💡 «Пастка ефективності»</strong>
+          <p>Компанії, що надмірно концентруються на внутрішніх проєктах, ризикують стати найефективнішими гравцями у скорочуваному сегменті ринку. Kodak зробила ідеально ефективним виробництво плівки — і пропустила цифрові технології. Nokia оптимізувала кнопкові телефони — і не встигла відповісти на iPhone. Баланс між внутрішніми та зовнішніми проєктами — стратегічна задача топ-менеджменту.</p>
+        </div>
+
+        <table>
+          <thead>
+            <tr><th>Критерій</th><th>Внутрішні проєкти</th><th>Зовнішні проєкти</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Фокус</td><td>Ефективність компанії зсередини</td><td>Зростання та доходи ззовні</td></tr>
+            <tr><td>Видимість для клієнта</td><td>Як правило, не помітні</td><td>Прямо впливають на клієнтський досвід</td></tr>
+            <tr><td>Ключові напрями</td><td>Lean/Six Sigma, ERP/CRM, RPA, upskilling, безпека</td><td>Вихід на ринки, нові продукти, ребрендинг, партнерства</td></tr>
+            <tr><td>Основний ризик</td><td>Опір персоналу, низька ROI при поганому плануванні</td><td>Ринковий ризик, регуляторні обмеження, конкуренція</td></tr>
+            <tr><td>Типовий горизонт</td><td>6–24 місяці</td><td>1–5 років</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">Таблиця 3.2. Порівняння внутрішніх та зовнішніх проєктів. Джерело: авторська розробка.</p>
+
+        <div class="summary-box">
+          <strong>✅ Ключові висновки розділу 3.2</strong>
+          <ul>
+            <li>Внутрішні проєкти: ефективність і фундамент — невидимі для клієнта, але критичні для масштабування.</li>
+            <li>Зовнішні проєкти: зростання і нові доходи — прямо впливають на конкурентну позицію.</li>
+            <li>Компанії потребують обох типів: без балансу між ними виникає або «пастка ефективності», або хаос зростання.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 3.3 -->
+      <section id="nature">
+        <h2>3.3. Проєкти адаптивного та проактивного розвитку</h2>
+        <p>Ще один принциповий вимір: «чому» компанія реалізує той чи інший проєкт? Однакові за змістом проєкти мають принципово різну логіку виникнення — і саме ця логіка визначає ризиковий профіль і критерії успіху.</p>
+
+        <h3 id="adaptive">3.3.1. Проєкти адаптивного розвитку</h3>
+        <p>Адаптивні проєкти — ініціативи, спрямовані на пристосування до змін у зовнішньому середовищі. Їхня мета — знизити ризики втрат і зберегти конкурентоспроможність. Тригер — зовнішній тиск: нові регуляції, зміна поведінки споживачів, вхід нового конкурента, криза.</p>
+
+        <div class="note">
+          <strong>📌 Кейс. Nova Post у перші тижні повномасштабної війни (2022)</strong>
+          Вже у перші тижні після 24.02.2022 Nova Post реалізувала масштабні адаптивні проєкти: інвестиції у генератори для сортувальних терміналів, Starlink для забезпечення зв'язку, децентралізація складів, переорієнтація логістики. Результат: доставка 1,5 млн посилок на день навіть у найінтенсивніші фази конфлікту. Джерело: Modern Diplomacy, грудень 2025.
+        </div>
+
+        <h3 id="proactive">3.3.2. Проєкти проактивного розвитку</h3>
+        <p>Проактивні проєкти — ініціативи, що запускаються не через примус, а з метою випередити події і сформувати нові можливості. У центрі — стратегічне бачення: ми не лише пристосовуємося до ринку, ми самі його формуємо. Проактивні проєкти більш ризиковані, але саме вони відповідають за стрибки у конкурентній позиції.</p>
+
+        <div class="note">
+          <strong>📌 Кейс. Microsoft: проактивний перехід до хмарної підписки Office 365</strong>
+          У 2011–2013 роках Microsoft вирішила перейти з одноразових ліцензій на підписну модель (SaaS) через Office 365 — до того як цей ринок існував для корпоративного ПЗ такого масштабу. Рішення зустріло внутрішній опір. Але результат підтвердив правоту: комерційна хмарна виручка Microsoft у FY2024 перевищила $135 млрд. Підписна модель забезпечила передбачуваний recurring revenue і глибший зв'язок з клієнтами. Джерело: Microsoft Annual Report FY2024.
+        </div>
+
+        <div class="note">
+          <strong>📌 Кейс. Nova Post: від адаптивного до проактивного в ЄС</strong>
+          Адаптивна фаза (2022): перші відділення у Польщі та Молдові як реакція на потоки переселенців. Проактивна фаза (2023–2026): системна програма European logistics network — 800 відділень у 16 країнах, €10 млн інвестицій у 2025, автоматизована лінія у Чехії. «Замість того, щоб гнатися за кількістю країн, краще поглиблювати присутність у ринках, що вже є» — CEO Nova Post Europe Олександр Лісовець. Джерело: Forbes Ukraine, 2026.
+        </div>
+
+        <table>
+          <thead>
+            <tr><th>Критерій</th><th>Адаптивні проєкти</th><th>Проактивні проєкти</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Природа виникнення</td><td>Реакція на зовнішній тиск або виклик</td><td>Ініціатива для формування нових можливостей</td></tr>
+            <tr><td>Тригер</td><td>Зміна регуляцій, конкурент, криза</td><td>Стратегічне бачення, технологічний тренд</td></tr>
+            <tr><td>Мета</td><td>Збереження конкурентоспроможності</td><td>Лідерство у новому сегменті</td></tr>
+            <tr><td>Рівень ризику</td><td>Нижчий — адаптуватися необхідно</td><td>Вищий — майбутнє невизначене</td></tr>
+            <tr><td>Стратегічна роль</td><td>«Оборонна стратегія» — збереження позиції</td><td>«Наступальна стратегія» — формування нового ринку</td></tr>
+            <tr><td>Типові приклади</td><td>COVID-перехід на доставку, ESG-звітність, релокація</td><td>iPhone, Tesla EV, Microsoft 365, Nova Post Europe</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">Таблиця 3.3. Порівняння адаптивних та проактивних проєктів. Джерело: авторська розробка.</p>
+
+        <div class="callout">
+          <strong>💡 Компанії потребують обох типів</strong>
+          <p>Лише адаптивні проєкти — компанія вічно «наздоганяє» ринок і ніколи не отримує першість у новому сегменті. Лише проактивні — ризик «перегоріти» і не встигнути відповісти на актуальні виклики. Оптимальний портфель: стабільний потік адаптивних проєктів (відповідь на поточні виклики) + стратегічні проактивні ставки (формування майбутнього).</p>
+        </div>
+
+        <div class="summary-box">
+          <strong>✅ Ключові висновки розділу 3.3</strong>
+          <ul>
+            <li>Адаптивні — реакція на зміни ззовні: збереження конкурентоспроможності в нових умовах.</li>
+            <li>Проактивні — ініціатива для формування нових можливостей: стратегічна ставка на майбутнє.</li>
+            <li>Відмінність не у змісті, а у природі виникнення і цільовій логіці проєкту.</li>
+            <li>Приклади: Nova Post (адаптивний → проактивний), Microsoft 365 (чисто проактивний).</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Tasks -->
+      <section id="tasks">
+        <h2>Питання для обговорення та практичні завдання</h2>
+        <ol>
+          <li>Визначте масштаб і тривалість таких проєктів Nova Post: (а) відкриття нового відділення у місті; (б) програма European expansion (2022–2026); (в) впровадження Starlink на терміналах у 2022 році. Обґрунтуйте класифікацію за трьома критеріями.</li>
+          <li>Компанія реалізує 15 проєктів одночасно, з яких 12 — внутрішні і лише 3 — зовнішні. Чи є цей баланс стратегічно правильним? За яких умов так, за яких — ні?</li>
+          <li>Проєкт впровадження ESG-звітності є адаптивним (реакція на вимоги ЄС) або проактивним (ставка на ESG-інвесторів)? Чи може один проєкт бути одночасно і адаптивним, і проактивним?</li>
+          <li><strong>Командне завдання:</strong> оберіть українську компанію (MHP, Kernel, Lifecell, ДТЕК, Укрзалізниця). Побудуйте «карту проєктів» за 2022–2025 роки: визначте 5–7 реальних ініціатив і класифікуйте кожну за всіма трьома вимірами лекції. Які висновки щодо стратегічних пріоритетів можна зробити з цієї карти?</li>
+          <li>Бент Фліфберг стверджує: «Ніколи не починайте мегапроєкт, не маючи чіткої «правої сторони» — конкретного результату для кінцевих користувачів». Як це правило можна застосувати до великих інфраструктурних проєктів в Україні?</li>
+        </ol>
+      </section>
+
+      <!-- Literature -->
+      <section id="literature">
+        <h2>Рекомендована література</h2>
+        <h3>Основна</h3>
+        <ol>
+          <li>Project Management Institute. <em>A Guide to the Project Management Body of Knowledge (PMBoK Guide). 7th ed.</em> — Newtown Square: PMI, 2021.</li>
+          <li>Flyvbjerg B., Gardner D. <em>How Big Things Get Done.</em> — Currency, 2023. — 288 p.</li>
+          <li>ISO 21500:2021. <em>Project, Programme and Portfolio Management.</em> — Geneva: ISO, 2021.</li>
+          <li>PMI. <em>Pulse of the Profession 2025.</em> — Newtown Square: PMI, 2025.</li>
+        </ol>
+        <h3>Додаткова та онлайн</h3>
+        <ol>
+          <li>Forbes Ukraine. <em>Nova Post Europe doubled its network to 800 branches.</em> 2026. — <a href="https://open4business.com.ua" style="color:var(--brand)">open4business.com.ua</a></li>
+          <li>Modern Diplomacy. <em>Delivering Under Fire: How Nova Post Became a Wartime Success Story.</em> 2025.</li>
+          <li>Microsoft. <em>Annual Report FY2024.</em> — <a href="https://microsoft.com" style="color:var(--brand)">microsoft.com</a></li>
+        </ol>
+      </section>
+
+      <!-- Nav between lectures -->
+      <div class="nav-lec">
+        <a href="lecture-2-projects.html">
+          <span>← Попередня</span>
+          <strong>Лекція 2. Види проєктів розвитку</strong>
+        </a>
+        <a href="materials.html" style="text-align:right">
+          <span>Усі матеріали →</span>
+          <strong>Повернутись до розділу</strong>
+        </a>
+      </div>
+
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Лекція 3 — Класифікація проєктів розвитку (продовження)</span>
+    <span>Курс: Обґрунтування проєктів розвитку компанії · КНУБА</span>
+  </div>
+</footer>
+</body>
+</html>
