@@ -54,7 +54,7 @@ h2{font-size:28px;line-height:1.15;margin:0;color:var(--deep)}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:22px;text-decoration:none;box-shadow:0 8px 22px rgba(34,50,74,.06);min-height:230px;display:flex;flex-direction:column}
 .card:hover{border-color:rgba(27,107,99,.45);box-shadow:var(--shadow);transform:translateY(-2px)}
-.card small{font-size:12px;letter-spacing:1.4px;text-transform:uppercase;font-weight:700;color:var(--brand);margin-bottom:12px}
+.card small{font-size:12px;letter-spacing:1.4px;text-transform:uppercase;font-weight:700;color:var(--brand);margin-bottom:12px;display:block}
 .card h3{font-size:22px;line-height:1.2;margin:0 0 10px;color:var(--deep)}
 .card p{color:var(--muted);margin:0 0 18px}
 .card .link{margin-top:auto;color:var(--brand);font-weight:700}
@@ -121,30 +121,28 @@ h2{font-size:28px;line-height:1.15;margin:0;color:var(--deep)}
       <p>Кожен блок можна розвивати окремо: додавати теми, приклади, практичні роботи, тести або нові калькулятори.</p>
     </div>
     <div class="grid">
-    <div class="card">
-        <small>Новий розділ</small>
+      <a class="card" href="materials.html">
+        <small>Лекції 1–4</small>
         <h3>Учбові матеріали</h3>
-        <p>Сторінка для лекційних тем, основних понять, формул та методичних пояснень.</p>
-        <a href="materials.html" class="link">Відкрити матеріали</a>
-    </div>
-
-    <div class="card">
+        <p>Лекційні теми, основні поняття, формули, методичні пояснення та кейси українських і міжнародних компаній.</p>
+        <span class="link">Відкрити матеріали</span>
+      </a>
+      <a class="card tasks" href="economic-tasks.html">
         <small>Існуючий інструмент</small>
         <h3>Економічні задачі</h3>
-        <p>Інтерактивний посібник і калькулятор для розрахунків з фінансової математики.</p>
-        <a href="economic-tasks.html" class="link">Перейти до задач</a>
-    </div>
-
-    <div class="card-future" id="future-modules">
+        <p>Інтерактивний посібник і калькулятор для розрахунків з фінансової математики, інвестиційного аналізу та інших тем.</p>
+        <span class="link">Перейти до задач</span>
+      </a>
+      <a class="card future" href="#development">
         <small>Можна додати пізніше</small>
         <h3>Майбутні модулі</h3>
-        <p>Місце для тестів, довідника термінів та інтерактивних інструментів.</p>
-        <a href="quick-calc.html" class="link" style="display: block; margin-top: 15px; font-weight: 600; color: #0071e3;">
-            📊 Експрес калькулятор окупності →
-        </a>
+        <p>Місце для тестів, практичних робіт, довідника термінів, завдань за темами або сторінок окремих дисциплін.</p>
+        <span class="link">Подивитися план</span>
+      </a>
     </div>
-</div>
-</div>
+
+    <div class="notes" id="development">
+      <div class="note">
         <h3>Як розширювати</h3>
         <p>Для нового розділу достатньо створити окремий HTML-файл і додати посилання на нього в меню та в картки на головній сторінці.</p>
       </div>
@@ -161,7 +159,6 @@ h2{font-size:28px;line-height:1.15;margin:0;color:var(--deep)}
     <span>Навчальний сайт з економіки будівництва</span>
     <span>Матеріали можна оновлювати по мірі розвитку курсу</span>
   </div>
-
-
+</footer>
 </body>
 </html>
