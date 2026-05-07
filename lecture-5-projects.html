@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Лекція 5 — Кількісна вимірюваність параметрів проєкту розвитку</title>
+<meta name="description" content="Лекція 5. Шість груп параметрів проєктів розвитку, методи KPI, BSC, SMART, бенчмаркінг та сценарне моделювання. ESG-параметри як стандарт звітності.">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --bg:#f6f4ef;--paper:#fffdf8;--ink:#17202a;--muted:#5f6b75;
+  --line:#d9d4c7;--brand:#1b6b63;--brand2:#b66a2c;--deep:#22324a;
+  --soft:#e8f1ee;--accent:#fff1d9;--r:8px;
+}
+body{margin:0;font-family:Arial,"Helvetica Neue",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+a{color:inherit}
+.top{border-bottom:1px solid var(--line);background:rgba(255,253,248,.92);position:sticky;top:0;z-index:10;backdrop-filter:blur(10px)}
+.top-inner{max-width:1060px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-weight:700;color:var(--deep);text-decoration:none}
+.nav{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.nav a{font-size:14px;text-decoration:none;padding:8px 11px;border-radius:var(--r);color:var(--muted)}
+.nav a:hover{background:var(--soft);color:var(--ink)}
+.hero{max-width:1060px;margin:0 auto;padding:50px 24px 24px}
+.kicker{font-size:12px;letter-spacing:1.8px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:12px}
+h1{font-size:clamp(31px,4.4vw,52px);line-height:1.06;margin:0;color:var(--deep)}
+.lead{font-size:18px;color:var(--muted);max-width:780px;margin:16px 0 0}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 15px;border-radius:var(--r);font-weight:700;text-decoration:none;border:1px solid var(--brand);color:var(--brand)}
+.btn.primary{background:var(--brand);color:white}
+.content{max-width:1060px;margin:0 auto;padding:20px 24px 72px;display:grid;grid-template-columns:280px minmax(0,1fr);gap:22px}
+.aside,.article{background:var(--paper);border:1px solid var(--line);border-radius:var(--r)}
+.aside{padding:18px;height:max-content;position:sticky;top:76px}
+.aside h2{font-size:18px;margin:0 0 12px;color:var(--deep)}
+.aside a{display:block;text-decoration:none;color:var(--muted);padding:9px 0;border-top:1px solid var(--line)}
+.aside a:hover{color:var(--brand)}
+.aside .nav-section{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--brand);font-weight:700;padding:14px 0 4px;border-top:none;margin-top:4px}
+.article{padding:28px}
+.meta{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:24px}
+.meta div{background:var(--soft);padding:13px 15px}
+.meta strong{display:block;color:var(--deep);margin-bottom:4px}
+section{border-top:1px solid var(--line);padding-top:24px;margin-top:24px}
+section:first-of-type{border-top:none;margin-top:0;padding-top:0}
+h2{font-size:27px;line-height:1.2;margin:0 0 12px;color:var(--deep)}
+h3{font-size:19px;margin:20px 0 8px;color:var(--deep)}
+p{color:var(--muted);margin:0 0 13px}
+ul,ol{margin:0 0 14px;padding-left:22px;color:var(--muted)}
+li{margin:7px 0}
+.note{background:var(--accent);border-left:4px solid var(--brand2);border-radius:var(--r);padding:14px 16px;margin:16px 0}
+.note strong{display:block;margin-bottom:4px;color:var(--deep)}
+.callout{background:var(--soft);border-left:4px solid var(--brand);border-radius:var(--r);padding:14px 16px;margin:16px 0}
+.callout strong{display:block;color:var(--deep);margin-bottom:6px}
+.callout p{margin:4px 0;color:var(--ink);font-size:15px}
+.warn{background:#fff4df;border-left:4px solid var(--brand2);border-radius:var(--r);padding:14px 16px;margin:16px 0}
+.warn strong{display:block;color:var(--brand2);margin-bottom:6px}
+.warn p{margin:4px 0;color:var(--ink);font-size:15px}
+table{width:100%;border-collapse:collapse;margin:16px 0 8px;background:white;font-size:15px}
+th,td{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}
+th{background:var(--soft);color:var(--deep);font-weight:700}
+.table-caption{font-size:13px;color:var(--muted);margin-bottom:18px;font-style:italic}
+.formula{background:var(--soft);border-left:4px solid var(--brand);border-radius:var(--r);padding:13px 16px;margin:14px 0;color:var(--deep);font-weight:700;font-size:16px}
+.summary-box{background:var(--soft);border:1px solid rgba(27,107,99,.3);border-radius:var(--r);padding:18px;margin-top:18px}
+.summary-box strong{display:block;color:var(--deep);margin-bottom:8px;font-size:16px}
+.summary-box ul{margin:0}
+.nav-lec{display:flex;gap:12px;margin-top:28px;padding-top:20px;border-top:1px solid var(--line)}
+.nav-lec a{flex:1;background:var(--soft);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;text-decoration:none}
+.nav-lec a span{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
+.nav-lec a strong{color:var(--deep)}
+.nav-lec a:hover{border-color:var(--brand)}
+.footer{border-top:1px solid var(--line);padding:22px 24px;color:var(--muted);font-size:14px}
+.footer-inner{max-width:1060px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media(max-width:860px){
+  .top-inner{align-items:flex-start;flex-direction:column}
+  .nav{justify-content:flex-start}
+  .content{grid-template-columns:1fr}
+  .aside{position:static}
+  .meta{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .top-inner,.hero,.content{padding-left:18px;padding-right:18px}
+  .actions{flex-direction:column}
+  .btn{width:100%}
+  .article{padding:20px}
+  .nav-lec{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="index.html">Економіка будівництва</a>
+    <nav class="nav">
+      <a href="index.html">Головна</a>
+      <a href="materials.html">Учбові матеріали</a>
+      <a href="economic-tasks.html">Економічні задачі</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="kicker">Лекція 5</div>
+    <h1>Кількісна вимірюваність параметрів проєкту розвитку компанії</h1>
+    <p class="lead">Шість груп параметрів ефективності; методи KPI, BSC, SMART, бенчмаркінг і сценарне моделювання; ESG як обов'язковий стандарт звітності 2025–2026.</p>
+    <div class="actions">
+      <a class="btn primary" href="Лекція_5_Кількісна_вимірюваність.docx">Завантажити повну лекцію DOCX</a>
+      <a class="btn" href="materials.html">Назад до матеріалів</a>
+    </div>
+  </section>
+
+  <div class="content">
+    <aside class="aside">
+      <h2>Зміст лекції</h2>
+      <a href="#why">5.1. Роль кількісного вимірювання</a>
+      <span class="nav-section">6 груп параметрів</span>
+      <a href="#financial">Фінансові (ROI, NPV, IRR)</a>
+      <a href="#strategic">Стратегічні та бізнесові</a>
+      <a href="#operational">Операційні</a>
+      <a href="#quality">Якість і ефективність</a>
+      <a href="#innovation">Інноваційні та цифрові</a>
+      <a href="#esg">ESG-параметри</a>
+      <span class="nav-section">5 методів оцінки</span>
+      <a href="#kpi">KPI</a>
+      <a href="#bsc">BSC</a>
+      <a href="#smart">SMART-критерії</a>
+      <a href="#bench">Бенчмаркінг</a>
+      <a href="#scenario">Сценарне моделювання</a>
+      <a href="#tasks">Питання і завдання</a>
+      <a href="#literature">Література</a>
+    </aside>
+
+    <article class="article">
+      <div class="meta">
+        <div><strong>Тема</strong>Кількісні параметри проєктів розвитку: 6 груп показників і 5 методів оцінки ефективності.</div>
+        <div><strong>Для кого</strong>Студенти 1–2 курсу магістратури економічних спеціальностей.</div>
+        <div><strong>Головна ідея</strong>«Ви не можете управляти тим, що не вимірюєте» (Пітер Друкер). Організації з формальними KPI досягають цілей у 73% vs 58% без них.</div>
+        <div><strong>Формат</strong>Навчальна лекція з формулами, таблицями, розрахунковими прикладами, кейсами та статистикою PMI/ESG 2024–2026.</div>
+      </div>
+
+      <!-- 5.1 -->
+      <section id="why">
+        <h2>5.1. Чому кількісне вимірювання є основою управлінських рішень</h2>
+        <p>Будь-який проєкт розвитку — це інвестиція ресурсів у майбутні результати. Але сам факт реалізації не гарантує ефективності. Керівництво, інвестори та партнери мають бачити не розповідь про успіх, а конкретні верифіковані цифри.</p>
+        <p>Кількісне вимірювання виконує чотири управлінські функції: <strong>об'єктивність</strong> (реальні цифри замість суб'єктивних вражень); <strong>контроль</strong> (швидка реакція на відхилення до того, як вони стають критичними); <strong>порівнянність</strong> (зіставлення кількох проєктів для відбору в портфель); <strong>прозорість</strong> (акціонери, кредитори, ESG-інвестори бачать реальний ефект).</p>
+
+        <div class="callout">
+          <strong>📊 Статистика: вимірювання як чинник успіху проєктів (PMI 2025)</strong>
+          <p>— Організації з формальними KPI досягають цілей у <strong>73%</strong> випадків; без такої системи — лише у <strong>58%</strong>.</p>
+          <p>— Проєкти із чітко визначеними критеріями успіху мають NPSS +54 проти +31 при частковому вимірюванні.</p>
+          <p>— 12% загального обсягу проєктних інвестицій втрачається через відсутність формального управління.</p>
+          <p>— 29% проєктів зазнають невдачі через відсутність спільних вимірюваних цілей.</p>
+          <p style="font-size:13px;color:var(--muted);margin-top:8px">Джерело: PMI Pulse of the Profession 2025; TeamStage Project Management Statistics 2024.</p>
+        </div>
+
+        <div class="summary-box">
+          <strong>✅ Ключові висновки розділу 5.1</strong>
+          <ul>
+            <li>Вимірювання — не бюрократія, а умова управлінського контролю: 73% vs 58% досягнення цілей.</li>
+            <li>4 функції вимірювання: об'єктивність, контроль, порівнянність, прозорість.</li>
+            <li>Відсутність метрик — управлінська помилка, що прямо знижує ефективність проєкту.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 5.2 -->
+      <section id="parameters">
+        <h2>5.2. Шість груп параметрів проєктів розвитку компанії</h2>
+        <p>Повноцінна система вимірювання охоплює шість груп параметрів. Кожна вимірює окремий вимір цінності — від безпосереднього фінансового ефекту до довгострокового соціального впливу. Використання лише однієї групи дає неповну картину і може призвести до хибних рішень.</p>
+
+        <h3 id="financial">Група 1. Фінансові показники</h3>
+        <p>Базові інструменти оцінки доцільності та результативності проєкту. Мають ключове значення при прийнятті рішення про запуск і оцінці фактичного ефекту після завершення.</p>
+
+        <div class="formula">ROI = (Чистий прибуток / Інвестиції) × 100%</div>
+        <div class="formula">NPV = Σ [CFₜ / (1 + r)ᵗ] − I₀</div>
+        <div class="formula">IRR: ставка дисконту, при якій NPV = 0</div>
+
+        <ul>
+          <li><strong>ROI (Return on Investment)</strong> — скільки прибутку приносить кожна вкладена гривня. ROI нижче альтернативної дохідності сигналізує про субоптимальне використання ресурсів.</li>
+          <li><strong>NPV (Net Present Value)</strong> — різниця між теперішньою вартістю грошових потоків і початковими інвестиціями. NPV &gt; 0 — проєкт створює додану вартість; NPV &lt; 0 — знищує її.</li>
+          <li><strong>IRR (Internal Rate of Return)</strong> — порівнюється з WACC: якщо IRR &gt; WACC — проєкт генерує більше, ніж коштує фінансування.</li>
+          <li><strong>Payback Period</strong> — термін повернення інвестицій. Використовується разом із NPV, а не замість нього.</li>
+        </ul>
+
+        <div class="note">
+          <strong>📌 Приклад. Розрахунок фінансових параметрів: проєкт автоматизації складу</strong>
+          Інвестиції: 5 млн грн. Грошові потоки: рік 1 — 1,2 млн; рік 2 — 1,8 млн; рік 3 — 2,2 млн; рік 4 — 2,0 млн. Ставка дисконту — 12%.<br><br>
+          <strong>ROI</strong> (сукупний за 4 роки): (7,2 – 5,0) / 5,0 × 100% = <strong>44%</strong><br>
+          <strong>NPV</strong>: 1,2/1,12 + 1,8/1,12² + 2,2/1,12³ + 2,0/1,12⁴ – 5,0 ≈ <strong>+1,28 млн грн</strong><br>
+          <strong>IRR</strong>: ≈ 22% &gt; WACC 12% → проєкт вигідний<br>
+          <strong>Payback Period</strong>: ≈ 2,8 роки<br><br>
+          Висновок: усі фінансові індикатори підтверджують доцільність. Проєкт проходить фінансовий фільтр.
+        </div>
+
+        <h3 id="strategic">Група 2. Стратегічні та бізнесові параметри</h3>
+        <p>Демонструють, наскільки проєкт сприяє досягненню довгострокових цілей — тих, що не завжди відображаються у фінансовій звітності поточного року, але формують конкурентну позицію у майбутньому.</p>
+        <ul>
+          <li>Зростання ринкової частки (%)</li>
+          <li>Рівень капіталізації компанії (ринкова вартість)</li>
+          <li>Кількість нових клієнтів і контрактів</li>
+          <li>Розширення географії присутності (кількість ринків)</li>
+          <li>Відповідність міжнародним стандартам якості (GlobalGAP, ISO, BRC)</li>
+        </ul>
+
+        <div class="note">
+          <strong>📌 Кейс. Nova Post Europe: стратегічні параметри програми експансії (2022–2025)</strong>
+          Зростання кількості країн: з 0 (2021) до 16 (кінець 2025). Відділень у ЄС: 800+ (подвоєння за 2025 рік). Прибутковість у Польщі, Молдові, Чехії та Латвії — Q4 2025. Консолідований дохід групи у 2024: 54,2 млрд грн (+24%). Джерело: Forbes Ukraine, 2026.
+        </div>
+
+        <h3 id="operational">Група 3. Операційні параметри</h3>
+        <p>Оцінюють ефективність внутрішніх процесів і використання ресурсів. Особливо важливі для технологічних і організаційних проєктів.</p>
+        <ul>
+          <li>Продуктивність праці (виробіток на одного працівника)</li>
+          <li>Скорочення витрат (%)</li>
+          <li>Швидкість процесів / time-to-market (дні)</li>
+          <li>Рівень автоматизації (%)</li>
+        </ul>
+
+        <div class="note">
+          <strong>📌 Кейс. DTEK: операційні параметри цифрової трансформації</strong>
+          Після впровадження ERP IT-Enterprise для 20 000+ співробітників: скорочення часу закриття місячної фінансової звітності; уніфікація HR-даних; зниження частки ручного введення даних у ключових процесах. Паралельно — EU renewables portfolio DRI: 1,4 ГВт операційних та проєктних потужностей у Румунії, Хорватії, Італії та Польщі. Джерело: IT Ukraine Association 2026; DTEK Sustainability in Action 2024.
+        </div>
+
+        <h3 id="quality">Група 4. Параметри якості та ефективності</h3>
+        <p>«Міст» між операційними покращеннями і ринковим ефектом — пов'язані з результатами для клієнтів та якістю процесів.</p>
+        <ul>
+          <li><strong>Рівень дефектності</strong> = (Дефектні / Загальний обсяг) × 100%</li>
+          <li><strong>NPS (Net Promoter Score)</strong> — від –100 до +100; значення &gt;50 вважається відмінним</li>
+          <li>Виконання KPI (% завдань у встановлені строки)</li>
+          <li><strong>MTBF</strong> (Mean Time Between Failures) — середній час безвідмовної роботи</li>
+          <li><strong>MTTR</strong> (Mean Time To Repair) — середній час відновлення</li>
+        </ul>
+
+        <h3 id="innovation">Група 5. Інноваційні та цифрові параметри</h3>
+        <p>Оцінюють наскільки компанія стає сучаснішою та технологічнішою завдяки проєктам розвитку. В умовах 2025–2026 років — критичні конкурентні чинники.</p>
+        <ul>
+          <li>Кількість нових продуктів або сервісів за рік</li>
+          <li>Відсоток доходу від інноваційних продуктів (%)</li>
+          <li>Рівень цифровізації процесів (%)</li>
+        </ul>
+
+        <div class="note">
+          <strong>📌 Кейс. MHP: інноваційні параметри сталого агровиробництва</strong>
+          Площа застосування змінних норм внесення добрив у 2024: 61 052 га (2023: 9 755 га) — зростання у 6,3 рази. Сертифікація GLOBAL G.A.P. та ISCC. Площа земельного банку у вуглецевих проєктах зросла на 40% у 2024 році. Джерело: MHP Integrated Annual Report 2024.
+        </div>
+
+        <h3 id="esg">Група 6. ESG-параметри (Environmental, Social, Governance)</h3>
+        <p>У 2024–2026 роках ESG-параметри перейшли з «бажаних» у «обов'язкові» — як мінімум для компаній, що прагнуть доступу до міжнародного капіталу або ринків ЄС.</p>
+
+        <table>
+          <thead><tr><th>Напрям ESG</th><th>Ключові показники</th><th>Приклад цільового значення</th></tr></thead>
+          <tbody>
+            <tr><td><strong>E — Environmental</strong></td><td>Обсяг викидів CO₂, частка відновлюваної енергії, споживання енергії/одиницю, рівень переробки відходів</td><td>CO₂ –15% за 2 роки; відновлювана енергія &gt;40%</td></tr>
+            <tr><td><strong>S — Social</strong></td><td>Кількість створених робочих місць, витрати на навчання (% від доходу), плинність персоналу, NPS персоналу</td><td>Плинність &lt;10%; навчання &gt;2% від доходу</td></tr>
+            <tr><td><strong>G — Governance</strong></td><td>Прозорість звітності (аудити), частка незалежних директорів, наявність комплаєнс-політик, кількість порушень</td><td>Незалежних директорів &gt;30%; ESG-рейтинг ≥BB</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">Таблиця 5.1. ESG-параметри проєктів розвитку. Джерело: авторська розробка; DTEK Sustainability 2024; CSRD Directive 2025.</p>
+
+        <div class="callout">
+          <strong>📊 ESG в Україні: ключові дані (2024–2026)</strong>
+          <p>— Середній ESG Maturity Index серед українських банків — 46,8% (2024): іноземні банки — 62,7%; державні — 52,3%; локальні приватні — лише 32,3%.</p>
+          <p>— DTEK: зобов'язання повністю вийти з вугільної генерації до 2035 р.; членство в PPCA; портфель відновлюваної енергії в ЄС — 1,4 ГВт.</p>
+          <p>— MHP: площа у вуглецевих проєктах зросла на 40% у 2024 р.</p>
+          <p>— Україна затвердила 86 національних завдань ЦСР до 2030 року.</p>
+          <p>— CSRD (Corporate Sustainability Reporting Directive) ЄС обов'язкова з 2025–2026 рр. для компаній, що мають доступ до ринків ЄС.</p>
+          <p style="font-size:13px;color:var(--muted);margin-top:8px">Джерела: ResearchGate ESG Maturity Ukraine 2025; DTEK Sustainability 2024; MHP Annual Report 2024.</p>
+        </div>
+
+        <div class="warn">
+          <strong>⚠️ Типова помилка: формальна ESG-звітність без реального змісту</strong>
+          <p>Середній ESG Maturity Index 46,8% підтверджує: відповідати вимогам формально і реально трансформувати практики — не одне й те саме. ESG-параметри мають бути інтегровані в систему KPI проєкту на етапі планування, а не додані «заднім числом» у звіт. Джерело: KSE. ESG in Ukraine: Is Everyone Faking It? 2025.</p>
+        </div>
+
+        <table>
+          <thead><tr><th>Група параметрів</th><th>Ключові показники</th><th>Одиниці</th><th>Приклад цільового значення</th></tr></thead>
+          <tbody>
+            <tr><td>1. Фінансові</td><td>ROI, NPV, IRR, Payback Period</td><td>%, грн, роки</td><td>ROI ≥ 15%, NPV &gt; 0, IRR &gt; WACC</td></tr>
+            <tr><td>2. Стратегічні та бізнесові</td><td>Ринкова частка, капіталізація, нові клієнти</td><td>%, кількість</td><td>Ринкова частка +4 п.п.</td></tr>
+            <tr><td>3. Операційні</td><td>Продуктивність, витрати, time-to-market</td><td>%, дні</td><td>Витрати –12%, time-to-market –30%</td></tr>
+            <tr><td>4. Якість і ефективність</td><td>NPS, дефектність, MTBF/MTTR</td><td>%, бали</td><td>NPS &gt; 60, дефектність &lt; 0,5%</td></tr>
+            <tr><td>5. Інноваційні та цифрові</td><td>Нові продукти/рік, % доходу від інновацій</td><td>%, шт.</td><td>40% доходу від нових продуктів за 2 роки</td></tr>
+            <tr><td>6. ESG</td><td>CO₂, відновлювана енергія, робочі місця</td><td>%, тонни</td><td>CO₂ –15%, відновлювана енергія 50%</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">Таблиця 5.2. Зведена система кількісних параметрів проєктів розвитку. Джерело: авторська розробка; PMBoK 7th ed. (PMI, 2021).</p>
+
+        <div class="summary-box">
+          <strong>✅ Ключові висновки розділу 5.2</strong>
+          <ul>
+            <li>Шість груп охоплюють повний спектр ефектів: від фінансових до соціально-екологічних.</li>
+            <li>Використання лише фінансових показників дає неповну картину й може призвести до хибних рішень.</li>
+            <li>ESG стали обов'язковими для компаній, що прагнуть до ринків ЄС або міжнародного капіталу (CSRD з 2025–2026).</li>
+            <li>Всі 6 груп параметрів мають бути визначені на етапі планування, а не додані пост-фактум.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 5.3 -->
+      <section id="methods">
+        <h2>5.3. Методи кількісної оцінки ефективності проєктів розвитку</h2>
+        <p>П'ять ключових методів: KPI, BSC, SMART, бенчмаркінг і сценарне моделювання. Кожен виконує свою специфічну роль і не є альтернативою іншим — ефективна система поєднує їх усі на різних фазах ЖЦ проєкту.</p>
+
+        <h3 id="kpi">Метод 1. Ключові показники ефективності (KPI)</h3>
+        <p>KPI — система вимірюваних показників, що відображають досягнення цілей проєкту. Кожен KPI складається з чотирьох елементів: <strong>цілі</strong> (що вимірюється), <strong>метрики</strong> (одиниця), <strong>цільового значення</strong> і <strong>періоду вимірювання</strong>.</p>
+
+        <div class="note">
+          <strong>📌 Приклади KPI у проєктах різних типів</strong>
+          <strong>Технологічний (ERP):</strong> рівень автоматизації звітності &gt;80%; скорочення часу закриття місячної звітності з 10 до 3 днів.<br>
+          <strong>Ринковий (вихід на ЄС):</strong> 5 нових ринків за 2 роки; частка експортного доходу &gt;30%; NPS &gt;40.<br>
+          <strong>ESG-проєкт:</strong> зменшення CO₂ на 15% за 2 роки; відновлювана енергія &gt;40%; ESG-рейтинг ≥BB.
+        </div>
+
+        <h3 id="bsc">Метод 2. Збалансована система показників (BSC)</h3>
+        <p>BSC (Balanced Scorecard) — методика стратегічного управління Каплана і Нортона (1992). Перекладає абстрактні стратегічні цілі у вимірювані показники за <strong>чотирма перспективами</strong>:</p>
+        <ul>
+          <li><strong>Фінансова</strong>: «Як нас сприймають акціонери?» — ROI, NPV, виручка, EBITDA.</li>
+          <li><strong>Клієнтська</strong>: «Як нас сприймають клієнти?» — NPS, частка ринку, retention rate.</li>
+          <li><strong>Внутрішні процеси</strong>: «У чому ми маємо перевершувати?» — дефектність, time-to-market, автоматизація.</li>
+          <li><strong>Розвиток і навчання</strong>: «Чи можемо ми вдосконалюватися?» — кваліфікація, цифровізація, ESG, плинність.</li>
+        </ul>
+        <p>BSC пов'язує перспективи у причинно-наслідковий ланцюг: навчання → кращі процеси → задоволені клієнти → фінансовий результат.</p>
+
+        <div class="callout">
+          <strong>📊 BSC у світовій практиці (2024–2025)</strong>
+          <p>— Понад половина великих компаній у США, Європі та Азії використовують BSC (Bain & Company Management Tools Survey).</p>
+          <p>— BSC визнано Harvard Business Review одним із найвпливовіших управлінських концептів за останні 75 років.</p>
+          <p>— Систематичний огляд 136 досліджень (2024) підтверджує ефективність BSC як у корпораціях, так і в SME.</p>
+          <p>— Сучасний тренд: S-BSC (Sustainability BSC) — інтеграція ESG-метрик; Agile BSC — щоденне відстеження KPI з AI-аналітикою.</p>
+          <p style="font-size:13px;color:var(--muted);margin-top:8px">Джерело: Balanced Scorecard Institute 2025; MDPI BSC History Review 2025.</p>
+        </div>
+
+        <table>
+          <thead><tr><th>Перспектива BSC</th><th>Ключове питання</th><th>Типові KPI проєктів розвитку</th></tr></thead>
+          <tbody>
+            <tr><td>Фінансова</td><td>Як нас сприймають акціонери?</td><td>ROI, NPV, IRR, виручка від нових продуктів, EBITDA</td></tr>
+            <tr><td>Клієнтська</td><td>Як нас сприймають клієнти?</td><td>NPS, ринкова частка, кількість нових клієнтів, retention rate</td></tr>
+            <tr><td>Внутрішні процеси</td><td>У чому ми маємо перевершувати?</td><td>Дефектність, time-to-market, автоматизація, продуктивність</td></tr>
+            <tr><td>Розвиток і навчання</td><td>Чи можемо ми вдосконалюватися?</td><td>Кваліфікація, цифровізація, інновації, ESG, плинність</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">Таблиця 5.3. Чотири перспективи BSC. Джерело: Kaplan R., Norton D. The Balanced Scorecard, 1996; адаптовано.</p>
+
+        <h3 id="smart">Метод 3. SMART-критерії для постановки цілей</h3>
+        <p>SMART — стандарт постановки цілей і параметрів, що забезпечує їхню вимірюваність і реалістичність:</p>
+        <ul>
+          <li><strong>S</strong>pecific — конкретна, чітко визначена</li>
+          <li><strong>M</strong>easurable — вимірювана, є кількісний показник</li>
+          <li><strong>A</strong>chievable — досяжна, реалістична з урахуванням ресурсів</li>
+          <li><strong>R</strong>elevant — доречна, пов'язана зі стратегічними цілями</li>
+          <li><strong>T</strong>ime-bound — обмежена в часі, має чітку дату</li>
+        </ul>
+        <p><em>Приклад трансформації:</em> «Збільшити продажі» → SMART: «Збільшити виручку від нових продуктів на 25% за 18 місяців за рахунок виходу на ринок Польщі та Чехії».</p>
+
+        <h3 id="bench">Метод 4. Бенчмаркінг</h3>
+        <p>Систематичне порівняння показників компанії з кращими практиками галузі (best-in-class) або прямими конкурентами. Відповідає на питання: наскільки наші показники ефективні відносно ринку? Компанія може мати ROI = 15% і вважати це успіхом — але якщо середнє по галузі 25%, це сигнал про недостатню ефективність.</p>
+        <p>Три виміри бенчмаркінгу: <strong>зовнішній</strong> (vs. конкуренти), <strong>функціональний</strong> (vs. лідери суміжних галузей), <strong>внутрішній</strong> (між підрозділами або проєктами). Джерела: PMI, McKinsey, Deloitte звіти; Forbes рейтинги; публічна ESG-звітність.</p>
+
+        <div class="note">
+          <strong>📌 Кейс. Kernel: бенчмаркінг у сталому агровиробництві</strong>
+          Kernel використовує сертифікацію GLOBAL G.A.P. та ISCC як точку бенчмаркінгу для оцінки відповідності міжнародним стандартам якості. Порівняльний аналіз yield per hectare і carbon footprint дозволяє відстежувати конкурентоспроможність агрономічних практик відносно провідних агрохолдингів ЦСЄ. Джерело: Kernel Annual Report 2024.
+        </div>
+
+        <h3 id="scenario">Метод 5. Сценарне моделювання</h3>
+        <p>Метод кількісного аналізу, що оцінює ефективність проєкту за різних припущень. Три сценарії: <strong>базовий</strong> (найімовірніший), <strong>оптимістичний</strong> (найсприятливіші умови), <strong>стресовий</strong> (криза, ріст витрат, падіння попиту). Дозволяє знайти «точку прориву» — критичне значення параметра, при якому проєкт перестає бути рентабельним.</p>
+        <p>Сучасний варіант: <strong>AI-assisted scenario modeling</strong> — Power BI або ML-системи будують імовірнісні розподіли на основі методу Монте-Карло (тисячі симуляцій).</p>
+
+        <div class="note">
+          <strong>📌 Приклад. Сценарний аналіз для виходу на ринок ЄС</strong>
+          Три ринки: Польща, Чехія, Румунія. Три сценарії на 3 роки:<br>
+          <strong>Базовий:</strong> зростання 15%/рік, рентабельність 8%, окупність 2,5 роки.<br>
+          <strong>Оптимістичний:</strong> рентабельність 14%, окупність 1,8 роки.<br>
+          <strong>Стресовий:</strong> рентабельність 2%, NPV &lt; 0 при 12%.<br>
+          <strong>Висновок:</strong> при стресовому сценарії Румунія — від'ємний NPV, Польща — позитивний. Рішення: пріоритет Польщі з хеджуванням валютних ризиків.
+        </div>
+
+        <table>
+          <thead><tr><th>Метод</th><th>Для чого</th><th>Коли застосовується</th><th>Головне обмеження</th></tr></thead>
+          <tbody>
+            <tr><td>KPI</td><td>Контроль прогресу та цілей</td><td>Планування + весь ЖЦ</td><td>Ризик «гри у показники»</td></tr>
+            <tr><td>BSC</td><td>Зв'язок стратегії з результатами</td><td>Планування і стратегічна оцінка</td><td>Складність причинно-наслідкових зв'язків</td></tr>
+            <tr><td>SMART</td><td>Перевірка якості постановки цілей</td><td>Ініціація і планування</td><td>Не є системою вимірювання</td></tr>
+            <tr><td>Бенчмаркінг</td><td>Відносна ефективність vs. ринок</td><td>Ініціація і постпроєктна оцінка</td><td>Важко знайти порівнянні дані</td></tr>
+            <tr><td>Сценарне моделювання</td><td>Оцінка стійкості за різних умов</td><td>Планування та аналіз доцільності</td><td>Якість залежить від вхідних припущень</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">Таблиця 5.4. Порівняння методів кількісної оцінки. Джерело: авторська розробка; PMBoK 7th ed.; Kaplan & Norton (1992, 1996).</p>
+
+        <div class="summary-box">
+          <strong>✅ Ключові висновки розділу 5.3</strong>
+          <ul>
+            <li>BSC використовують більш ніж половина великих компаній у США, Європі та Азії; визнано HBR концептом 75 років.</li>
+            <li>Тренд: Agile BSC + AI-аналітика для щоденного відстеження і автоматичного виявлення відхилень.</li>
+            <li>Жоден метод не є самодостатнім — ефективна система поєднує всі п'ять на різних фазах ЖЦ.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Tasks -->
+      <section id="tasks">
+        <h2>Питання для обговорення та практичні завдання</h2>
+        <ol>
+          <li>«Ви не можете управляти тим, що не вимірюєте» (Пітер Друкер). Наведіть конкретний приклад проєкту, де відсутність кількісних параметрів призвела до управлінської помилки. Як слід було організувати систему вимірювання?</li>
+          <li>Компанія A вимірює ефективність цифрової трансформації виключно ROI = 18%. Компанія B вимірює за BSC: ROI 18%, NPS +12, автоматизація 60%, кваліфікація +25%. Чия система краща і чому?</li>
+          <li><strong>Розрахункове завдання:</strong> проєкт автоматизації потребує 8 млн грн. Грошові потоки: рік 1 — 2,0 млн; рік 2 — 2,8 млн; рік 3 — 3,2 млн; рік 4 — 2,5 млн. Ставка дисконту — 14%. Розрахуйте ROI, NPV, Payback Period. Чи є проєкт ефективним?</li>
+          <li>Побудуйте сценарний аналіз для виходу на новий регіональний ринок. Визначте ключові змінні, три сценарії та відповідні значення ROI і NPV. Яке рішення прийняли б ви як керівник проєкту?</li>
+          <li>DTEK взяв зобов'язання повністю вийти з вугільної генерації до 2035 р. Які ESG-параметри ви включили б у систему вимірювання? Побудуйте міні-BSC за 4 перспективами.</li>
+        </ol>
+      </section>
+
+      <!-- Literature -->
+      <section id="literature">
+        <h2>Рекомендована література</h2>
+        <h3>Основна</h3>
+        <ol>
+          <li>Project Management Institute. <em>PMBoK Guide. 7th ed.</em> — PMI, 2021.</li>
+          <li>Kaplan R.S., Norton D.P. <em>The Balanced Scorecard.</em> — Harvard Business School Press, 1996.</li>
+          <li>PMI. <em>Pulse of the Profession 2025.</em> — PMI, 2025.</li>
+        </ol>
+        <h3>Корпоративні звіти та онлайн</h3>
+        <ol>
+          <li>DTEK. <em>Sustainability in Action 2024.</em> — <a href="https://dtek.com" style="color:var(--brand)">dtek.com</a></li>
+          <li>MHP. <em>Integrated Annual Report 2024.</em> — <a href="https://mhp.com.ua" style="color:var(--brand)">mhp.com.ua</a></li>
+          <li>Kernel. <em>Annual Report 2024.</em> — <a href="https://kernel.ua" style="color:var(--brand)">kernel.ua</a></li>
+          <li>Balanced Scorecard Institute. <em>BSC Basics Overview 2025.</em> — <a href="https://balancedscorecard.org" style="color:var(--brand)">balancedscorecard.org</a></li>
+          <li>KSE. <em>ESG in Ukraine: Is Everyone Faking It? 2025.</em> — <a href="https://kse.ua" style="color:var(--brand)">kse.ua</a></li>
+        </ol>
+      </section>
+
+      <!-- Nav -->
+      <div class="nav-lec">
+        <a href="lecture-4-projects.html">
+          <span>← Попередня</span>
+          <strong>Лекція 4. Життєвий цикл та стратегія</strong>
+        </a>
+        <a href="materials.html" style="text-align:right">
+          <span>Усі матеріали →</span>
+          <strong>Повернутись до розділу</strong>
+        </a>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Лекція 5 — Кількісна вимірюваність параметрів проєкту розвитку</span>
+    <span>Курс: Обґрунтування проєктів розвитку компанії · КНУБА</span>
+  </div>
+</footer>
+</body>
+</html>
