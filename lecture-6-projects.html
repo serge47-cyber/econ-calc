@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Лекція 6 — Практичні кроки зі створення і реалізації проєкту розвитку</title>
+<meta name="description" content="Лекція 6. SWOT/PEST/VRIO-аналіз, ФЕО, Business Model Canvas, матриця Ансоффа, WBS, управління командою та змінами.">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --bg:#f6f4ef;--paper:#fffdf8;--ink:#17202a;--muted:#5f6b75;
+  --line:#d9d4c7;--brand:#1b6b63;--brand2:#b66a2c;--deep:#22324a;
+  --soft:#e8f1ee;--accent:#fff1d9;--r:8px;
+}
+body{margin:0;font-family:Arial,"Helvetica Neue",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+a{color:inherit}
+.top{border-bottom:1px solid var(--line);background:rgba(255,253,248,.92);position:sticky;top:0;z-index:10;backdrop-filter:blur(10px)}
+.top-inner{max-width:1060px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-weight:700;color:var(--deep);text-decoration:none}
+.nav{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.nav a{font-size:14px;text-decoration:none;padding:8px 11px;border-radius:var(--r);color:var(--muted)}
+.nav a:hover{background:var(--soft);color:var(--ink)}
+.hero{max-width:1060px;margin:0 auto;padding:50px 24px 24px}
+.kicker{font-size:12px;letter-spacing:1.8px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:12px}
+h1{font-size:clamp(31px,4.4vw,52px);line-height:1.06;margin:0;color:var(--deep)}
+.lead{font-size:18px;color:var(--muted);max-width:780px;margin:16px 0 0}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 15px;border-radius:var(--r);font-weight:700;text-decoration:none;border:1px solid var(--brand);color:var(--brand)}
+.btn.primary{background:var(--brand);color:white}
+.content{max-width:1060px;margin:0 auto;padding:20px 24px 72px;display:grid;grid-template-columns:280px minmax(0,1fr);gap:22px}
+.aside,.article{background:var(--paper);border:1px solid var(--line);border-radius:var(--r)}
+.aside{padding:18px;height:max-content;position:sticky;top:76px}
+.aside h2{font-size:18px;margin:0 0 12px;color:var(--deep)}
+.aside a{display:block;text-decoration:none;color:var(--muted);padding:9px 0;border-top:1px solid var(--line)}
+.aside a:hover{color:var(--brand)}
+.aside .nav-section{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--brand);font-weight:700;padding:14px 0 4px;border-top:none;margin-top:4px}
+.article{padding:28px}
+.meta{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:24px}
+.meta div{background:var(--soft);padding:13px 15px}
+.meta strong{display:block;color:var(--deep);margin-bottom:4px}
+section{border-top:1px solid var(--line);padding-top:24px;margin-top:24px}
+section:first-of-type{border-top:none;margin-top:0;padding-top:0}
+h2{font-size:27px;line-height:1.2;margin:0 0 12px;color:var(--deep)}
+h3{font-size:19px;margin:20px 0 8px;color:var(--deep)}
+p{color:var(--muted);margin:0 0 13px}
+ul,ol{margin:0 0 14px;padding-left:22px;color:var(--muted)}
+li{margin:7px 0}
+.note{background:var(--accent);border-left:4px solid var(--brand2);border-radius:var(--r);padding:14px 16px;margin:16px 0}
+.note strong{display:block;margin-bottom:4px;color:var(--deep)}
+.callout{background:var(--soft);border-left:4px solid var(--brand);border-radius:var(--r);padding:14px 16px;margin:16px 0}
+.callout strong{display:block;color:var(--deep);margin-bottom:6px}
+.callout p{margin:4px 0;color:var(--ink);font-size:15px}
+.warn{background:#fff4df;border-left:4px solid var(--brand2);border-radius:var(--r);padding:14px 16px;margin:16px 0}
+.warn strong{display:block;color:var(--brand2);margin-bottom:6px}
+.warn p{margin:4px 0;color:var(--ink);font-size:15px}
+table{width:100%;border-collapse:collapse;margin:16px 0 8px;background:white;font-size:15px}
+th,td{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}
+th{background:var(--soft);color:var(--deep);font-weight:700}
+.table-caption{font-size:13px;color:var(--muted);margin-bottom:18px;font-style:italic}
+.summary-box{background:var(--soft);border:1px solid rgba(27,107,99,.3);border-radius:var(--r);padding:18px;margin-top:18px}
+.summary-box strong{display:block;color:var(--deep);margin-bottom:8px;font-size:16px}
+.summary-box ul{margin:0}
+.nav-lec{display:flex;gap:12px;margin-top:28px;padding-top:20px;border-top:1px solid var(--line)}
+.nav-lec a{flex:1;background:var(--soft);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;text-decoration:none}
+.nav-lec a span{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
+.nav-lec a strong{color:var(--deep)}
+.nav-lec a:hover{border-color:var(--brand)}
+.footer{border-top:1px solid var(--line);padding:22px 24px;color:var(--muted);font-size:14px}
+.footer-inner{max-width:1060px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media(max-width:860px){.top-inner{align-items:flex-start;flex-direction:column}.nav{justify-content:flex-start}.content{grid-template-columns:1fr}.aside{position:static}.meta{grid-template-columns:1fr}}
+@media(max-width:520px){.top-inner,.hero,.content{padding-left:18px;padding-right:18px}.actions{flex-direction:column}.btn{width:100%}.article{padding:20px}.nav-lec{flex-direction:column}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="index.html">Економіка будівництва</a>
+    <nav class="nav">
+      <a href="index.html">Головна</a>
+      <a href="materials.html">Учбові матеріали</a>
+      <a href="economic-tasks.html">Економічні задачі</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="kicker">Лекція 6</div>
+    <h1>Практичні кроки зі створення і реалізації проєкту розвитку</h1>
+    <p class="lead">SWOT/PEST/VRIO-аналіз, ФЕО з аналізом чутливості, Business Model Canvas, матриця Ансоффа, WBS і RAID, управління командою та змінами за моделлю Коттера.</p>
+    <div class="actions">
+      <a class="btn primary" href="Лекція_6_Практичні_кроки.docx">Завантажити повну лекцію DOCX</a>
+      <a class="btn" href="materials.html">Назад до матеріалів</a>
+    </div>
+  </section>
+
+  <div class="content">
+    <aside class="aside">
+      <h2>Зміст лекції</h2>
+      <span class="nav-section">6.1. Аналіз ресурсів</span>
+      <a href="#swot">SWOT-аналіз</a>
+      <a href="#pest">PEST-аналіз</a>
+      <a href="#vrio">VRIO-аналіз</a>
+      <span class="nav-section">6.2. ФЕО проєкту</span>
+      <a href="#budget">CAPEX, OPEX, Cash Flow</a>
+      <a href="#sensitivity">Аналіз чутливості</a>
+      <a href="#financing">Джерела фінансування / ДПП</a>
+      <span class="nav-section">6.3. Бізнес-модель</span>
+      <a href="#bmc">Business Model Canvas</a>
+      <a href="#ansoff">Матриця Ансоффа</a>
+      <span class="nav-section">6.4. Планування</span>
+      <a href="#wbs">WBS та діаграма Ганта</a>
+      <a href="#raid">RAID-журнал ризиків</a>
+      <span class="nav-section">6.5. Управління</span>
+      <a href="#team">Команда і лідерство</a>
+      <a href="#change">Change Management</a>
+      <a href="#tasks">Питання і завдання</a>
+      <a href="#literature">Література</a>
+    </aside>
+
+    <article class="article">
+      <div class="meta">
+        <div><strong>Тема</strong>Повний практичний цикл: від аналізу до управління проєктом розвитку через 5 взаємопов'язаних кроків.</div>
+        <div><strong>Для кого</strong>Студенти 1–2 курсу магістратури економічних спеціальностей.</div>
+        <div><strong>Головна ідея</strong>Проєкт розвитку потребує системного підходу: аналіз → обґрунтування → бізнес-модель → планування → управління змінами. Пропустити будь-який крок — ризик провалу.</div>
+        <div><strong>Формат</strong>Лекція з інструментальними прикладами, таблицями, розрахунками, кейсами Nova Post/MHP/Amazon та статистикою PMI/McKinsey/Prosci 2024–2026.</div>
+      </div>
+
+      <!-- 6.1 -->
+      <section id="analysis">
+        <h2>6.1. Аналіз внутрішніх ресурсів: SWOT, PEST і VRIO</h2>
+        <p>Проєкт розвитку починається не з рішення, а з розуміння. Три інструменти утворюють повноцінну аналітичну систему: SWOT для загальної картини, PEST для зовнішнього контексту, VRIO для глибини внутрішнього потенціалу.</p>
+
+        <h3 id="swot">SWOT-аналіз</h3>
+        <p>SWOT (Strengths, Weaknesses, Opportunities, Threats) — «фільтр доцільності» проєкту. Ключова цінність — не у заповненні чотирьох квадрантів, а у виявленні стратегічних відповідностей: як сильні сторони реалізують можливості? Як слабкі сторони підвищують вразливість до загроз?</p>
+
+        <div class="note">
+          <strong>📌 Кейс. SWOT перед запуском Nova Post у країнах ЄС</strong>
+          <strong>Strengths:</strong> відпрацьована логістична модель; впізнаваний бренд серед переселенців; AI-диспетчеризація; досвід роботи в умовах невизначеності.<br>
+          <strong>Weaknesses:</strong> обмежена впізнаваність серед місцевого населення; мовні бар'єри; вища вартість на початковому етапі.<br>
+          <strong>Opportunities:</strong> 6+ млн українців у ЄС; зростання e-commerce; регуляторна гармонізація Єдиного ринку.<br>
+          <strong>Threats:</strong> конкуренція DHL, DPD, InPost; волатильність курсу; вимоги трудового законодавства ЄС.<br>
+          <strong>Висновок:</strong> стратегічна доцільність підтверджена при правильному виборі ринків входу і хеджуванні валютних ризиків.
+        </div>
+
+        <h3 id="pest">PEST-аналіз</h3>
+        <p>PEST (Political, Economic, Social, Technological) або PESTEL (+Environmental, Legal) — аналіз макросередовища. Особливо важливий для проєктів виходу на нові ринки або реакції на регуляторні зміни.</p>
+
+        <table>
+          <thead><tr><th>Фактор</th><th>Сигнали для проєктів розвитку в Україні 2025–2026</th><th>Можливості</th><th>Загрози</th></tr></thead>
+          <tbody>
+            <tr><td><strong>P — Політичні</strong></td><td>Статус кандидата ЄС, воєнний стан</td><td>EU4Business, DREAM-платформа, програми відновлення</td><td>Нестабільність законодавства, мобілізаційні обмеження</td></tr>
+            <tr><td><strong>E — Економічні</strong></td><td>Інфляція ~10%, ВВП +3,4% (2024), допомога $38 млрд</td><td>Відновлення попиту, міжнародне фінансування</td><td>Дефіцит бюджету, обмеження на рух капіталу</td></tr>
+            <tr><td><strong>S — Соціальні</strong></td><td>6+ млн переселенців за кордоном, 5 млн ВПО</td><td>Нові клієнтські сегменти, дистанційні послуги</td><td>Дефіцит кадрів, демографічні зміни</td></tr>
+            <tr><td><strong>T — Технологічні</strong></td><td>AI-революція, Diia 21,7 млн користувачів</td><td>Цифровізація держпослуг, AI для бізнесу</td><td>Кібератаки на інфраструктуру</td></tr>
+            <tr><td><strong>E — Екологічні</strong></td><td>CSRD Директива ЄС, ESG-вимоги</td><td>Зелена відбудова, вуглецеві кредити</td><td>Витрати на ESG-відповідність</td></tr>
+            <tr><td><strong>L — Правові</strong></td><td>Гармонізація з правом ЄС, нові закони про ДПП</td><td>Нові форми партнерства, доступ до ринків ЄС</td><td>Складність дозвільних процедур</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">Таблиця 6.1. PEST-аналіз для проєктів розвитку в Україні. Джерело: НБУ, Мінфін, МВФ Ukraine Report 2025.</p>
+
+        <h3 id="vrio">VRIO-аналіз</h3>
+        <p>VRIO (Value, Rarity, Imitability, Organization) — інструмент оцінки внутрішніх ресурсів з точки зору їхнього потенціалу створювати <strong>стійку конкурентну перевагу</strong> (Barney, 1991). Запитує не просто «яка наша сила?», а «чи є ця сила справжньою конкурентною перевагою?»</p>
+        <ul>
+          <li><strong>V — Value:</strong> чи допомагає ресурс зменшити витрати або збільшити доходи?</li>
+          <li><strong>R — Rarity:</strong> чи є ресурс унікальним або доступним лише небагатьом?</li>
+          <li><strong>I — Imitability:</strong> наскільки важко конкурентам скопіювати?</li>
+          <li><strong>O — Organization:</strong> чи здатна компанія організувати ефективне використання?</li>
+        </ul>
+
+        <table>
+          <thead><tr><th>Цінний?</th><th>Рідкісний?</th><th>Важко імітувати?</th><th>Організаційно підтриманий?</th><th>Конкурентний наслідок</th></tr></thead>
+          <tbody>
+            <tr><td>Ні</td><td>–</td><td>–</td><td>–</td><td>Конкурентна невигода → переглянути ресурс</td></tr>
+            <tr><td>Так</td><td>Ні</td><td>–</td><td>–</td><td>Конкурентний паритет → достатньо для виживання</td></tr>
+            <tr><td>Так</td><td>Так</td><td>Ні</td><td>–</td><td>Тимчасова перевага → потрібен захист</td></tr>
+            <tr><td>Так</td><td>Так</td><td>Так</td><td>Ні</td><td>Невикористана перевага → організаційна трансформація</td></tr>
+            <tr><td>Так</td><td>Так</td><td>Так</td><td>Так</td><td><strong>Стійка конкурентна перевага → основа для проєкту</strong></td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">Таблиця 6.2. Алгоритм VRIO. Джерело: Barney J. Academy of Management Executive, 1995.</p>
+
+        <div class="note">
+          <strong>📌 VRIO-аналіз ресурсів українських компаній</strong>
+          <strong>Nova Post — мережа 35 000+ відділень:</strong> V✓ R✓ I✓ O✓ → Стійка конкурентна перевага.<br>
+          <strong>MHP — вертикальна інтеграція агровиробництва:</strong> V✓ R✓ I✓ O✓ → Стійка перевага на глобальному ринку.<br>
+          <strong>Невеликий виробник меблів — цінова доступність:</strong> V✓ R✗ → Лише конкурентний паритет. Необхідні додаткові диференціатори.
+        </div>
+
+        <div class="summary-box">
+          <strong>✅ Ключові висновки 6.1</strong>
+          <ul>
+            <li>SWOT + PEST + VRIO — повноцінна аналітична система для обґрунтування проєктів розвитку.</li>
+            <li>VRIO: стійка перевага = цінний + рідкісний + важко відтворюваний + організаційно підтриманий.</li>
+            <li>PEST для України 2025–2026: унікальні можливості ЄС-кандидатства і $38 млрд допомоги поряд із специфічними ризиками.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 6.2 -->
+      <section id="feo">
+        <h2>6.2. Фінансово-економічне обґрунтування проєкту</h2>
+        <p>ФЕО — комплексна оцінка доцільності інвестицій: економічна ефективність, ризики, окупність і вплив на фінансовий стан компанії. Є ключовим розділом бізнес-кейсу і обов'язковою умовою для отримання фінансування.</p>
+
+        <h3 id="budget">Структура бюджету: CAPEX і OPEX</h3>
+        <ul>
+          <li><strong>CAPEX</strong> (Capital Expenditures) — одноразові інвестиції: обладнання, будівництво, розробка ПЗ, ліцензії. Відображаються у балансі як активи, що амортизуються.</li>
+          <li><strong>OPEX</strong> (Operational Expenditures) — регулярні витрати: зарплата, оренда, IT-підтримка, маркетинг. Виникають після завершення проєкту.</li>
+          <li><strong>Cash Flow</strong> — рух грошових коштів у динаміці по роках. Перші 1–2 роки зазвичай від'ємні; далі — зростання до беззбитковості.</li>
+        </ul>
+        <p>Методи оцінки ефективності: NPV, IRR, Payback Period (розглянуті в лекції 5) + <strong>PI (Profitability Index)</strong> = PV грошових потоків / Інвестиції. PI &gt; 1 — проєкт вигідний. <strong>DSCR ≥ 1,25</strong> — стандартна вимога банків для проєктного фінансування.</p>
+
+        <h3 id="sensitivity">Аналіз чутливості та сценарії</h3>
+        <p>Визначає, які чинники найбільше впливають на NPV. Для кожного ключового параметра будується таблиця: зміна параметра на –20%, –10%, +10%, +20% → зміна NPV. Параметри з найбільшим впливом стають пріоритетами для ризик-менеджменту.</p>
+
+        <div class="callout">
+          <strong>📊 Приклад аналізу чутливості (базовий NPV = +3,2 млн грн)</strong>
+          <p>Ціна продукту –10% → NPV = +0,8 млн грн (–75%). <strong>Найчутливіший параметр.</strong></p>
+          <p>Обсяг продажів –10% → NPV = +1,9 млн грн (–41%).</p>
+          <p>CAPEX +15% → NPV = +1,6 млн грн (–50%).</p>
+          <p>Ставка дисконту 15% → NPV = +2,1 млн грн (–34%).</p>
+          <p><strong>Стратегія:</strong> контракти з фіксованими цінами або форвардні угоди для хеджування цінового ризику.</p>
+        </div>
+
+        <h3 id="financing">Джерела фінансування і ДПП</h3>
+        <p>Державно-приватне партнерство (ДПП) — механізм спільного фінансування між державою і приватним сектором. Держава надає активи або гарантований попит; приватний партнер — капітал і компетенції. Ризики розподіляються між партнерами.</p>
+
+        <div class="callout">
+          <strong>📊 ДПП в Україні: програми відновлення 2024–2026</strong>
+          <p>— DREAM-платформа: понад 11 000 верифікованих відновлювальних проєктів з прозорим трекінгом для інвесторів.</p>
+          <p>— Міжнародна допомога у 2024: понад $38 млрд (ЄС, МВФ, Світовий банк, США).</p>
+          <p>— Програми ЄС: EU4Business, EBRD Ukraine Solidarity Package, EIB Ukraine Special Package.</p>
+          <p style="font-size:13px;color:var(--muted);margin-top:8px">Джерела: DREAM Platform; МВФ Country Report Ukraine 2025; Мінфін України.</p>
+        </div>
+
+        <div class="summary-box">
+          <strong>✅ Ключові висновки 6.2</strong>
+          <ul>
+            <li>ФЕО = CAPEX/OPEX + NPV/IRR/PI/DSCR + аналіз чутливості + сценарії + вибір джерела фінансування.</li>
+            <li>Аналіз чутливості виявляє найвразливіші параметри — ціна, обсяг продажів, CAPEX.</li>
+            <li>DSCR ≥ 1,25 — стандартна банківська вимога для проєктного фінансування.</li>
+            <li>DREAM + $38 млрд: нові реальні можливості для великих проєктів відновлення і розвитку.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 6.3 -->
+      <section id="strategy">
+        <h2>6.3. Розробка бізнес-моделі і стратегії реалізації</h2>
+
+        <h3 id="bmc">Business Model Canvas (BMC)</h3>
+        <p>BMC — інструмент стратегічного моделювання Остервальдера і Піньє (2010), розроблений з 470 практиками з 45 країн. Описує 9 взаємопов'язаних блоків бізнес-моделі:</p>
+        <ul>
+          <li><strong>Ціннісні пропозиції</strong> — яку проблему вирішує продукт/послуга</li>
+          <li><strong>Сегменти клієнтів</strong> — для кого створюється цінність</li>
+          <li><strong>Канали збуту</strong> — як цінність доставляється до клієнта</li>
+          <li><strong>Відносини з клієнтами</strong> — тип взаємодії з кожним сегментом</li>
+          <li><strong>Ключові ресурси</strong> — які активи необхідні (тут використовується VRIO)</li>
+          <li><strong>Ключові партнери</strong> — хто забезпечує ресурси або діяльність</li>
+          <li><strong>Ключові види діяльності</strong> — що компанія робить для реалізації пропозиції</li>
+          <li><strong>Структура витрат</strong> — що є найдорожчим у бізнес-моделі</li>
+          <li><strong>Потоки доходів</strong> — як і за що клієнти платять</li>
+        </ul>
+
+        <div class="note">
+          <strong>📌 BMC для проєкту NovaPay (Nova Post)</strong>
+          <strong>Цінність:</strong> фінансові послуги (оплата, перекази, зберігання) без окремого банківського рахунку.<br>
+          <strong>Сегменти:</strong> покупці e-commerce, малий бізнес, переселенці.<br>
+          <strong>Канали:</strong> мобільний застосунок, веб, термінали у відділеннях.<br>
+          <strong>Ключові ресурси:</strong> IT-платформа, ліцензія НБУ, мережа 35 000+ відділень.<br>
+          <strong>Потоки доходів:</strong> комісії за перекази, відсотки, преміум-функції.<br>
+          <strong>Ключова синергія:</strong> існуюча мережа відділень як канал — різко знижує CAPEX порівняно з банківськими відділеннями.
+        </div>
+
+        <h3 id="ansoff">Матриця Ансоффа (1957)</h3>
+        <p>Структурує вибір стратегії зростання через комбінацію продуктів і ринків. Ризик зростає діагонально від лівого верхнього кута (проникнення) до правого нижнього (диверсифікація).</p>
+
+        <table>
+          <thead><tr><th>Стратегія</th><th>Ринок</th><th>Продукт</th><th>Рівень ризику</th><th>Приклад</th></tr></thead>
+          <tbody>
+            <tr><td>Проникнення на ринок</td><td>Існуючий</td><td>Існуючий</td><td>Низький</td><td>Rozetka: акції та лояльність для утримання клієнтів</td></tr>
+            <tr><td>Розвиток продукту</td><td>Існуючий</td><td>Новий</td><td>Середній</td><td>Nova Post → NovaPay для існуючих клієнтів логістики</td></tr>
+            <tr><td>Розвиток ринку</td><td>Новий</td><td>Існуючий</td><td>Середній</td><td>Nova Post: вихід у 16 країн ЄС з існуючою моделлю</td></tr>
+            <tr><td>Диверсифікація</td><td>Новий</td><td>Новий</td><td>Високий</td><td>Amazon → AWS: хмарний сервіс для IT-компаній ($100 млрд+)</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">Таблиця 6.3. Матриця Ансоффа. Джерело: Ansoff H.I. Harvard Business Review, 1957; адаптовано.</p>
+
+        <div class="summary-box">
+          <strong>✅ Ключові висновки 6.3</strong>
+          <ul>
+            <li>BMC (9 блоків) відображає повну логіку створення, поставки і захоплення цінності.</li>
+            <li>Матриця Ансоффа: ризик зростає від проникнення до диверсифікації.</li>
+            <li>AWS Amazon — $100 млрд+: найризикованіша стратегія стала найприбутковішим підрозділом.</li>
+            <li>Nova Post одночасно реалізує дві стратегії: розвиток продукту (NovaPay) + розвиток ринку (ЄС).</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 6.4 -->
+      <section id="planning">
+        <h2>6.4. Планування проєкту: WBS, Ганта і RAID</h2>
+
+        <h3 id="wbs">WBS та діаграма Ганта</h3>
+        <p><strong>WBS</strong> (Work Breakdown Structure) — ієрархічна декомпозиція проєкту від мети до конкретних пакетів робіт. Три принципи: орієнтація на результати; 100% правило (нічого не випадає, нічого зайвого); оптимальна глибина (3–5 рівнів).</p>
+        <p><strong>Діаграма Ганта</strong> — графік послідовності робіт у часі. <strong>Метод критичного шляху (CPM)</strong> визначає найдовший ланцюг взаємозалежних завдань — затримка будь-якого завдання на критичному шляху автоматично затримує весь проєкт. Дозволяє фокусувати управлінську увагу на дійсно критичних точках.</p>
+
+        <h3 id="raid">RAID-журнал управління ризиками</h3>
+        <p>RAID (Risks, Assumptions, Issues, Dependencies) — структурований інструмент управління: ризики, припущення, проблеми і залежності. Чотири стратегії реагування на ризики:</p>
+        <ul>
+          <li><strong>Avoid (уникнення)</strong> — зміна плану так, щоб ризик не виник</li>
+          <li><strong>Mitigate (пом'якшення)</strong> — дії для зниження ймовірності або впливу</li>
+          <li><strong>Transfer (передання)</strong> — страхування або контрактне перенесення на третю сторону</li>
+          <li><strong>Accept (прийняття)</strong> — якщо вартість управління перевищує потенційний збиток</li>
+        </ul>
+
+        <table>
+          <thead><tr><th>Категорія</th><th>Опис</th><th>Рейтинг</th><th>Стратегія</th></tr></thead>
+          <tbody>
+            <tr><td>Ризик</td><td>Коливання курсу EUR/UAH &gt;15%</td><td>4×4=16</td><td>Transfer: форвардні валютні контракти</td></tr>
+            <tr><td>Ризик</td><td>Затримка отримання ліцензії в новій країні</td><td>3×5=15</td><td>Mitigate: місцевий юридичний радник на старті</td></tr>
+            <tr><td>Ризик</td><td>Ключові співробітники залишають проєкт</td><td>2×4=8</td><td>Mitigate: ретейншн-бонуси, backup-плани</td></tr>
+            <tr><td>Припущення</td><td>Попит від діаспори забезпечить беззбитковість у рік 2</td><td>–</td><td>Верифікувати через пілот у 2 містах у рік 1</td></tr>
+            <tr><td>Залежність</td><td>Успіх залежить від IT-інтеграції</td><td>–</td><td>Синхронізація з IT-командою кожні 2 тижні</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">Таблиця 6.4. RAID-журнал проєкту виходу на ринок ЄС. Джерело: авторська розробка; PMBoK 7th ed. (PMI, 2021).</p>
+
+        <div class="summary-box">
+          <strong>✅ Ключові висновки 6.4</strong>
+          <ul>
+            <li>WBS: 100% правило — нічого не випадає, нічого зайвого. Чіткий розподіл відповідальності.</li>
+            <li>CPM фокусує увагу на критичних завданнях, затримка яких затримує весь проєкт.</li>
+            <li>RAID-журнал: 4 стратегії реагування — Avoid, Mitigate, Transfer, Accept.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 6.5 -->
+      <section id="management">
+        <h2>6.5. Управління проєктом: команда, лідерство і зміни</h2>
+
+        <h3 id="team">Команда і лідерство</h3>
+        <p>Матрична + Agile модель є найпоширенішою для корпоративних проєктів трансформації 2024–2025. Ключові ролі: <strong>Спонсор</strong> (ресурси, підтримка, усунення бар'єрів), <strong>PM</strong> (координація, бюджет, ризики), <strong>Команда</strong> (виконання), <strong>Стейкхолдери</strong> (всі зацікавлені сторони).</p>
+        <p><strong>Модель Такмана</strong> — 4 стадії розвитку команди: <em>Forming</em> (знайомство) → <em>Storming</em> (конфлікти) → <em>Norming</em> (узгодженість) → <em>Performing</em> (висока результативність). Завдання PM — прискорити перехід до Performing і утримати команду в ній.</p>
+
+        <div class="note">
+          <strong>📌 Команда програми European expansion Nova Post</strong>
+          Спонсор: CEO Nova Post Group. Program Manager: CEO Nova Post Europe. Country PMs: окремі для кожної країни. Функціональні команди: IT, HR, Legal, Marketing. Ключовий виклик: баланс між глобальними стандартами і локальними особливостями («Germans prefer address delivery, Poles prefer postmen» — CEO Лісовець, Forbes Ukraine, 2026).
+        </div>
+
+        <h3 id="change">Change Management: модель Коттера</h3>
+        <p>8 кроків Коттера для управління змінами в проєктах розвитку:</p>
+        <ol>
+          <li>Створення відчуття нагальності</li>
+          <li>Формування команди змін</li>
+          <li>Розробка бачення і стратегії</li>
+          <li>Комунікація бачення</li>
+          <li>Усунення перепон</li>
+          <li><strong>Генерація швидких перемог</strong> ← критичний крок</li>
+          <li>Закріплення і продовження змін</li>
+          <li>Впровадження змін у корпоративну культуру</li>
+        </ol>
+        <p>Критичний 6-й крок: без видимих результатів перших 90 днів організація втрачає довіру до змін.</p>
+
+        <div class="callout">
+          <strong>📊 Статистика: управління людьми у проєктах розвитку</strong>
+          <p>— 70% проєктів цифрової трансформації провалюються через людський фактор, а не технологічні проблеми (McKinsey).</p>
+          <p>— 29% проєктів зазнають невдачі через незадовільну комунікацію (PMI Pulse 2025).</p>
+          <p>— Системне управління змінами підвищує ймовірність досягнення або перевищення цільового ROI у 6 разів (Prosci 2023).</p>
+          <p style="font-size:13px;color:var(--muted);margin-top:8px">Джерела: McKinsey 2024; PMI Pulse 2025; Prosci Benchmarking Study 2023.</p>
+        </div>
+
+        <div class="summary-box">
+          <strong>✅ Ключові висновки 6.5</strong>
+          <ul>
+            <li>Матрична + Agile модель — найпоширеніша для корпоративних проєктів трансформації.</li>
+            <li>Tuckman: Forming → Storming → Norming → Performing. Завдання PM — прискорити перехід.</li>
+            <li>70% трансформацій провалюються через людський фактор; системний Change Management підвищує ROI у 6 разів.</li>
+            <li>Kotter: 8 кроків, критичний — 6-й (швидкі перемоги у перші 90 днів).</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Tasks -->
+      <section id="tasks">
+        <h2>Питання для обговорення та практичні завдання</h2>
+        <ol>
+          <li>Проведіть SWOT і VRIO-аналіз будь-якої відомої компанії. Визначте, які ресурси є джерелом стійкої конкурентної переваги, а які — лише паритету. Як це впливає на вибір проєктів розвитку?</li>
+          <li><strong>Розрахункове завдання:</strong> CAPEX — 50 млн грн; доходи: рік 1 — 15 млн, рік 2 — 25 млн, рік 3 — 35 млн, рік 4 — 40 млн; OPEX — 18 млн/рік; ставка 14%. Розрахуйте NPV, IRR, PI, Payback. Аналіз чутливості: ціна –15% і CAPEX +20%. Чи реалізовувати проєкт?</li>
+          <li>Побудуйте BMC для реального або гіпотетичного проєкту розвитку. Покажіть зв'язки між блоками і критичні залежності.</li>
+          <li>Визначте стратегію Ансоффа для: (а) Nova Post відкриває відділення в Польщі; (б) Nova Post запускає NovaPay; (в) Amazon запускає AWS. Обґрунтуйте рівень ризику.</li>
+          <li>Компанія впровадила CRM (в строки і бюджет), але через 6 місяців 65% менеджерів повернулися до Excel. Яка фаза ЖЦ і який механізм змін не спрацювали? Розробіть план виправлення.</li>
+        </ol>
+      </section>
+
+      <!-- Literature -->
+      <section id="literature">
+        <h2>Рекомендована література</h2>
+        <h3>Основна</h3>
+        <ol>
+          <li>Project Management Institute. <em>PMBoK Guide. 7th ed.</em> — PMI, 2021.</li>
+          <li>Barney J.B. <em>Looking Inside for Competitive Advantage.</em> Academy of Management Executive, 1995.</li>
+          <li>Osterwalder A., Pigneur Y. <em>Business Model Generation.</em> — Wiley, 2010.</li>
+          <li>Ansoff H.I. <em>Strategies for Diversification.</em> Harvard Business Review, 1957.</li>
+          <li>Kotter J.P. <em>Leading Change.</em> — Harvard Business Review Press, 2012.</li>
+        </ol>
+        <h3>Додаткова та онлайн</h3>
+        <ol>
+          <li>Prosci. <em>Best Practices in Change Management. 12th ed.</em> — 2023. — <a href="https://prosci.com" style="color:var(--brand)">prosci.com</a></li>
+          <li>DREAM Platform. <a href="https://dream.gov.ua" style="color:var(--brand)">dream.gov.ua</a></li>
+          <li>Strategyzer. Business Model Canvas. — <a href="https://strategyzer.com" style="color:var(--brand)">strategyzer.com</a></li>
+          <li>Forbes Ukraine. Nova Post Europe 2026. — <a href="https://open4business.com.ua" style="color:var(--brand)">open4business.com.ua</a></li>
+        </ol>
+      </section>
+
+      <!-- Nav -->
+      <div class="nav-lec">
+        <a href="lecture-5-projects.html">
+          <span>← Попередня</span>
+          <strong>Лекція 5. Кількісна вимірюваність параметрів</strong>
+        </a>
+        <a href="materials.html" style="text-align:right">
+          <span>Усі матеріали →</span>
+          <strong>Повернутись до розділу</strong>
+        </a>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Лекція 6 — Практичні кроки зі створення і реалізації проєкту розвитку</span>
+    <span>Курс: Обґрунтування проєктів розвитку компанії · КНУБА</span>
+  </div>
+</footer>
+</body>
+</html>
