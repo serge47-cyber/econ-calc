@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Лекція 7 — Критерії вибору пріоритетних проєктів розвитку компанії</title>
+<meta name="description" content="Лекція 7 (фінальна). 8 критеріїв відбору, бальна система з вагами, BCG та GE/McKinsey матриці, реальні опціони, типові помилки та найкращі практики.">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{--bg:#f6f4ef;--paper:#fffdf8;--ink:#17202a;--muted:#5f6b75;--line:#d9d4c7;--brand:#1b6b63;--brand2:#b66a2c;--deep:#22324a;--soft:#e8f1ee;--accent:#fff1d9;--r:8px}
+body{margin:0;font-family:Arial,"Helvetica Neue",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+a{color:inherit}
+.top{border-bottom:1px solid var(--line);background:rgba(255,253,248,.92);position:sticky;top:0;z-index:10;backdrop-filter:blur(10px)}
+.top-inner{max-width:1060px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-weight:700;color:var(--deep);text-decoration:none}
+.nav{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.nav a{font-size:14px;text-decoration:none;padding:8px 11px;border-radius:var(--r);color:var(--muted)}
+.nav a:hover{background:var(--soft);color:var(--ink)}
+.hero{max-width:1060px;margin:0 auto;padding:50px 24px 24px}
+.kicker{font-size:12px;letter-spacing:1.8px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:12px}
+.badge{display:inline-block;background:var(--brand);color:white;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;margin-left:10px;vertical-align:middle;letter-spacing:.8px}
+h1{font-size:clamp(31px,4.4vw,52px);line-height:1.06;margin:0;color:var(--deep)}
+.lead{font-size:18px;color:var(--muted);max-width:780px;margin:16px 0 0}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 15px;border-radius:var(--r);font-weight:700;text-decoration:none;border:1px solid var(--brand);color:var(--brand)}
+.btn.primary{background:var(--brand);color:white}
+.content{max-width:1060px;margin:0 auto;padding:20px 24px 72px;display:grid;grid-template-columns:280px minmax(0,1fr);gap:22px}
+.aside,.article{background:var(--paper);border:1px solid var(--line);border-radius:var(--r)}
+.aside{padding:18px;height:max-content;position:sticky;top:76px}
+.aside h2{font-size:18px;margin:0 0 12px;color:var(--deep)}
+.aside a{display:block;text-decoration:none;color:var(--muted);padding:9px 0;border-top:1px solid var(--line)}
+.aside a:hover{color:var(--brand)}
+.aside .nav-section{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--brand);font-weight:700;padding:14px 0 4px;border-top:none;margin-top:4px}
+.article{padding:28px}
+.meta{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:24px}
+.meta div{background:var(--soft);padding:13px 15px}
+.meta strong{display:block;color:var(--deep);margin-bottom:4px}
+section{border-top:1px solid var(--line);padding-top:24px;margin-top:24px}
+section:first-of-type{border-top:none;margin-top:0;padding-top:0}
+h2{font-size:27px;line-height:1.2;margin:0 0 12px;color:var(--deep)}
+h3{font-size:19px;margin:20px 0 8px;color:var(--deep)}
+p{color:var(--muted);margin:0 0 13px}
+ul,ol{margin:0 0 14px;padding-left:22px;color:var(--muted)}
+li{margin:7px 0}
+.note{background:var(--accent);border-left:4px solid var(--brand2);border-radius:var(--r);padding:14px 16px;margin:16px 0}
+.note strong{display:block;margin-bottom:4px;color:var(--deep)}
+.callout{background:var(--soft);border-left:4px solid var(--brand);border-radius:var(--r);padding:14px 16px;margin:16px 0}
+.callout strong{display:block;color:var(--deep);margin-bottom:6px}
+.callout p{margin:4px 0;color:var(--ink);font-size:15px}
+.warn{background:#fff4df;border-left:4px solid var(--brand2);border-radius:var(--r);padding:14px 16px;margin:16px 0}
+.warn strong{display:block;color:var(--brand2);margin-bottom:6px}
+.warn p{margin:4px 0;color:var(--ink);font-size:15px}
+table{width:100%;border-collapse:collapse;margin:16px 0 8px;background:white;font-size:14px}
+th,td{border:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--soft);color:var(--deep);font-weight:700}
+.table-caption{font-size:13px;color:var(--muted);margin-bottom:18px;font-style:italic}
+.formula{background:var(--soft);border-left:4px solid var(--brand);border-radius:var(--r);padding:13px 16px;margin:14px 0;color:var(--deep);font-weight:700;font-size:16px}
+.summary-box{background:var(--soft);border:1px solid rgba(27,107,99,.3);border-radius:var(--r);padding:18px;margin-top:18px}
+.summary-box strong{display:block;color:var(--deep);margin-bottom:8px;font-size:16px}
+.summary-box ul{margin:0}
+.final-box{background:var(--deep);color:white;border-radius:var(--r);padding:24px;margin-top:24px}
+.final-box h3{color:white;margin-top:0}
+.final-box p{color:rgba(255,255,255,.85);margin-bottom:8px}
+.nav-lec{display:flex;gap:12px;margin-top:28px;padding-top:20px;border-top:1px solid var(--line)}
+.nav-lec a{flex:1;background:var(--soft);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;text-decoration:none}
+.nav-lec a span{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
+.nav-lec a strong{color:var(--deep)}
+.nav-lec a:hover{border-color:var(--brand)}
+.footer{border-top:1px solid var(--line);padding:22px 24px;color:var(--muted);font-size:14px}
+.footer-inner{max-width:1060px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media(max-width:860px){.top-inner{align-items:flex-start;flex-direction:column}.nav{justify-content:flex-start}.content{grid-template-columns:1fr}.aside{position:static}.meta{grid-template-columns:1fr}}
+@media(max-width:520px){.top-inner,.hero,.content{padding-left:18px;padding-right:18px}.actions{flex-direction:column}.btn{width:100%}.article{padding:20px}.nav-lec{flex-direction:column}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="index.html">Економіка будівництва</a>
+    <nav class="nav">
+      <a href="index.html">Головна</a>
+      <a href="materials.html">Учбові матеріали</a>
+      <a href="economic-tasks.html">Економічні задачі</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="kicker">Лекція 7 <span class="badge">Фінальна</span></div>
+    <h1>Критерії вибору пріоритетних проєктів розвитку компанії</h1>
+    <p class="lead">8 критеріїв відбору з вагами; бальна система; матриці BCG та GE/McKinsey; реальні опціони та вартість гнучкості; типові помилки і найкращі практики портфельного управління.</p>
+    <div class="actions">
+      <a class="btn primary" href="Лекція_7_Критерії_вибору.docx">Завантажити повну лекцію DOCX</a>
+      <a class="btn" href="materials.html">Назад до матеріалів</a>
+    </div>
+  </section>
+
+  <div class="content">
+    <aside class="aside">
+      <h2>Зміст лекції</h2>
+      <a href="#why">7.1. Чому пріоритизація — мистецтво</a>
+      <span class="nav-section">7.2. Вісім критеріїв</span>
+      <a href="#criteria">Огляд 8 критеріїв</a>
+      <a href="#scoring">7.3. Бальна система з вагами</a>
+      <span class="nav-section">7.4. Стратегічні матриці</span>
+      <a href="#bcg">BCG-матриця</a>
+      <a href="#ge">GE/McKinsey (9-box)</a>
+      <a href="#options">7.5. Реальні опціони</a>
+      <a href="#mistakes">7.6. Помилки і практики</a>
+      <a href="#tasks">Питання і завдання</a>
+      <a href="#summary">Підсумок курсу</a>
+      <a href="#literature">Література</a>
+    </aside>
+
+    <article class="article">
+      <div class="meta">
+        <div><strong>Тема</strong>Системний відбір і пріоритизація проєктів розвитку у корпоративному портфелі.</div>
+        <div><strong>Для кого</strong>Студенти 1–2 курсу магістратури економічних спеціальностей.</div>
+        <div><strong>Головна ідея</strong>«Сутність стратегії — це вибір того, що НЕ робити» (Michael Porter). Системна пріоритизація у 3 рази підвищує досягнення стратегічних цілей.</div>
+        <div><strong>Формат</strong>Фінальна лекція курсу з розрахунковими прикладами, матрицями, кейсами Nova Post/Amazon, статистикою PMI/Gartner/McKinsey 2024–2026.</div>
+      </div>
+
+      <!-- 7.1 -->
+      <section id="why">
+        <h2>7.1. Чому пріоритизація є стратегічним мистецтвом</h2>
+        <p>Ресурси завжди обмежені. Без системного підходу відбір проєктів перетворюється на «боротьбу за ресурси», де перемагає той, хто голосніше лобіює свої ідеї, а не той, чий проєкт дійсно найефективніший.</p>
+        <p>Системна пріоритизація вирішує три задачі: <strong>об'єктивне порівняння</strong> (два проєкти з однаковим NPV можуть різнитися за стратегічністю, ризиками або ресурсомісткістю); <strong>прозорість для стейкхолдерів</strong> (рішення, обґрунтоване за 8 критеріями, можна оскаржити або погодитися з ним); <strong>навчальний цикл</strong> (порівняння прогнозних балів із фактичними результатами вдосконалює систему).</p>
+
+        <div class="callout">
+          <strong>📊 Статистика: вплив системної пріоритизації (PMI/Gartner 2024–2025)</strong>
+          <p>— Організації із зрілим Portfolio Management у <strong>3 рази</strong> частіше досягають стратегічних цілей (PMI Pulse 2025).</p>
+          <p>— Організації з формалізованим відбором втрачають у <strong>2,5 рази</strong> менше ресурсів через провальні ініціативи (PMI, 2025).</p>
+          <p>— <strong>45%</strong> компаній глобально не мають формальних критеріїв відбору — рішення ситуативні (Gartner PMO Survey, 2024).</p>
+          <p style="font-size:13px;color:var(--muted);margin-top:8px">Джерела: PMI Pulse of the Profession 2025; Gartner PMO Survey 2024.</p>
+        </div>
+
+        <div class="summary-box">
+          <strong>✅ Ключові висновки 7.1</strong>
+          <ul>
+            <li>Пріоритизація без системи = «боротьба за ресурси», де перемагає гучніший, а не кращий проєкт.</li>
+            <li>45% компаній не мають формальних критеріїв — системна проблема, не виняток.</li>
+            <li>Зрілий Portfolio Management: ×3 до досягнення стратегічних цілей.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 7.2 -->
+      <section id="criteria">
+        <h2>7.2. Вісім критеріїв відбору пріоритетних проєктів</h2>
+        <p>Системний підхід передбачає вісім критеріїв, що охоплюють кількісні і якісні виміри цінності. Використання лише фінансових критеріїв — поширена і дорога помилка.</p>
+
+        <table>
+          <thead><tr><th>Критерій</th><th>Що оцінюється</th><th>Типові показники</th><th>Вага</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1. Стратегічна відповідність</strong></td><td>Зв'язок з OKR, бізнес-моделлю, стратегічними пріоритетами</td><td>Частка стратегічних цілей, що підтримує проєкт</td><td>×1,5</td></tr>
+            <tr><td><strong>2. Економіка</strong></td><td>NPV, IRR, ROI, Payback Period, чутливість до ключових драйверів</td><td>NPV (грн), IRR (%), Payback (роки)</td><td>×1,5</td></tr>
+            <tr><td><strong>3. Ризик і невизначеність</strong></td><td>TRL, ринкові, регуляторні, кіберризики; стресовий сценарій</td><td>Ймовірність провалу (%); діапазон NPV у сценаріях</td><td>×1,2</td></tr>
+            <tr><td><strong>4. Ресурсомісткість</strong></td><td>Потреба у рідкісних компетенціях; завантаженість ключових команд</td><td>Завантаженість IT/R&D/Legal (%); gap у компетенціях</td><td>×1,2</td></tr>
+            <tr><td><strong>5. Швидкість і опційність</strong></td><td>Time-to-first-value; можливість поетапної реалізації (MVP)</td><td>Місяців до першого результату; наявність опцій</td><td>×1,0</td></tr>
+            <tr><td><strong>6. Клієнтська цінність</strong></td><td>NPS, частка ринку, LTV/CAC, бар'єри для конкурентів</td><td>NPS (бали), LTV/CAC, ринкова частка (п.п.)</td><td>×1,0</td></tr>
+            <tr><td><strong>7. ESG і комплаєнс</strong></td><td>Відповідність ESG-стандартам, CSRD, регуляторним вимогам</td><td>ESG-рейтинг, CO₂ (тонни), штрафні ризики</td><td>×0,8</td></tr>
+            <tr><td><strong>8. Синергія в портфелі</strong></td><td>Взаємне підсилення або конкуренція з іншими проєктами</td><td>Синергетичний NPV; конфлікти ресурсів</td><td>×1,0</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">Таблиця 7.1. Вісім критеріїв відбору. Джерело: авторська розробка; PMBoK 7th ed. (PMI, 2021); McKinsey Portfolio Management Practices.</p>
+
+        <div class="summary-box">
+          <strong>✅ Ключові висновки 7.2</strong>
+          <ul>
+            <li>Стратегічна відповідність і економіка — найвищі ваги (×1,5): вирішальні питання портфеля.</li>
+            <li>Ризик і ресурси — ×1,2: навіть ідеальний проєкт провалюється без ресурсів.</li>
+            <li>ESG (×0,8): менша вага не означає меншу важливість — але рідше є вирішальною при виборі.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 7.3 -->
+      <section id="scoring">
+        <h2>7.3. Бальна система з вагами: практичний приклад</h2>
+        <p>Weighted Scoring Model: кожен критерій оцінюється 0–100 балів → множиться на вагу → підсумовується в інтегральний рейтинг. Прозора, гнучка, зрозуміла будь-якому менеджеру.</p>
+
+        <table>
+          <thead><tr><th>Критерій</th><th>Вага</th><th>Антикризовий (оптимізація SKU)</th><th>Інноваційний (мобільний додаток)</th><th>Інвестиційний (нова виробнича лінія)</th></tr></thead>
+          <tbody>
+            <tr><td>Стратегічна відповідність</td><td>×1,5</td><td>80 → <strong>120</strong></td><td>70 → <strong>105</strong></td><td>60 → <strong>90</strong></td></tr>
+            <tr><td>Економіка (ROI=140%, IRR≈90%)</td><td>×1,5</td><td>90 → <strong>135</strong></td><td>65 → <strong>97,5</strong></td><td>55 → <strong>82,5</strong></td></tr>
+            <tr><td>Ризик (нижче = краще)</td><td>×1,2</td><td>85 → <strong>102</strong></td><td>60 → <strong>72</strong></td><td>50 → <strong>60</strong></td></tr>
+            <tr><td>Ресурсомісткість ($0,5 млн)</td><td>×1,2</td><td>90 → <strong>108</strong></td><td>70 → <strong>84</strong></td><td>40 → <strong>48</strong></td></tr>
+            <tr><td>Швидкість і опційність</td><td>×1,0</td><td>90 → <strong>90</strong></td><td>75 → <strong>75</strong></td><td>40 → <strong>40</strong></td></tr>
+            <tr><td>Клієнтська цінність</td><td>×1,0</td><td>60 → <strong>60</strong></td><td>85 → <strong>85</strong></td><td>70 → <strong>70</strong></td></tr>
+            <tr><td>ESG і комплаєнс</td><td>×0,8</td><td>70 → <strong>56</strong></td><td>75 → <strong>60</strong></td><td>65 → <strong>52</strong></td></tr>
+            <tr><td>Синергія в портфелі</td><td>×1,0</td><td>65 → <strong>65</strong></td><td>80 → <strong>80</strong></td><td>60 → <strong>60</strong></td></tr>
+            <tr style="background:var(--soft)"><td><strong>ЗАГАЛЬНИЙ БАЛ</strong></td><td></td><td><strong>736 балів 🥇</strong></td><td><strong>658,5 балів 🥈</strong></td><td><strong>502,5 балів 🥉</strong></td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">Таблиця 7.2. Бальна оцінка трьох проєктів. Джерело: авторська розробка на основі тренінг-курсу І.О. Шапошнікової (КНУБА, 2026).</p>
+
+        <p><strong>Висновок:</strong> антикризовий проєкт — перший пріоритет (швидкий грошовий потік, низький ризик). Інноваційний — другий (клієнтська цінність, стратегія). Інвестиційний — третій (значний NPV $4 млн, але $10 млн CAPEX і 3–5 років). <strong>Стратегія:</strong> антикризовий фінансує інноваційний; інвестиційний — коли вивільняться ресурси.</p>
+
+        <div class="warn">
+          <strong>⚠️ Три недоліки бальної системи</strong>
+          <p>1. <strong>Суб'єктивність</strong>: «натягування» балів під свої інтереси. Рішення: анонімне голосування або зовнішня фасилітація.</p>
+          <p>2. <strong>«Арифметична пастка»</strong>: високий бал з одного критерію перекриває критичний провал з іншого. Рішення: встановити мінімальні пороги відсіву.</p>
+          <p>3. <strong>Вимагає зрілості</strong>: без якісних даних і досвідчених оцінювачів перетворюється на бюрократію без змісту.</p>
+        </div>
+      </section>
+
+      <!-- 7.4 -->
+      <section id="matrices">
+        <h2>7.4. Стратегічні матриці: BCG і GE/McKinsey</h2>
+
+        <h3 id="bcg">BCG-матриця (Boston Consulting Group, 1970)</h3>
+        <p>Чотири квадранти за осями «темп зростання ринку» і «відносна частка ринку»:</p>
+        <ul>
+          <li><strong>⭐ Зірки</strong> — висока частка + швидкий ріст: пріоритет інвестицій</li>
+          <li><strong>🐄 Дійні корови</strong> — висока частка + повільний ріст: генерують Cash Flow для інших</li>
+          <li><strong>❓ Знаки питання</strong> — низька частка + швидкий ріст: рішення «інвестувати чи виходити»</li>
+          <li><strong>🐕 Собаки</strong> — низька частка + повільний ріст: кандидати на виведення</li>
+        </ul>
+        <p>BCG — хороша для швидкого скринінгу, але надто проста: ігнорує синергію, абсолютний розмір ринку, проміжні стани.</p>
+
+        <h3 id="ge">Матриця GE/McKinsey — 9-box (1970-ті)</h3>
+        <p>Розроблена McKinsey для General Electric як більш нюансована альтернатива BCG. Матриця 3×3 за двома складеними осями:</p>
+        <ul>
+          <li><strong>Вертикальна вісь — Привабливість галузі:</strong> розмір і темпи зростання ринку, прибутковість, конкурентна інтенсивність (Porter's Five Forces), регуляторне середовище, технологічні тенденції.</li>
+          <li><strong>Горизонтальна вісь — Конкурентна сила:</strong> ринкова частка, сила бренду, лояльність клієнтів, технологічна готовність (VRIO-аналіз).</li>
+        </ul>
+
+        <table>
+          <thead><tr><th>Конкур. сила →</th><th>Висока</th><th>Середня</th><th>Низька</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Висока привабливість</strong></td><td>Інвестувати й зростати 🟢</td><td>Вибірково інвестувати</td><td>Інвестувати вибірково або виходити</td></tr>
+            <tr><td><strong>Середня привабливість</strong></td><td>Захищати і оптимізувати</td><td>Управляти задля вартості 🟡</td><td>Збирати / скорочувати</td></tr>
+            <tr><td><strong>Низька привабливість</strong></td><td>Збирати / виводити</td><td>Виводити з мінімальними втратами</td><td>Виводити 🔴</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">Таблиця 7.3. Матриця GE/McKinsey. Джерело: McKinsey Quarterly «Enduring Ideas: The GE-McKinsey Nine-Box Matrix», 2008; адаптовано.</p>
+
+        <div class="note">
+          <strong>📌 GE/McKinsey для портфеля Nova Post Group</strong>
+          <strong>NovaPay:</strong> висока привабливість + висока конкурентна сила → «Інвестувати й зростати». Масштабування функцій, R&D нових продуктів.<br>
+          <strong>Nova Post Europe:</strong> висока привабливість + середня сила (сильний бренд серед діаспори, обмежена серед місцевих) → «Вибірково інвестувати». Поглиблення в прибуткових ринках.<br>
+          <strong>Традиційна доставка по Україні:</strong> середня привабливість + висока сила → «Захищати і оптимізувати». Автоматизація, зниження витрат.<br>
+          Джерело: авторська інтерпретація; Forbes Ukraine 2026; Nova Post ESG Report 2023.
+        </div>
+
+        <div class="summary-box">
+          <strong>✅ Ключові висновки 7.4</strong>
+          <ul>
+            <li>BCG: 4 квадранти — швидкий скринінг, але надто груба для остаточних рішень.</li>
+            <li>GE/McKinsey: 9 клітинок з вагованими осями — розроблена McKinsey для GE у 1970-х, використовується досі.</li>
+            <li>Обидві матриці відповідають «куди рухатись», але потребують деталізованої стратегії реалізації.</li>
+            <li>GE/McKinsey + VRIO = природне поєднання для оцінки конкурентної сили по горизонтальній осі.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 7.5 -->
+      <section id="options">
+        <h2>7.5. Реальні опціони: вартість гнучкості інноваційних проєктів</h2>
+        <p>Класичний NPV трактує інвестицію як «жорстке» рішення і не враховує вартість гнучкості — право розширити, відкласти, згорнути або переключити проєкт залежно від нових даних. Через це він систематично <strong>недооцінює інноваційні проєкти</strong> з високою невизначеністю.</p>
+
+        <h3>П'ять типів реальних опціонів</h3>
+        <ul>
+          <li><strong>Option to Expand</strong> — якщо пілот успішний → масштабуємо (пр.: пілотний завод ВДЕ → повне виробництво)</li>
+          <li><strong>Option to Defer</strong> — відкласти до прояснення ринку (пр.: вихід у новий регіон через 2 роки)</li>
+          <li><strong>Option to Abandon</strong> — зупинити MVP при відсутності product-market fit</li>
+          <li><strong>Option to Switch</strong> — переключити ресурси (пр.: фабрика виробляє і соки, і енергетики)</li>
+          <li><strong>Compound Options</strong> — кожен крок відкриває наступний: R&D → патент → продукт → ліцензування</li>
+        </ul>
+
+        <h3>Розрахунковий приклад: пілот як реальний опціон</h3>
+
+        <div class="formula">Варіант А — повна інвестиція $10 млн зараз<br>
+Очікуваний NPV = 0,5 × $15 млн + 0,5 × (–$5 млн) = <strong>$5 млн</strong><br>
+Максимальні втрати при невдачі: <strong>$5 млн</strong></div>
+
+        <div class="formula">Варіант Б — пілот $2 млн → рішення через 2 роки<br>
+При успіху (50%): +$15 млн; при невдачі (50%): втрачаємо лише $2 млн<br>
+Вартість опції = 0,5 × $15 – 0 – $2 = <strong>$5,5 млн</strong><br>
+Максимальні втрати при невдачі: <strong>$2 млн</strong></div>
+
+        <p><strong>Варіант Б вигідніший:</strong> NPV вищий на $0,5 млн і максимальні втрати нижчі в 2,5 рази. <strong>Вартість гнучкості = реальний і вимірюваний актив.</strong></p>
+
+        <div class="note">
+          <strong>📌 Nova Post: реальний опціон у European expansion</strong>
+          2022: мінімальні інвестиції у Польщу і Молдову (Option to Expand від потоків переселенців). 2023: підтвердження попиту → розширення у нові країни. 2024–2025: підтвердження прибутковості у 4 країнах → масштабна інвестиція €10 млн, подвоєння мережі до 800 відділень у 16 країнах. Якби компанія одразу інвестувала €50 млн в усі 16 країн — ризики та потенційні втрати були б суттєво більшими. Джерело: Forbes Ukraine, 2026.
+        </div>
+
+        <div class="callout">
+          <strong>📊 Де застосовуються реальні опціони</strong>
+          <p>R&D (фармацевтика, IT): MVP або клінічна фаза перед масштабним запуском.</p>
+          <p>Інфраструктура: перша черга будівництва з опцією добудови за попитом.</p>
+          <p>Енергетика: гнучкі інвестиції у ВДЕ залежно від цін на електроенергію.</p>
+          <p>Стартапи: вихід у нові сегменти з можливістю швидкого згортання.</p>
+          <p>Реальні опціони підвищують точність оцінки R&D-портфелів на 40% vs класичний DCF (MIT Sloan, 2024).</p>
+        </div>
+
+        <div class="summary-box">
+          <strong>✅ Ключові висновки 7.5</strong>
+          <ul>
+            <li>Класичний NPV недооцінює інноваційні проєкти — не враховує вартість гнучкості.</li>
+            <li>5 типів: Expand, Defer, Abandon, Switch, Compound.</li>
+            <li>Пілот $2 млн: NPV $5,5 млн і максимальні втрати $2 млн vs повна інвестиція NPV $5 млн і втрати $5 млн.</li>
+            <li>Стандарт для фармацевтики, IT, енергетики і будь-яких довгострокових проєктів із високою невизначеністю.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 7.6 -->
+      <section id="mistakes">
+        <h2>7.6. Типові помилки і найкращі практики</h2>
+
+        <h3>Типові помилки</h3>
+        <ul>
+          <li><strong>Лише IRR без масштабу і синергії</strong> — проєкт із IRR 90% і бюджетом $0,5 млн не замінює IRR 18% і $10 млн, якщо другий будує стратегічні бар'єри на 5 років.</li>
+          <li><strong>Відсутність критичних порогів</strong> — бальна система може дати прохідний рейтинг проєкту з від'ємним NPV при стресовому сценарії.</li>
+          <li><strong>Ігнорування ресурсних обмежень</strong> — два проєкти, що конкурують за одних ML-інженерів, блокують один одного.</li>
+          <li><strong>Ігнорування ESG і регуляторних вимог</strong> — приховані штрафні ризики суттєво знижують реальний ROI.</li>
+          <li><strong>Застарілі критерії і ваги</strong> — система, розроблена 3 роки тому, може не відображати поточну стратегію.</li>
+        </ul>
+
+        <h3>Найкращі практики</h3>
+        <ul>
+          <li><strong>Регулярне калібрування</strong> — щороку або при зміні стратегії переглядати критерії і ваги.</li>
+          <li><strong>Комбінування методів</strong> — бальна система + GE/McKinsey + реальні опціони: оптимальна система для зрілої компанії.</li>
+          <li><strong>Критичні пороги відсіву</strong> — наприклад, NPV > 0 при базовому; DSCR ≥ 1,25 для кредитних проєктів.</li>
+          <li><strong>Прозорість для стейкхолдерів</strong> — публікувати критерії і результати оцінки на інвестиційних комітетах.</li>
+          <li><strong>Agile-перегляд портфеля</strong> — щоквартально, а не раз на рік.</li>
+        </ul>
+
+        <div class="callout">
+          <strong>📊 Найкращі практики лідерів (Gartner/PMI 2024–2025)</strong>
+          <p>— Компанії з щоквартальним переглядом портфеля на <strong>35% рідше</strong> продовжують проєкти, що втратили актуальність (Gartner 2024).</p>
+          <p>— Компанії з формальними порогами відсіву витрачають на <strong>28% менше</strong> ресурсів на безперспективні ініціативи (PMI 2025).</p>
+          <p>— Реальні опціони підвищують точність оцінки R&D-портфелів на <strong>40%</strong> vs класичний DCF (MIT Sloan 2024).</p>
+        </div>
+      </section>
+
+      <!-- Tasks -->
+      <section id="tasks">
+        <h2>Питання для обговорення та практичні завдання</h2>
+        <ol>
+          <li>Компанія A відбирає проєкти виключно за IRR; компанія B — за бальною системою з 8 критеріями. Яка через 5 років матиме кращу стратегічну позицію? Обґрунтуйте через конкретний сценарій.</li>
+          <li><strong>Командне завдання:</strong> у вашій компанії 5 проєктів-кандидатів із бюджетом $15 млн і обмеженим IT-ресурсом (20 FTE/рік). Застосуйте бальну систему і аналіз «capacity vs demand». Відберіть 2–3 проєкти в портфель. Запропонуйте ваги критеріїв і обґрунтуйте їх.</li>
+          <li>Позиціонуйте три проєкти з практичного прикладу лекції в матриці GE/McKinsey. Чи збігається результат матриці з результатом бальної системи? Якщо ні — чому?</li>
+          <li><strong>Розрахункове завдання:</strong> повна інвестиція $5 млн; пілот $1 млн + $4 млн пізніше; ймовірність успіху 60%; NPV при успіху $8 млн; NPV при невдачі –$3 млн. Розрахуйте вартість опції пілоту. Порівняйте з класичним NPV. Що вигідніше?</li>
+          <li><strong>Фінальна дискусія:</strong> три ініціативи — антикризова (ROI 140%, NPV $0,7 млн), вихід у ЄС (NPV $4 млн, окупність 4 роки), ESG-проєкт (без прямого фін. результату, але критичний для доступу до ринків ЄС). Як розподілити ресурси? Хто має найвищий пріоритет?</li>
+        </ol>
+      </section>
+
+      <!-- Summary -->
+      <section id="summary">
+        <div class="final-box">
+          <h3>🎓 Загальний підсумок курсу «Обґрунтування проєктів розвитку компанії»</h3>
+          <p><strong>Лекція 1:</strong> Проєкти розвитку — рушій трансформації; відмінність від операційної діяльності; роль бізнес-кейсу, SMART/OKR, стейкхолдерів.</p>
+          <p><strong>Лекції 2–3:</strong> Класифікація: за змістом (5 видів), масштабом (моно/програма/мегапроєкт), методологією (Waterfall/Agile/гібрид), спрямованістю (внутрішні/зовнішні), природою (адаптивні/проактивні).</p>
+          <p><strong>Лекція 4:</strong> ЖЦ: 6 етапів (ініціація → постпроєктна фаза); 7 механізмів стратегічної інтеграції; цифровий стек управління; AI трансформує PM.</p>
+          <p><strong>Лекція 5:</strong> 6 груп параметрів (фінансові → ESG); 5 методів оцінки (KPI, BSC, SMART, бенчмаркінг, сценарне моделювання). ESG обов'язковий для ринків ЄС (CSRD).</p>
+          <p><strong>Лекція 6:</strong> SWOT/PEST/VRIO → ФЕО → BMC → матриця Ансоффа → WBS/RAID → Change Management (Kotter, Tuckman). Системне управління змінами: ×6 до ROI.</p>
+          <p><strong>Лекція 7:</strong> 8 критеріїв відбору з вагами; бальна система; BCG і GE/McKinsey; реальні опціони. Системна пріоритизація: ×3 до досягнення стратегічних цілей.</p>
+        </div>
+      </section>
+
+      <!-- Literature -->
+      <section id="literature">
+        <h2>Рекомендована література</h2>
+        <h3>Ключові джерела курсу</h3>
+        <ol>
+          <li>Project Management Institute. <em>PMBoK Guide. 7th ed.</em> — PMI, 2021.</li>
+          <li>Kaplan R.S., Norton D.P. <em>The Balanced Scorecard.</em> — Harvard Business School Press, 1996.</li>
+          <li>Osterwalder A., Pigneur Y. <em>Business Model Generation.</em> — Wiley, 2010.</li>
+          <li>Barney J.B. <em>Looking Inside for Competitive Advantage.</em> Academy of Management Executive, 1995.</li>
+          <li>Kotter J.P. <em>Leading Change.</em> — Harvard Business Review Press, 2012.</li>
+          <li>Ansoff H.I. <em>Strategies for Diversification.</em> Harvard Business Review, 1957.</li>
+          <li>Flyvbjerg B., Gardner D. <em>How Big Things Get Done.</em> — Currency, 2023.</li>
+          <li>Шапошнікова І.О. <em>Обґрунтування проєктів розвитку компанії: тренінг-курс.</em> — К.: КНУБА, 2026.</li>
+        </ol>
+        <h3>Онлайн</h3>
+        <ol>
+          <li>PMI. <em>Pulse of the Profession 2025.</em> — <a href="https://pmi.org" style="color:var(--brand)">pmi.org</a></li>
+          <li>McKinsey Quarterly. <em>GE-McKinsey Nine-Box Matrix.</em> — <a href="https://mckinsey.com" style="color:var(--brand)">mckinsey.com</a></li>
+          <li>Gartner. <em>PMO Survey 2024.</em> — <a href="https://gartner.com" style="color:var(--brand)">gartner.com</a></li>
+          <li>Balanced Scorecard Institute. — <a href="https://balancedscorecard.org" style="color:var(--brand)">balancedscorecard.org</a></li>
+          <li>Forbes Ukraine. Nova Post Europe 2026. — <a href="https://open4business.com.ua" style="color:var(--brand)">open4business.com.ua</a></li>
+        </ol>
+      </section>
+
+      <!-- Nav -->
+      <div class="nav-lec">
+        <a href="lecture-6-projects.html">
+          <span>← Попередня</span>
+          <strong>Лекція 6. Практичні кроки</strong>
+        </a>
+        <a href="materials.html" style="text-align:right">
+          <span>Усі матеріали →</span>
+          <strong>Повернутись до розділу</strong>
+        </a>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Лекція 7 (фінальна) — Критерії вибору пріоритетних проєктів розвитку</span>
+    <span>Курс: Обґрунтування проєктів розвитку компанії · КНУБА</span>
+  </div>
+</footer>
+</body>
+</html>
