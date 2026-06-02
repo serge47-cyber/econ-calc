@@ -1,222 +1,572 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Економіка будівництва — навчальний сайт</title>
-<meta name="description" content="Інтерактивний навчальний сайт з економіки будівництва: матеріали, економічні задачі та інструменти для студентів.">
-<style>
-*,*::before,*::after{box-sizing:border-box}
-:root{
-  --bg:#f6f4ef;
-  --paper:#fffdf8;
-  --ink:#17202a;
-  --muted:#5f6b75;
-  --line:#d9d4c7;
-  --brand:#1b6b63;
-  --brand2:#b66a2c;
-  --deep:#22324a;
-  --soft:#e8f1ee;
-  --warn:#fff1d9;
-  --shadow:0 18px 45px rgba(34,50,74,.11);
-  --r:8px;
-}
-body.dark-theme {
-  --bg: #0A0D14 !important;
-  --paper: #111520 !important;
-  --ink: #F4F1EC !important;
-  --muted: #9A95A8 !important;
-  --line: rgba(255, 255, 255, 0.08) !important;
-  --brand: #3ECFAA !important;
-  --brand2: #D4A843 !important;
-  --deep: #F4F1EC !important;
-  --soft: #181D2C !important;
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Інтерактивний навчальний сайт з економіки будівництва: матеріали, економічні задачі та інструменти для студентів." />
+  <title>Економіка будівництва — навчальний сайт</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── TOKENS (СВІТЛА ТЕМА ЗА ЗАМОВЧУВАННЯМ) ─────────── */
+    :root {
+      --bg:          #f8f8f6;
+      --bg2:         #ffffff;
+      --bg3:         #f0f0ec;
+      --surface:     #ffffff;
+      --border:      #e2e2dc;
+      --border2:     #d0d0c8;
+      --text:        #1a1a18;
+      --text2:       #5a5a54;
+      --text3:       #8a8a82;
+      --accent:      #896312;        /* Наше фірмове глибоке золото для КНУБА */
+      --accent-bg:   #fdf3e6;
+      --accent2:     #006650;        /* Наш глибокий смарагдовий колір */
+      --accent2-bg:  #e6f4f0;
+      --warn:        #a05a10;
+      --warn-bg:     #fdf3e6;
+      --radius:      12px;
+      --radius-sm:   8px;
+      --shadow:      0 1px 3px rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.04);
+      --shadow-md:   0 2px 8px rgba(0,0,0,.08), 0 4px 20px rgba(0,0,0,.05);
+      --font:        'Inter', system-ui, sans-serif;
+      --mono:        'JetBrains Mono', monospace;
+      --nav-h:       56px;
+    }
 
-/* Фікс верхньої білої плашки навігації */
-body.dark-theme .top {
-  background: rgba(17, 21, 32, 0.95) !important;
-  border-bottom-color: rgba(255, 255, 255, 0.15) !important;
-}
+    /* ─── ІНТЕГРАЦІЯ: ГЛОБАЛЬНА ТЕМНА ТЕМА САЙТУ ─────────── */
+    body.dark-theme {
+      --bg:          #0A0D14;
+      --bg2:         #111520;
+      --bg3:         #181D2C;
+      --surface:     #181D2C;
+      --border:      rgba(255, 255, 255, 0.08);
+      --border2:     rgba(255, 255, 255, 0.15);
+      --text:        #F4F1EC;
+      --text2:       #9A95A8;
+      --text3:       #5A5669;
+      --accent:      #D4A843;        /* Ярке золото для темного тла */
+      --accent-bg:   rgba(212, 168, 67, 0.1);
+      --accent2:     #3ECFAA;        /* М'який neon зелений */
+      --accent2-bg:  rgba(62, 207, 170, 0.1);
+      --warn:        #E05252;
+      --warn-bg:     rgba(224, 82, 82, 0.1);
+      --shadow:      0 1px 3px rgba(0,0,0,.3), 0 2px 8px rgba(0,0,0,.2);
+      --shadow-md:   0 2px 8px rgba(0,0,0,.4), 0 4px 20px rgba(0,0,0,.25);
+    }
 
-/* Фікс тла вбудованих калькуляторів-тренажерів */
-body.dark-theme .mini-calc-card,
-body.dark-theme div[style*="background: var(--bg2)"] {
-  background: #181D2C !important;
-  border-color: rgba(255, 255, 255, 0.15) !important;
-}
-body.dark-theme input {
-  background: #0A0D14 !important;
-  color: #F4F1EC !important;
-  border-color: rgba(255, 255, 255, 0.15) !important;
-}
-body{margin:0;font-family:Arial,"Helvetica Neue",sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
-a{color:inherit}
-.top{border-bottom:1px solid var(--line);background:rgba(255,253,248,.92);position:sticky;top:0;z-index:10;backdrop-filter:blur(10px)}
-.top-inner{max-width:1120px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-.brand{font-weight:700;color:var(--deep);text-decoration:none}
-.nav{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-.nav a{font-size:14px;text-decoration:none;padding:8px 11px;border-radius:var(--r);color:var(--muted)}
-.nav a:hover{background:var(--soft);color:var(--ink)}
-.hero{max-width:1120px;margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:34px;align-items:center}
-.kicker{font-size:12px;letter-spacing:1.8px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:12px}
-h1{font-size:clamp(32px,5vw,58px);line-height:1.04;margin:0;color:var(--deep);letter-spacing:0}
-.lead{font-size:18px;color:var(--muted);max-width:650px;margin:18px 0 0}
-.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:11px 16px;border-radius:var(--r);font-weight:700;text-decoration:none;border:1px solid var(--brand)}
-.btn.primary{background:var(--brand);color:white}
-.btn.secondary{background:transparent;color:var(--brand)}
-.btn:hover{transform:translateY(-1px)}
-.visual{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:22px}
-.visual-title{font-size:13px;color:var(--muted);margin-bottom:16px}
-.chart{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:end;height:210px;border-left:1px solid var(--line);border-bottom:1px solid var(--line);padding:12px 0 0 12px}
-.bar{border-radius:6px 6px 0 0;background:linear-gradient(180deg,var(--brand),#7fb5a8);min-height:42px;position:relative}
-.bar:nth-child(2){height:62%;background:linear-gradient(180deg,var(--brand2),#e3ad73)}
-.bar:nth-child(3){height:82%}
-.bar:nth-child(4){height:48%;background:linear-gradient(180deg,var(--deep),#6d7c94)}
-.bar:nth-child(1){height:36%}
-.bar span{position:absolute;left:0;right:0;bottom:-30px;text-align:center;font-size:12px;color:var(--muted)}
-.sections{max-width:1120px;margin:0 auto;padding:24px 24px 72px}
-.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:18px}
-h2{font-size:28px;line-height:1.15;margin:0;color:var(--deep)}
-.section-head p{margin:0;color:var(--muted);max-width:500px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:22px;text-decoration:none;box-shadow:0 8px 22px rgba(34,50,74,.06);min-height:230px;display:flex;flex-direction:column}
-.card:hover{border-color:rgba(27,107,99,.45);box-shadow:var(--shadow);transform:translateY(-2px)}
-.card small{font-size:12px;letter-spacing:1.4px;text-transform:uppercase;font-weight:700;color:var(--brand);margin-bottom:12px;display:block}
-.card h3{font-size:22px;line-height:1.2;margin:0 0 10px;color:var(--deep)}
-.card p{color:var(--muted);margin:0 0 18px}
-.card .link{margin-top:auto;color:var(--brand);font-weight:700}
-.card.tasks{background:linear-gradient(180deg,#fffdf8,#f2fbf7)}
-.card.future{background:var(--warn)}
-.notes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
-.note{background:transparent;border-top:1px solid var(--line);padding-top:18px}
-.note h3{margin:0 0 8px;color:var(--deep);font-size:18px}
-.note p{margin:0;color:var(--muted)}
-.footer{border-top:1px solid var(--line);padding:22px 24px;color:var(--muted);font-size:14px}
-.footer-inner{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-@media(max-width:820px){
-  .top-inner{align-items:flex-start;flex-direction:column}
-  .nav{justify-content:flex-start}
-  .hero{grid-template-columns:1fr;padding-top:38px}
-  .grid,.notes{grid-template-columns:1fr}
-}
-@media(max-width:520px){
-  .top-inner,.hero,.sections{padding-left:18px;padding-right:18px}
-  .actions{flex-direction:column}
-  .btn{width:100%}
-  .section-head{display:block}
-  .section-head p{margin-top:8px}
-}
-</style>
+    /* ─── RESET ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      font-size: 15px;
+      line-height: 1.65;
+      background: var(--bg);
+      color: var(--text);
+      transition: background .25s, color .25s;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── NAV ────────────────────────────────────────────── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      height: var(--nav-h);
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+      padding: 0 24px; gap: 0;
+      transition: background .25s, border-color .25s;
+    }
+    .nav-brand {
+      font-size: 14px; font-weight: 600;
+      color: var(--text); white-space: nowrap;
+      margin-right: auto;
+    }
+    .nav-brand span { color: var(--text3); font-weight: 400; margin-left: 6px; }
+    .nav-links { display: flex; align-items: center; gap: 2px; }
+    .nav-links a {
+      padding: 6px 12px; border-radius: var(--radius-sm);
+      font-size: 13.5px; color: var(--text2); font-weight: 500;
+      transition: background .15s, color .15s;
+    }
+    .nav-links a:hover, .nav-links a.active { background: var(--bg3); color: var(--text); }
+    .nav-links a.active { color: var(--accent) !important; font-weight: 700; }
+    
+    .theme-btn {
+      margin-left: 12px;
+      width: 32px; height: 32px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: transparent;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      color: var(--text); font-size: 15px;
+      transition: background .15s, border-color .15s;
+      outline: none;
+    }
+    .theme-btn:hover { background: var(--bg3); border-color: var(--border2); }
+
+    /* ─── LAYOUT ─────────────────────────────────────────── */
+    .page { max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    .hero {
+      padding: 52px 0 40px;
+      border-bottom: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: start;
+    }
+    .hero-kicker {
+      font-size: 11.5px; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--accent);
+      display: flex; align-items: center; gap: 6px; margin-bottom: 12px;
+    }
+    .hero-kicker::before {
+      content: ''; display: block; width: 18px; height: 2px; background: var(--accent); border-radius: 1px;
+    }
+    .hero h1 {
+      font-size: clamp(22px, 3.5vw, 30px); font-weight: 600;
+      line-height: 1.25; color: var(--text); margin-bottom: 14px;
+    }
+    .hero p {
+      font-size: 15px; color: var(--text2); max-width: 520px; line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 18px; border-radius: var(--radius-sm);
+      font-size: 13.5px; font-weight: 500; cursor: pointer;
+      transition: all .15s;
+    }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+      border: 1px solid transparent;
+    }
+    .btn-primary:hover { filter: brightness(1.1); }
+    body.dark-theme .btn-primary { color: #0A0D14; font-weight: 600; }
+    
+    .btn-secondary {
+      background: var(--bg3); color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { background: var(--border); }
+
+    /* hero stats */
+    .hero-stats {
+      display: flex; flex-direction: column; gap: 10px;
+      padding: 20px; background: var(--bg3); border-radius: var(--radius);
+      border: 1px solid var(--border); min-width: 160px;
+    }
+    .stat-item { display: flex; flex-direction: column; gap: 2px; }
+    .stat-num { font-size: 22px; font-weight: 600; color: var(--text); font-family: var(--mono); }
+    .stat-label { font-size: 12px; color: var(--text3); }
+
+    /* ─── SECTION TITLES ─────────────────────────────────── */
+    .section { padding: 40px 0 0; }
+    .section-head {
+      display: flex; align-items: baseline; gap: 12px; margin-bottom: 20px;
+    }
+    .section-head h2 { font-size: 17px; font-weight: 600; }
+    .section-head .section-count {
+      font-size: 12px; color: var(--text3); font-family: var(--mono);
+      background: var(--bg3); padding: 2px 8px; border-radius: 20px;
+    }
+
+    /* ─── COURSE ROADMAP ─────────────────────────────────── */
+    .roadmap {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    .module-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px 22px;
+      display: flex; flex-direction: column; gap: 10px;
+      box-shadow: var(--shadow);
+      transition: border-color .15s, box-shadow .15s, transform .15s;
+      text-decoration: none; color: inherit;
+    }
+    .module-card:hover {
+      border-color: var(--border2); box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+    .module-card.featured { border-color: var(--accent); }
+
+    .card-tag {
+      font-size: 11px; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; padding: 3px 8px; border-radius: 20px;
+      width: fit-content;
+    }
+    .tag-active { background: var(--accent-bg); color: var(--accent); }
+    .tag-calc   { background: var(--accent2-bg); color: var(--accent2); }
+    .tag-soon   { background: var(--bg3); color: var(--text3); }
+
+    .card-title { font-size: 15px; font-weight: 600; line-height: 1.35; }
+    .card-desc  { font-size: 13px; color: var(--text2); line-height: 1.6; flex: 1; }
+
+    .card-meta {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 10px; border-top: 1px solid var(--border);
+    }
+    .card-count { font-size: 12px; color: var(--text3); font-family: var(--mono); }
+    .card-arrow { font-size: 13px; color: var(--text3); }
+    .module-card:hover .card-arrow { color: var(--accent); }
+
+    /* ─── TOPICS GRID ────────────────────────────────────── */
+    .topics-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    }
+    .topic-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 14px 16px;
+      display: flex; flex-direction: column; gap: 6px;
+      transition: border-color .15s;
+    }
+    .topic-item:hover { border-color: var(--border2); }
+    .topic-num { font-family: var(--mono); font-size: 11px; color: var(--accent); font-weight: 600; }
+    .topic-name { font-size: 13.5px; font-weight: 600; }
+    .topic-sub  { font-size: 12px; color: var(--text2); }
+
+    /* ─── LECTURES LIST ──────────────────────────────────── */
+    .lectures-list { display: flex; flex-direction: column; gap: 8px; }
+    .lecture-row {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 14px 18px;
+      box-shadow: var(--shadow); transition: border-color .15s, transform .15s;
+      text-decoration: none; color: inherit;
+    }
+    .lecture-row:hover { border-color: var(--border2); transform: translateX(2px); }
+    .lec-num {
+      font-family: var(--mono); font-size: 12px; color: var(--text3);
+      flex: 0 0 28px; text-align: center;
+    }
+    .lec-body { flex: 1; min-width: 0; }
+    .lec-title { font-size: 14px; font-weight: 500; }
+    .lec-sub   { font-size: 12.5px; color: var(--text2); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .lec-badge {
+      flex: 0 0 auto; font-size: 11px; font-weight: 600; letter-spacing: .04em;
+      padding: 3px 8px; border-radius: 20px; text-transform: uppercase;
+    }
+    .badge-case   { background: var(--accent2-bg); color: var(--accent2); }
+    .badge-theory { background: var(--accent-bg);  color: var(--accent); }
+    .badge-strat  { background: var(--warn-bg);    color: var(--warn); }
+    .lec-arrow { color: var(--text3); font-size: 13px; }
+    .lecture-row:hover .lec-arrow { color: var(--accent); }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    .footer {
+      margin-top: 60px; padding: 24px 0;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 12.5px; color: var(--text3);
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 680px) {
+      .nav { padding: 0 16px; }
+      .nav-links a { padding: 6px 8px; font-size: 13px; }
+      .page { padding: 0 16px 60px; }
+      .hero { grid-template-columns: 1fr; gap: 20px; padding: 36px 0 30px; }
+      .hero-stats { flex-direction: row; justify-content: space-around; min-width: unset; }
+      .roadmap { grid-template-columns: 1fr; }
+      .topics-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 420px) {
+      .topics-grid { grid-template-columns: 1fr; }
+      .lec-sub { display: none; }
+    }
+  </style>
 </head>
 <body>
-<div class="top">
-  <div class="top-inner">
-    <a href="index.html" class="brand">Економіка будівництва</a>
-    <nav class="nav" style="display: flex; align-items: center; gap: 12px;">
-      <a href="index.html" id="nav-link-home" style="font-weight: 700; border-bottom: 2px solid var(--brand);">Головна</a>
-      <a href="materials.html" id="nav-link-materials">Учбові матеріали</a>
-      <a href="economic-tasks.html" id="nav-link-tasks">Лабораторія розрахунків</a>
-      
-      <button id="theme-toggle-btn" onclick="toggleTheme()" style="background: var(--soft); color: var(--ink); border: 1px solid var(--line); border-radius: 20px; padding: 4px 12px; cursor: pointer; font-size: 12px; display: flex; align-items: center; gap: 6px; font-weight: 600; margin-left: 8px; outline: none;">
-        <span id="theme-text">Світлий</span> <span id="theme-emoji">🌙</span>
-      </button>
-    </nav>
-  </div>
-</div>
 
-<main>
-  <section class="hero">
-    <div>
-      <div class="kicker">КНУБА · інтерактивний навчальний сайт</div>
-      <h1>Матеріали та задачі з економіки будівництва</h1>
-      <p class="lead">Єдина стартова сторінка для навчальних матеріалів, практичних економічних задач і майбутніх інтерактивних інструментів курсу.</p>
-      <div class="actions">
-        <a class="btn primary" href="economic-tasks.html">Відкрити економічні задачі</a>
-        <a class="btn secondary" href="materials.html">Перейти до матеріалів</a>
-      </div>
+  <nav class="nav">
+    <div class="nav-brand">Економіка будівництва<span>КНУБА</span></div>
+    <div class="nav-links">
+      <a href="index.html" class="active">Головна</a>
+      <a href="materials.html">Матеріали</a>
+      <a href="economic-tasks.html">Лабораторія</a>
     </div>
-    <div class="visual" aria-label="Схематичний графік навчальних розділів">
-      <div class="visual-title">Структура сайту для поступового наповнення</div>
-      <div class="chart">
-        <div class="bar"><span>Теми</span></div>
-        <div class="bar"><span>Формули</span></div>
-        <div class="bar"><span>Задачі</span></div>
-        <div class="bar"><span>Тести</span></div>
-      </div>
-    </div>
-  </section>
+    <button class="theme-btn" id="themeBtn" title="Перемкнути тему" aria-label="Перемкнути тему">🌙</button>
+  </nav>
 
-  <section class="sections" aria-labelledby="site-sections">
-    <div class="section-head">
-      <h2 id="site-sections">Розділи сайту</h2>
-      <p>Кожен блок можна розвивати окремо: додавати теми, приклади, практичні роботи, тести або нові калькулятори.</p>
-    </div>
-    <div class="grid">
-      <a class="card" href="materials.html">
-        <small>Лекції 1–7</small>
-        <h3>Учбові матеріали</h3>
-        <p>Лекційні теми, основні поняття, формули, методичні пояснення та кейси українських і міжнародних компаній.</p>
-        <span class="link">Відкрити матеріали</span>
-      </a>
-      <a class="card tasks" href="economic-tasks.html">
-        <small>Існуючий інструмент</small>
-        <h3>Економічні задачі</h3>
-        <p>Інтерактивний посібник і калькулятор для розрахунків з фінансової математики, інвестиційного аналізу та інших тем.</p>
-        <span class="link">Перейти до задач</span>
-      </a>
-      <a class="card future" href="#development">
-        <small>Можна додати пізніше</small>
-        <h3>Майбутні модулі</h3>
-        <p>Місце для тестів, практичних робіт, довідника термінів, завдань за темами або сторінок окремих дисциплін.</p>
-        <span class="link">Подивитися план</span>
-      </a>
-    </div>
+  <main class="page">
 
-    <!--
-    <div class="notes" id="development">
-      <div class="note">
-        <h3>Як розширювати</h3>
-        <p>Для нового розділу достатньо створити окремий HTML-файл і додати посилання на нього в меню та в картки на головній сторінці.</p>
+    <section class="hero">
+      <div>
+        <div class="hero-kicker">інтерактивний навчальний сайт</div>
+        <h1>Матеріали та задачі<br>з економіки будівництва</h1>
+        <p>Лекційні курси, формули, кейси українських компаній і практичні фінансово-економічні розрахунки — все в одному місці.</p>
+        <div class="hero-actions">
+          <a href="economic-tasks.html" class="btn btn-primary">
+            <span>⊞</span> Лабораторія розрахунків
+          </a>
+          <a href="materials.html" class="btn btn-secondary">
+            Учбові матеріали →
+          </a>
+        </div>
       </div>
-      <div class="note">
-        <h3>Поточна адреса</h3>
-        <p>Якщо GitHub Pages увімкнено для репозиторію, сторінка буде доступна за адресою виду <strong>serge47-cyber.github.io/econ-calc/</strong>.</p>
+      <div class="hero-stats" aria-label="Статистика курсу">
+        <div class="stat-item">
+          <span class="stat-num">7</span>
+          <span class="stat-label">лекцій</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">14</span>
+          <span class="stat-label">вкладок розрахунків</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">4</span>
+          <span class="stat-label">напрями аналізу</span>
+        </div>
       </div>
-    </div>
-    -->
-  </section>
-</main>
+    </section>
 
-<footer class="footer">
-  <div class="footer-inner">
-    <span>Навчальний сайт з економіки будівництва</span>
-    <span>Матеріали оновлюватимуся по мірі розвитку проєкту</span>
-  </div>
-</footer>
-<script>
-  function applySavedTheme() {
-    var currentTheme = localStorage.getItem("theme");
-    var btnText = document.getElementById("theme-text");
-    var btnEmoji = document.getElementById("theme-emoji");
-    if (currentTheme === "dark") {
-      document.body.classList.add("dark-theme");
-      if (btnText) btnText.innerText = "Темний";
-      if (btnEmoji) btnEmoji.innerText = "☀️";
+    <section class="section" id="sections">
+      <div class="section-head">
+        <h2>Розділи сайту</h2>
+        <span class="section-count">3 модулі</span>
+      </div>
+      <div class="roadmap">
+        <a href="materials.html" class="module-card featured">
+          <span class="card-tag tag-active">Лекції 1–7</span>
+          <div class="card-title">Учбові матеріали</div>
+          <div class="card-desc">Лекційні теми, основні поняття, формули, методичні пояснення та кейси Nova Post, MHP, DTEK, Kernel.</div>
+          <div class="card-meta">
+            <span class="card-count">7 лекцій · 3 теми</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="economic-tasks.html" class="module-card featured">
+          <span class="card-tag tag-calc">Інструмент</span>
+          <div class="card-title">Лабораторія розрахунків</div>
+          <div class="card-desc">Інтерактивний посібник для розрахунків з фінансової математики, інвестиційного аналізу, управлінського обліку та фінансового аналізу.</div>
+          <div class="card-meta">
+            <span class="card-count">14 вкладок · 4 напрями</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="#development" class="module-card" style="grid-column: 1 / -1;">
+          <span class="card-tag tag-soon">Планується</span>
+          <div class="card-title">Майбутні модулі</div>
+          <div class="card-desc">Тести, практичні роботи, довідник термінів, завдання за темами або сторінки окремих дисциплін. Кожен block можна розвивати окремо.</div>
+          <div class="card-meta">
+            <span class="card-count">Тести · Практичні · Довідник</span>
+            <span class="card-arrow">↓</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" id="topics">
+      <div class="section-head">
+        <h2>Теми лабораторії</h2>
+        <span class="section-count">14 розрахункових вкладок</span>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-item">
+          <span class="topic-num">Фін. математика</span>
+          <span class="topic-name">Складні відсотки</span>
+          <span class="topic-sub">FV, PV, EAR</span>
+        </div>
+        <div class="topic-item">
+          <span class="topic-num">Фін. математика</span>
+          <span class="topic-name">Ануїтет / Кредит</span>
+          <span class="topic-sub">PMT, графік платежів</span>
+        </div>
+        <div class="topic-item">
+          <span class="topic-num">Інвест. аналіз</span>
+          <span class="topic-name">NPV / IRR</span>
+          <span class="topic-sub">Оцінка проєктів</span>
+        </div>
+        <div class="topic-item">
+          <span class="topic-num">Управл. облік</span>
+          <span class="topic-name">Амортизація</span>
+          <span class="topic-sub">SL, DDB, SYD</span>
+        </div>
+        <div class="topic-item">
+          <span class="topic-num">Управл. облік</span>
+          <span class="topic-name">Беззбитковість</span>
+          <span class="topic-sub">BEP, маржа безпеки</span>
+        </div>
+        <div class="topic-item">
+          <span class="topic-num">Фін. аналіз</span>
+          <span class="topic-name">Рентабельність</span>
+          <span class="topic-sub">ROE, ROA, ROI</span>
+        </div>
+        <div class="topic-item">
+          <span class="topic-num">Фін. аналіз</span>
+          <span class="topic-name">Ліквідність</span>
+          <span class="topic-sub">Current, Quick ratio</span>
+        </div>
+        <div class="topic-item">
+          <span class="topic-num">Інвест. аналіз</span>
+          <span class="topic-name">WACC</span>
+          <span class="topic-sub">Вартість капіталу</span>
+        </div>
+        <div class="topic-item">
+          <span class="topic-num">Інвест. аналіз</span>
+          <span class="topic-name">Облігації / DDM</span>
+          <span class="topic-sub">YTM, ціна акції</span>
+        </div>
+        <div class="topic-item">
+          <span class="topic-num">Інвест. аналіз</span>
+          <span class="topic-name">Порівняння проєктів</span>
+          <span class="topic-sub">NPV, IRR, PI, PBP</span>
+        </div>
+        <div class="topic-item">
+          <span class="topic-num">Інвест. аналіз</span>
+          <span class="topic-name">Сценарний аналіз</span>
+          <span class="topic-sub">Base / Best / Worst</span>
+        </div>
+        <div class="topic-item">
+          <span class="topic-num">Управл. облік</span>
+          <span class="topic-name">Direct vs Absorption</span>
+          <span class="topic-sub">Методи калькуляції</span>
+        </div>
+      </div>
+      <div style="margin-top:14px; text-align:right;">
+        <a href="economic-tasks.html" class="btn btn-secondary" style="font-size:13px;">
+          Відкрити лабораторію →
+        </a>
+      </div>
+    </section>
+
+    <section class="section" id="lectures">
+      <div class="section-head">
+        <h2>Лекційний курс</h2>
+        <span class="section-count">7 лекцій</span>
+      </div>
+      <div class="lectures-list">
+        <a href="materials.html#lecture-1" class="lecture-row">
+          <span class="lec-num">01</span>
+          <div class="lec-body">
+            <div class="lec-title">Проєкти розвитку компанії</div>
+            <div class="lec-sub">Роль проєктів у бізнесі, SMART, OKR, командна взаємодія</div>
+          </div>
+          <span class="lec-badge badge-theory">Основи</span>
+          <span class="lec-arrow">→</span>
+        </a>
+        <a href="materials.html#lecture-2" class="lecture-row">
+          <span class="lec-num">02</span>
+          <div class="lec-body">
+            <div class="lec-title">Види проєктів розвитку компанії</div>
+            <div class="lec-sub">Waterfall / Agile, кейси MHP, Nova Poshta</div>
+          </div>
+          <span class="lec-badge badge-case">Кейс</span>
+          <span class="lec-arrow">→</span>
+        </a>
+        <a href="materials.html#lecture-3" class="lecture-row">
+          <span class="lec-num">03</span>
+          <div class="lec-body">
+            <div class="lec-title">Класифікація проєктів</div>
+            <div class="lec-sub">Моно-, мульти- та мегапроєкти, кейси Grammarly, Rozetka</div>
+          </div>
+          <span class="lec-badge badge-case">Кейс</span>
+          <span class="lec-arrow">→</span>
+        </a>
+        <a href="materials.html#lecture-4" class="lecture-row">
+          <span class="lec-num">04</span>
+          <div class="lec-body">
+            <div class="lec-title">Життєвий цикл та стратегія</div>
+            <div class="lec-sub">6 етапів ЖЦ, корпоративна стратегія, роль ШІ</div>
+          </div>
+          <span class="lec-badge badge-strat">Стратегія</span>
+          <span class="lec-arrow">→</span>
+        </a>
+        <a href="materials.html#lecture-5" class="lecture-row">
+          <span class="lec-num">05</span>
+          <div class="lec-body">
+            <div class="lec-title">Кількісна вимірюваність параметрів</div>
+            <div class="lec-sub">KPI, BSC, ESG; кейси DTEK, MHP, Kernel, Nova Post</div>
+          </div>
+          <span class="lec-badge badge-case">Кейс</span>
+          <span class="lec-arrow">→</span>
+        </a>
+        <a href="materials.html#lecture-6" class="lecture-row">
+          <span class="lec-num">06</span>
+          <div class="lec-body">
+            <div class="lec-title">Практичні кроки зі створення проєкту</div>
+            <div class="lec-sub">SWOT/PEST/VRIO, WBS, RAID, Kotter 8 кроків</div>
+          </div>
+          <span class="lec-badge badge-theory">Аналіз</span>
+          <span class="lec-arrow">→</span>
+        </a>
+        <a href="materials.html#lecture-7" class="lecture-row">
+          <span class="lec-num">07</span>
+          <div class="lec-body">
+            <div class="lec-title">Критерії вибору пріоритетних проєктів</div>
+            <div class="lec-sub">BCG, GE/McKinsey, реальні опціони, portfolio управління</div>
+          </div>
+          <span class="lec-badge badge-strat">Стратегія</span>
+          <span class="lec-arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" id="development">
+      <div class="section-head">
+        <h2>Структура для поступового наповнення</h2>
+      </div>
+      <div style="
+        background: var(--surface); border: 1px solid var(--border);
+        border-radius: var(--radius); padding: 20px 24px;
+        display: flex; gap: 32px; flex-wrap: wrap;
+      ">
+        <div style="display:flex; flex-direction:column; gap:6px; min-width:120px;">
+          <span style="font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--text3); font-weight:600;">Готово</span>
+          <span style="font-size:13.5px; color: var(--accent2);">✓ Теми</span>
+          <span style="font-size:13.5px; color: var(--accent2);">✓ Формули</span>
+          <span style="font-size:13.5px; color: var(--accent2);">✓ Задачі</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:6px; min-width:120px;">
+          <span style="font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--text3); font-weight:600;">Планується</span>
+          <span style="font-size:13.5px; color: var(--text2);">○ Тести</span>
+          <span style="font-size:13.5px; color: var(--text2);">○ Практичні роботи</span>
+          <span style="font-size:13.5px; color: var(--text2);">○ Довідник термінів</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="page">
+    <div class="footer">
+      <span>Кафедра економіки будівництва · КНУБА</span>
+      <span>Оновлено: 2026</span>
+    </div>
+  </footer>
+
+  <script>
+    // ─── THEME TOGGLE ───────────────────────────────────────
+    const btn = document.getElementById('themeBtn');
+
+    function applySavedTheme() {
+      const currentTheme = localStorage.getItem('theme');
+      if (currentTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        if (btn) btn.textContent = '☀️';
+      } else {
+        document.body.classList.remove('dark-theme');
+        if (btn) btn.textContent = '🌙';
+      }
     }
-  }
 
-  function toggleTheme() {
-    document.body.classList.toggle("dark-theme");
-    var isDark = document.body.classList.contains("dark-theme");
-    localStorage.setItem("theme", isDark ? "dark" : "light");
-    
-    document.querySelectorAll("#theme-text").forEach(el => el.innerText = isDark ? "Темний" : "Світлий");
-    document.querySelectorAll("#theme-emoji").forEach(el => el.innerText = isDark ? "☀️" : "🌙");
-  }
-  
-  applySavedTheme();
-</script>
+    if (btn) {
+      btn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-theme');
+        const isDark = document.body.classList.contains('dark-theme');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        btn.textContent = isDark ? '☀️' : '🌙';
+      });
+    }
+
+    // Ініціалізація при відкритті сторінки
+    applySavedTheme();
+
+    // Навігаційне активне підсвічування
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      if (a.getAttribute('href') === 'index.html') a.classList.add('active');
+      else a.classList.remove('active');
+    });
+  </script>
 </body>
 </html>
