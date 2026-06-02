@@ -1,331 +1,557 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Учбові матеріали — Економіка будівництва</title>
-<meta name="description" content="Учбові матеріали з економіки будівництва: теми, формули, приклади та посилання для студентів.">
-<style>
-*,*::before,*::after{box-sizing:border-box}
-:root{
-  --bg:#f6f4ef;
-  --paper:#fffdf8;
-  --ink:#17202a;
-  --muted:#5f6b75;
-  --line:#d9d4c7;
-  --brand:#1b6b63;
-  --brand2:#b66a2c;
-  --deep:#22324a;
-  --soft:#e8f1ee;
-  --r:8px;
-}
-body.dark-theme {
-  --bg: #0A0D14 !important;
-  --paper: #111520 !important;
-  --ink: #F4F1EC !important;
-  --muted: #9A95A8 !important;
-  --line: rgba(255, 255, 255, 0.08) !important;
-  --brand: #3ECFAA !important;
-  --brand2: #D4A843 !important;
-  --deep: #F4F1EC !important;
-  --soft: #181D2C !important;
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Учбові матеріали з економіки будівництва: теми, формули, приклади та посилання для студентів." />
+  <title>Учбові матеріали — Економіка будівництва</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── TOKENS (СВІТЛА ТЕМА ЗА ЗАМОВЧУВАННЯМ) ─────────── */
+    :root {
+      --bg:          #f8f8f6;
+      --bg2:         #ffffff;
+      --bg3:         #f0f0ec;
+      --surface:     #ffffff;
+      --border:      #e2e2dc;
+      --border2:     #d0d0c8;
+      --text:        #1a1a18;
+      --text2:       #5a5a54;
+      --text3:       #8a8a82;
+      --accent:      #896312;        /* Наше фірмове глибоке золото для КНУБА */
+      --accent-bg:   #fdf3e6;
+      --accent2:     #006650;        /* Наш глибокий смарагдовий колір */
+      --accent2-bg:  #e6f4f0;
+      --warn:        #a05a10;
+      --warn-bg:     #fdf3e6;
+      --radius:      12px;
+      --radius-sm:   8px;
+      --shadow:      0 1px 3px rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.04);
+      --shadow-md:   0 2px 8px rgba(0,0,0,.08), 0 4px 20px rgba(0,0,0,.05);
+      --font:        'Inter', system-ui, sans-serif;
+      --mono:        'JetBrains Mono', monospace;
+      --nav-h:       56px;
+    }
 
-/* Фікс верхньої білої плашки навігації */
-body.dark-theme .top {
-  background: rgba(17, 21, 32, 0.95) !important;
-  border-bottom-color: rgba(255, 255, 255, 0.15) !important;
-}
+    /* ─── ІНТЕГРАЦІЯ: ГЛОБАЛЬНА ТЕМНА ТЕМА САЙТУ ─────────── */
+    body.dark-theme {
+      --bg:          #0A0D14;
+      --bg2:         #111520;
+      --bg3:         #181D2C;
+      --surface:     #181D2C;
+      --border:      rgba(255, 255, 255, 0.08);
+      --border2:     rgba(255, 255, 255, 0.15);
+      --text:        #F4F1EC;
+      --text2:       #9A95A8;
+      --text3:       #5A5669;
+      --accent:      #D4A843;        /* Ярке золото для темного тла */
+      --accent-bg:   rgba(212, 168, 67, 0.1);
+      --accent2:     #3ECFAA;        /* М'який неоновий зелений */
+      --accent2-bg:  rgba(62, 207, 170, 0.1);
+      --warn:        #E05252;
+      --warn-bg:     rgba(224, 82, 82, 0.1);
+      --shadow:      0 1px 3px rgba(0,0,0,.3), 0 2px 8px rgba(0,0,0,.2);
+      --shadow-md:   0 2px 8px rgba(0,0,0,.4), 0 4px 20px rgba(0,0,0,.25);
+    }
 
-/* Фікс тла вбудованих калькуляторів-тренажерів */
-body.dark-theme .mini-calc-card,
-body.dark-theme div[style*="background: var(--bg2)"] {
-  background: #181D2C !important;
-  border-color: rgba(255, 255, 255, 0.15) !important;
-}
-body.dark-theme input {
-  background: #0A0D14 !important;
-  color: #F4F1EC !important;
-  border-color: rgba(255, 255, 255, 0.15) !important;
-}
-body{margin:0;font-family:Arial,"Helvetica Neue",sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
-a{color:inherit}
-.top{border-bottom:1px solid var(--line);background:rgba(255,253,248,.92);position:sticky;top:0;z-index:10;backdrop-filter:blur(10px)}
-.top-inner{max-width:1060px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-.brand{font-weight:700;color:var(--deep);text-decoration:none}
-.nav{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-.nav a{font-size:14px;text-decoration:none;padding:8px 11px;border-radius:var(--r);color:var(--muted)}
-.nav a:hover,.nav a[aria-current=page]{background:var(--soft);color:var(--ink)}
-.hero{max-width:1060px;margin:0 auto;padding:52px 24px 28px}
-.kicker{font-size:12px;letter-spacing:1.8px;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:12px}
-h1{font-size:clamp(31px,4.4vw,52px);line-height:1.06;margin:0;color:var(--deep);letter-spacing:0}
-.lead{font-size:18px;color:var(--muted);max-width:760px;margin:16px 0 0}
-.content{max-width:1060px;margin:0 auto;padding:20px 24px 72px}
-.tools{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 15px;border-radius:var(--r);font-weight:700;text-decoration:none;border:1px solid var(--brand);color:var(--brand)}
-.btn.primary{background:var(--brand);color:white}
-.layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:22px}
-.aside,.main-block{background:var(--paper);border:1px solid var(--line);border-radius:var(--r)}
-.aside{padding:18px;height:max-content}
-.aside h2{font-size:18px;margin:0 0 12px;color:var(--deep)}
-.aside a{display:block;text-decoration:none;color:var(--muted);padding:9px 0;border-top:1px solid var(--line)}
-.aside a:hover{color:var(--brand)}
-.main-block{padding:24px}
-.topic{border-top:1px solid var(--line);padding-top:22px;margin-top:22px}
-.topic:first-child{border-top:none;margin-top:0;padding-top:0}
-h2{font-size:26px;line-height:1.2;margin:0 0 10px;color:var(--deep)}
-h3{font-size:18px;margin:18px 0 8px;color:var(--deep)}
-p{color:var(--muted);margin:0 0 12px}
-ul{margin:0;padding-left:20px;color:var(--muted)}
-li{margin:6px 0}
-.formula{background:var(--soft);border-left:4px solid var(--brand);border-radius:var(--r);padding:13px 15px;margin:14px 0;color:var(--deep);font-weight:700}
-.lecture-card{background:var(--soft);border:1px solid rgba(27,107,99,.28);border-radius:var(--r);padding:18px;margin-bottom:22px}
-.lecture-card small{display:block;font-size:12px;letter-spacing:1.4px;text-transform:uppercase;font-weight:700;color:var(--brand);margin-bottom:8px}
-.lecture-card h2{margin-bottom:8px}
-.lecture-card a{display:inline-flex;margin-top:8px;color:var(--brand);font-weight:700;text-decoration:none}
-.lecture-card a:hover{text-decoration:underline}
-.placeholder{background:#fff4df;border:1px solid #ead2a9;border-radius:var(--r);padding:16px;margin-top:20px}
-.placeholder strong{display:block;color:var(--brand2);margin-bottom:6px}
-.footer{border-top:1px solid var(--line);padding:22px 24px;color:var(--muted);font-size:14px}
-.footer-inner{max-width:1060px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-@media(max-width:820px){
-  .top-inner{align-items:flex-start;flex-direction:column}
-  .nav{justify-content:flex-start}
-  .layout{grid-template-columns:1fr}
-}
-@media(max-width:520px){
-  .top-inner,.hero,.content{padding-left:18px;padding-right:18px}
-  .tools{flex-direction:column}
-  .btn{width:100%}
-}
-</style>
+    /* ─── RESET ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      font-size: 15px;
+      line-height: 1.65;
+      background: var(--bg);
+      color: var(--text);
+      transition: background .25s, color .25s;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── NAV ────────────────────────────────────────────── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      height: var(--nav-h);
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+      padding: 0 24px; gap: 0;
+      transition: background .25s, border-color .25s;
+    }
+    .nav-brand {
+      font-size: 14px; font-weight: 600;
+      color: var(--text); white-space: nowrap;
+      margin-right: auto;
+    }
+    .nav-brand span { color: var(--text3); font-weight: 400; margin-left: 6px; }
+    .nav-links { display: flex; align-items: center; gap: 2px; }
+    .nav-links a {
+      padding: 6px 12px; border-radius: var(--radius-sm);
+      font-size: 13.5px; color: var(--text2); font-weight: 500;
+      transition: background .15s, color .15s;
+    }
+    .nav-links a:hover { background: var(--bg3); color: var(--text); }
+    .nav-links a.active { color: var(--accent) !important; font-weight: 700; }
+    
+    .theme-btn {
+      margin-left: 12px;
+      width: 32px; height: 32px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: transparent;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      color: var(--text); font-size: 15px;
+      transition: background .15s, border-color .15s;
+      outline: none;
+    }
+    .theme-btn:hover { background: var(--bg3); border-color: var(--border2); }
+
+    /* ─── LAYOUT ─────────────────────────────────────────── */
+    .page { max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ─── BREADCRUMB ─────────────────────────────────────── */
+    .breadcrumb {
+      display: flex; align-items: center; gap: 6px;
+      padding: 18px 0 0;
+      font-size: 13px; color: var(--text3);
+    }
+    .breadcrumb a { color: var(--text3); transition: color .15s; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb-sep { font-size: 11px; }
+
+    /* ─── PAGE HEADER ────────────────────────────────────── */
+    .page-header {
+      padding: 20px 0 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-header .kicker {
+      font-size: 11.5px; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--accent);
+      display: flex; align-items: center; gap: 6px; margin-bottom: 10px;
+    }
+    .page-header .kicker::before {
+      content: ''; display: block; width: 18px; height: 2px;
+      background: var(--accent); border-radius: 1px;
+    }
+    .page-header h1 {
+      font-size: clamp(20px, 3vw, 26px); font-weight: 600;
+      line-height: 1.25; margin-bottom: 10px;
+    }
+    .page-header p { font-size: 14.5px; color: var(--text2); max-width: 560px; }
+
+    /* ─── TOC ────────────────────────────────────────────── */
+    .toc {
+      margin: 28px 0 0;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px 22px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6px 32px;
+      box-shadow: var(--shadow);
+    }
+    .toc-section-label {
+      grid-column: 1 / -1;
+      font-size: 11px; font-weight: 600; letter-spacing: .07em;
+      text-transform: uppercase; color: var(--text3);
+      padding: 8px 0 4px; border-top: 1px solid var(--border);
+    }
+    .toc-section-label:first-child { border-top: none; padding-top: 0; }
+    .toc a {
+      font-size: 13px; color: var(--text2);
+      display: flex; align-items: center; gap: 6px;
+      padding: 3px 0; transition: color .15s;
+    }
+    .toc a:hover { color: var(--accent); }
+    .toc a .toc-num { font-family: var(--mono); font-size: 11px; color: var(--text3); }
+
+    /* ─── SECTION ────────────────────────────────────────── */
+    .section { padding: 44px 0 0; }
+    .section-head {
+      display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px;
+    }
+    .section-head h2 { font-size: 18px; font-weight: 600; }
+    .section-head .count {
+      font-size: 12px; color: var(--text3); font-family: var(--mono);
+      background: var(--bg3); padding: 2px 8px; border-radius: 20px;
+    }
+    .section-desc { font-size: 13.5px; color: var(--text2); margin-bottom: 20px; }
+
+    /* ─── LECTURE GROUP ──────────────────────────────────── */
+    .lec-group { margin-bottom: 28px; }
+    .lec-group-label {
+      font-size: 11px; font-weight: 600; letter-spacing: .07em;
+      text-transform: uppercase; color: var(--text3);
+      padding-bottom: 10px; margin-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .lec-group-label::before {
+      content: ''; display: block; width: 3px; height: 12px;
+      background: var(--border2); border-radius: 2px;
+    }
+
+    .lecture-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px 22px;
+      display: grid; grid-template-columns: 44px 1fr auto; gap: 0 16px;
+      align-items: start; box-shadow: var(--shadow);
+      transition: border-color .15s, box-shadow .15s, transform .15s;
+      text-decoration: none; color: inherit; margin-bottom: 10px;
+    }
+    .lecture-card:last-child { margin-bottom: 0; }
+    .lecture-card:hover {
+      border-color: var(--border2); box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+    .lec-num-box {
+      width: 44px; height: 44px; border-radius: var(--radius-sm);
+      background: var(--bg3); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: 13px; font-weight: 500;
+      color: var(--text3); flex-shrink: 0; margin-top: 1px;
+    }
+    .lec-body { min-width: 0; }
+    .lec-title-row {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 5px; flex-wrap: wrap;
+    }
+    .lec-title { font-size: 15px; font-weight: 600; line-height: 1.3; }
+    .lec-badge {
+      font-size: 10.5px; font-weight: 600; letter-spacing: .05em;
+      padding: 2px 8px; border-radius: 20px; text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    .badge-case   { background: var(--accent2-bg); color: var(--accent2); }
+    .badge-theory { background: var(--accent-bg);  color: var(--accent); }
+    .badge-strat  { background: var(--warn-bg);    color: var(--warn); }
+    .badge-final  { background: var(--bg3); color: var(--text3); border: 1px solid var(--border); }
+
+    .lec-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
+    .lec-companies {
+      margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px;
+    }
+    .company-tag {
+      font-size: 11.5px; background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 4px; padding: 2px 7px; color: var(--text3);
+    }
+
+    .lec-action {
+      flex-shrink: 0; align-self: center;
+      display: flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 500; color: var(--accent);
+      white-space: nowrap; padding-left: 8px;
+    }
+    .lec-action .arrow { transition: transform .15s; }
+    .lecture-card:hover .arrow { transform: translateX(3px); }
+
+    /* ─── TOOL SECTIONS ──────────────────────────────────── */
+    .tool-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    .tool-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px 20px;
+      display: flex; flex-direction: column; gap: 8px;
+      box-shadow: var(--shadow);
+      text-decoration: none; color: inherit;
+      transition: border-color .15s, box-shadow .15s, transform .15s;
+    }
+    .tool-card:hover {
+      border-color: var(--accent); box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+    .tool-num { font-family: var(--mono); font-size: 11px; color: var(--text3); }
+    .tool-title { font-size: 14px; font-weight: 600; }
+    .tool-formula {
+      font-family: var(--mono); font-size: 13px;
+      color: var(--accent); background: var(--accent-bg);
+      padding: 6px 10px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+    .tool-desc { font-size: 12.5px; color: var(--text2); line-height: 1.55; flex: 1; }
+    .tool-link {
+      font-size: 12.5px; font-weight: 500; color: var(--accent);
+      display: flex; align-items: center; gap: 4px; margin-top: 4px;
+    }
+
+    /* ─── DIVIDER ────────────────────────────────────────── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 44px 0 0; }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    .footer {
+      margin-top: 60px; padding: 24px 0;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 12.5px; color: var(--text3);
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 680px) {
+      .nav { padding: 0 16px; }
+      .nav-links a { padding: 6px 8px; font-size: 13px; }
+      .page { padding: 0 16px 60px; }
+      .toc { grid-template-columns: 1fr; }
+      .lecture-card { grid-template-columns: 36px 1fr; }
+      .lec-action { display: none; }
+      .tool-cards { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .lecture-card { grid-template-columns: 1fr; gap: 10px; }
+      .lec-num-box { width: 36px; height: 36px; font-size: 12px; }
+    }
+  </style>
 </head>
 <body>
-<div class="top">
-  <div class="top-inner">
-    <a href="index.html" class="brand">Економіка будівництва</a>
-    <nav class="nav" style="display: flex; align-items: center; gap: 12px;">
-      <a href="index.html" id="nav-link-home">Головна</a>
-      <a href="materials.html" id="nav-link-materials" style="font-weight: 700; border-bottom: 2px solid var(--brand);">Учбові матеріали</a>
-      <a href="economic-tasks.html" id="nav-link-tasks">Лабораторія розрахунків</a>
-      
-      <button id="theme-toggle-btn" onclick="toggleTheme()" style="background: var(--soft); color: var(--ink); border: 1px solid var(--line); border-radius: 20px; padding: 4px 12px; cursor: pointer; font-size: 12px; display: flex; align-items: center; gap: 6px; font-weight: 600; margin-left: 8px; outline: none;">
-        <span id="theme-text">Світлий</span> <span id="theme-emoji">🌙</span>
-      </button>
+
+  <nav class="nav">
+    <div class="nav-brand">Економіка будівництва<span>КНУБА</span></div>
+    <div class="nav-links">
+      <a href="index.html">Головна</a>
+      <a href="materials.html" class="active">Матеріали</a>
+      <a href="economic-tasks.html">Лабораторія</a>
+    </div>
+    <button class="theme-btn" id="themeBtn" title="Перемкнути тему" aria-label="Перемкнути тему">🌙</button>
+  </nav>
+
+  <main class="page">
+
+    <nav class="breadcrumb" aria-label="Навігаційний ланцюжок">
+      <a href="index.html">Головна</a>
+      <span class="breadcrumb-sep">›</span>
+      <span>Учбові матеріали</span>
     </nav>
-  </div>
-</div>
 
-<main>
-  <section class="hero">
-    <div class="kicker">Навчальні матеріали</div>
-    <h1>Лекційні курси, формули та методичні пояснення</h1>
-    <p class="lead">Це стартова сторінка для матеріалів курсу. Її можна поступово наповнювати лекціями, прикладами, практичними роботами й посиланнями на додаткові джерела.</p>
-  </section>
+    <header class="page-header">
+      <div class="kicker">навчальні матеріали</div>
+      <h1>Лекційні курси, формули<br>та методичні пояснення</h1>
+      <p>Лекції з обґрунтування проєктів розвитку компанії та прикладний інструментарій з фінансово-економічних розрахунків.</p>
+    </header>
 
-  <section class="content">
-    <div class="tools">
-      <a class="btn primary" href="economic-tasks.html">Перейти до задач</a>
-      <a class="btn" href="index.html">На головну</a>
-    </div>
+    <nav class="toc" aria-label="Зміст сторінки">
+      <div class="toc-section-label">Лекційний курс</div>
+      <a href="#group-1"><span class="toc-num">01–02</span> Основи проєктного мислення</a>
+      <a href="#group-2"><span class="toc-num">03–04</span> Класифікація та життєвий цикл</a>
+      <a href="#group-3"><span class="toc-num">05–07</span> Оцінка, стратегія та портфель</a>
+      <div class="toc-section-label">Прикладний інструментарій</div>
+      <a href="#topic-1"><span class="toc-num">1</span> Вартість грошей у часі</a>
+      <a href="#topic-2"><span class="toc-num">2</span> Інвестиційний аналіз</a>
+      <a href="#topic-3"><span class="toc-num">3</span> Економіка будівельного проєкту</a>
+    </nav>
 
-    <div class="layout">
-      <aside class="aside">
-        <h2>Зміст</h2>
-        <div style="font-size: 11px; font-weight: 700; color: var(--ink3); margin: 15px 0 5px 0; letter-spacing: 0.05em; text-transform: uppercase;">ЛЕКЦІЙНІ КУРСИ</div>
-        <a href="#lectures">1. Обґрунтування проєктів розвитку компанії (1-7)</a>
-        <div style="font-size: 11px; font-weight: 700; color: var(--ink3); margin: 15px 0 5px 0; letter-spacing: 0.05em; text-transform: uppercase;">ПРИКЛАДНИЙ ІНСТРУМЕНТАРІЙ</div>
-        <a href="#topic-1">1. Вартість грошей у часі</a>
-        <a href="#topic-2">2. Інвестиційний аналіз</a>
-        <a href="#topic-3">3. Економіка проєкту</a>
-        <!-- <a href="#add">Як додавати матеріали</a> -->
-      </aside>
-
-      <div class="main-block">
-        <h2 style="margin-top: 2.5rem; margin-bottom: 1.5rem; color: var(--ink); border-bottom: 2px solid var(--line); padding-bottom: 8px;">ЛЕКЦІЙНІ КУРСИ</h2>
-
-        <section class="lecture-card" id="lectures">
-          <small>Лекція 1</small>
-          <h2>Проєкти розвитку компанії</h2>
-          <p>Роль проєктів у бізнесі, відмінність від операційної діяльності, SMART/OKR та командна взаємодію.</p>
-          <a href="lecture-1-projects.html">Відкрити лекцію</a>
-        </section>
-
-        <section class="lecture-card" id="lecture-2">
-          <small>Лекція 2</small>
-          <h2>Види проєктів розвитку компанії</h2>
-          <p>Класифікація проєктів за змістом, масштабом та методологією (Waterfall / Agile). Кейси MHP, Nova Poshta.</p>
-          <a href="lecture-2-projects.html">Відкрити лекцію</a>
-        </section>
-
-        <section class="lecture-card" id="lecture-3">
-          <small>Лекція 3</small>
-          <h2>Класифікація проєктів (продовження)</h2>
-          <p>Моно-, мульти- та мегапроєкти, тривалість та адаптивність. Кейси Grammarly, Rozetka/Amazon.</p>
-          <a href="lecture-3-projects.html">Відкрити лекцію</a>
-        </section>
-
-        <section class="lecture-card" id="lecture-4">
-          <small>Лекція 4</small>
-          <h2>Життєвий цикл та стратегія</h2>
-          <p>6 етапів ЖЦ, інтеграція проєктів у корпоративну стратегію та роль штучного інтелекту в управлінні.</p>
-          <a href="lecture-4-projects.html">Відкрити лекцію</a>
-        </section>
-
-        <section class="lecture-card" id="lecture-5">
-          <small>Лекція 5</small>
-          <h2>Кількісна вимірюваність параметрів проєкту</h2>
-          <p>Шість груп параметрів (фінансові, стратегічні, операційні, якість, інноваційні, ESG); методи KPI, BSC, SMART, бенчмаркінг та сценарне моделювання. Кейси DTEK, MHP, Kernel, Nova Post.</p>
-          <a href="lecture-5-projects.html">Відкрити лекцію</a>
-        </section>
-
-        <section class="lecture-card" id="lecture-6">
-          <small>Лекція 6</small>
-          <h2>Практичні кроки зі створення проєкту</h2>
-          <p>SWOT/PEST/VRIO-аналіз, ФЕО з аналізом чутливості, Business Model Canvas, матриця Ансоффа, WBS, RAID-журнал, управління командою та змінами (Kotter 8 кроків). Кейси Nova Post, MHP, Amazon.</p>
-          <a href="lecture-6-projects.html">Відкрити лекцію</a>
-        </section>
-
-        <section class="lecture-card" id="lecture-7">
-          <small>Лекція 7 — Фінальна</small>
-          <h2>Критерії вибору пріоритетних проєктів</h2>
-          <p>8 критеріїв відбору з вагами, бальна система з розрахунковим прикладом, матриці BCG та GE/McKinsey, реальні опціони, типові помилки і найкращі практики портфельного управління.</p>
-          <a href="lecture-7-projects.html">Відкрити лекцію</a>
-        </section>
-
-        <hr style="border: 0; border-top: 1px solid var(--line); margin: 40px 0;">
-
-        <h2 style="margin-top: 3rem; margin-bottom: 1.5rem; color: var(--ink); border-bottom: 2px solid var(--line);">ПРИКЛАДНИЙ ІНСТРУМЕНТАРІЙ</h2>
-        <article class="topic" id="topic-1">
-          <h2>1. Вартість грошей у часі</h2>
-          <p>Базова ідея теми: однакова сума грошей має різну економічну цінність у різні моменти часу.</p>
-          <div class="formula">FV = PV × (1 + r)<sup>n</sup></div>
-          <ul>
-            <li><strong>PV</strong> — теперішня вартість.</li>
-            <li><strong>FV</strong> — майбутня вартість.</li>
-            <li><strong>r</strong> — ставка за період.</li>
-          </ul>
-
-          <div style="background: var(--bg2); border: 1px solid var(--line2); border-radius: var(--radius-md); padding: 1.5rem; margin-top: 1.5rem; max-width: 600px; text-align: left;">
-            <h4 style="margin-top: 0; margin-bottom: 1.25rem; color: var(--ink); font-family: 'Literata', serif; font-size: 16px;">Тренажер: Розрахунок майбутньої вартості (FV)</h4>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-              <div style="display: flex; flex-direction: column; gap: 0.4rem; flex: 1; min-width: 140px;">
-                <label style="font-size: 12px; color: var(--ink2);">Теперішня вартість (PV):</label>
-                <input type="number" id="fv-pv" value="1000" step="100" style="padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--bg); color: var(--ink); font-size: 14px; outline: none;">
-              </div>
-              <div style="display: flex; flex-direction: column; gap: 0.4rem; flex: 1; min-width: 140px;">
-                <label style="font-size: 12px; color: var(--ink2);">Ставка відсотка (r, %):</label>
-                <input type="number" id="fv-r" value="10" step="0.5" style="padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--bg); color: var(--ink); font-size: 14px; outline: none;">
-              </div>
-              <div style="display: flex; flex-direction: column; gap: 0.4rem; flex: 1; min-width: 140px;">
-                <label style="font-size: 12px; color: var(--ink2);">Періоди (n, років):</label>
-                <input type="number" id="fv-n" value="5" step="1" style="padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--bg); color: var(--ink); font-size: 14px; outline: none;">
-              </div>
-            </div>
-            <button class="btn primary" onclick="calculateFutureValue()" style="margin-top: 1.25rem; width: auto; padding: 10px 20px; font-family: 'Literata', serif; font-size: 13px; cursor: pointer; background: var(--ink); color: var(--bg); border: none; border-radius: var(--radius-sm);">Розрахувати FV</button>
-            <div id="fv-result" style="margin-top: 1.25rem; padding: 10px; background: var(--bg); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--ink); display: none;"></div>
-          </div>
-        </article>
-
-        <article class="topic" id="topic-2">
-          <h2>2. Інвестиційний аналіз</h2>
-          <p>Показники ефективності: чиста приведна вартість (NPV), внутрішня норма дохідності (IRR) та строк окупності.</p>
-          <h3>Ключові параметри:</h3>
-          <ul>
-            <li>NPV, IRR, PI та Payback Period.</li>
-            <li>Короткі приклади розрахунку.</li>
-          </ul>
-
-          <div style="background: var(--bg2); border: 1px solid var(--line2); border-radius: var(--radius-md); padding: 1.5rem; margin-top: 1.5rem; max-width: 600px; text-align: left;">
-            <h4 style="margin-top: 0; margin-bottom: 1.25rem; color: var(--ink); font-family: 'Literata', serif; font-size: 16px;">Тренажер: Оцінка доцільності інвестицій (NPV та PI)</h4>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-              <div style="display: flex; flex-direction: column; gap: 0.4rem; flex: 1; min-width: 250px;">
-                <label style="font-size: 12px; color: var(--ink2);">Початкові інвестиції (IC, грн):</label>
-                <input type="number" id="npv-ic" value="500000" step="10000" style="padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--bg); color: var(--ink); font-size: 14px; outline: none;">
-              </div>
-              <div style="display: flex; flex-direction: column; gap: 0.4rem; flex: 1; min-width: 250px;">
-                <label style="font-size: 12px; color: var(--ink2);">Річний дохід (CF, грн/рік):</label>
-                <input type="number" id="npv-cf" value="150000" step="5000" style="padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--bg); color: var(--ink); font-size: 14px; outline: none;">
-              </div>
-              <div style="display: flex; flex-direction: column; gap: 0.4rem; flex: 1; min-width: 140px;">
-                <label style="font-size: 12px; color: var(--ink2);">Ставка дисконту (r, %):</label>
-                <input type="number" id="npv-r" value="12" step="0.5" style="padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--bg); color: var(--ink); font-size: 14px; outline: none;">
-              </div>
-              <div style="display: flex; flex-direction: column; gap: 0.4rem; flex: 1; min-width: 140px;">
-                <label style="font-size: 12px; color: var(--ink2);">Термін (n, років):</label>
-                <input type="number" id="npv-n" value="5" step="1" style="padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--bg); color: var(--ink); font-size: 14px; outline: none;">
-              </div>
-            </div>
-            <button class="btn primary" onclick="calculateInvestmentMetrics()" style="margin-top: 1.25rem; width: auto; padding: 10px 20px; font-family: 'Literata', serif; font-size: 13px; cursor: pointer; background: var(--ink); color: var(--bg); border: none; border-radius: var(--radius-sm);">Розрахувати NPV та PI</button>
-            <div id="npv-result" style="margin-top: 1.25rem; padding: 10px; background: var(--bg); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--ink); display: none; line-height: 1.6;"></div>
-          </div>
-        </article>
-
-        <article class="topic" id="topic-3">
-          <h2>3. Економіка будівельного проєкту</h2>
-          <p>Матеріали про кошторис, собівартість, прибуток та ризики реалізації проєктів.</p>
-
-          <div style="background: var(--bg2); border: 1px solid var(--line2); border-radius: var(--radius-md); padding: 1.5rem; margin-top: 1.5rem; max-width: 600px; text-align: left;">
-            <h4 style="margin-top: 0; margin-bottom: 1.25rem; color: var(--ink); font-family: 'Literata', serif; font-size: 16px;">Тренажер: Розрахунок фінансових результатів будівельного проєкту</h4>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-              <div style="display: flex; flex-direction: column; gap: 0.4rem; flex: 1; min-width: 250px;">
-                <label style="font-size: 12px; color: var(--ink2);">Прямі витрати (матеріали, ВДР, техніка, грн):</label>
-                <input type="number" id="const-direct" value="1200000" step="50000" style="padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--bg); color: var(--ink); font-size: 14px; outline: none;">
-              </div>
-              <div style="display: flex; flex-direction: column; gap: 0.4rem; flex: 1; min-width: 250px;">
-                <label style="font-size: 12px; color: var(--ink2);">Загальновиробничі / Накладні витрати (грн):</label>
-                <input type="number" id="const-overhead" value="300000" step="10000" style="padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--bg); color: var(--ink); font-size: 14px; outline: none;">
-              </div>
-              <div style="display: flex; flex-direction: column; gap: 0.4rem; flex: 1; min-width: 510px;">
-                <label style="font-size: 12px; color: var(--ink2);">Договірна ціна з замовником (грн):</label>
-                <input type="number" id="const-price" value="1800000" step="50000" style="padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--bg); color: var(--ink); font-size: 14px; outline: none;">
-              </div>
-            </div>
-            <button class="btn primary" onclick="calculateConstructionProject()" style="margin-top: 1.25rem; width: auto; padding: 10px 20px; font-family: 'Literata', serif; font-size: 13px; cursor: pointer; background: var(--ink); color: var(--bg); border: none; border-radius: var(--radius-sm);">Розрахувати фінансовий результат</button>
-            <div id="const-result" style="margin-top: 1.25rem; padding: 10px; background: var(--bg); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--ink); display: none; line-height: 1.6;"></div>
-          </div>
-        </article>
-
-      <!--
-        <div class="placeholder" id="add">
-          <strong>Місце для розвитку</strong>
-          Сюди можна додавати нові теми за такою ж структурою.
-        </div>
-      -->
+    <section class="section" id="lectures">
+      <div class="section-head">
+        <h2>Лекційний курс</h2>
+        <span class="count">7 лекцій</span>
       </div>
+      <p class="section-desc">Обґрунтування проєктів розвитку компанії — від базових понять до стратегічного портфельного управління.</p>
+
+      <div class="lec-group" id="group-1">
+        <div class="lec-group-label">Основи проєктного мислення</div>
+
+        <a href="lecture-1-projects.html" class="lecture-card">
+          <div class="lec-num-box">01</div>
+          <div class="lec-body">
+            <div class="lec-title-row">
+              <span class="lec-title">Проєкти розвитку компанії</span>
+              <span class="lec-badge badge-theory">Основи</span>
+            </div>
+            <p class="lec-desc">Роль проєктів у бізнесі, відмінність від операційної діяльності, цілепокладання за SMART та OKR, командна взаємодія.</p>
+          </div>
+          <div class="lec-action">Відкрити <span class="arrow">→</span></div>
+        </a>
+
+        <a href="lecture-2-projects.html" class="lecture-card">
+          <div class="lec-num-box">02</div>
+          <div class="lec-body">
+            <div class="lec-title-row">
+              <span class="lec-title">Види проєктів розвитку компанії</span>
+              <span class="lec-badge badge-case">Кейс</span>
+            </div>
+            <p class="lec-desc">Класифікація проєктів за змістом, масштабом та методологією — Waterfall і Agile підходи.</p>
+            <div class="lec-companies">
+              <span class="company-tag">MHP</span>
+              <span class="company-tag">Nova Poshta</span>
+            </div>
+          </div>
+          <div class="lec-action">Відкрити <span class="arrow">→</span></div>
+        </a>
+      </div>
+
+      <div class="lec-group" id="group-2">
+        <div class="lec-group-label">Класифікація та життєвий цикл</div>
+
+        <a href="lecture-3-projects.html" class="lecture-card">
+          <div class="lec-num-box">03</div>
+          <div class="lec-body">
+            <div class="lec-title-row">
+              <span class="lec-title">Класифікація проєктів (продовження)</span>
+              <span class="lec-badge badge-case">Кейс</span>
+            </div>
+            <p class="lec-desc">Моно-, мульти- та мегапроєкти, тривалість та адаптивність до змін зовнішнього середовища.</p>
+            <div class="lec-companies">
+              <span class="company-tag">Grammarly</span>
+              <span class="company-tag">Rozetka</span>
+              <span class="company-tag">Amazon</span>
+            </div>
+          </div>
+          <div class="lec-action">Відкрити <span class="arrow">→</span></div>
+        </a>
+
+        <a href="lecture-4-projects.html" class="lecture-card">
+          <div class="lec-num-box">04</div>
+          <div class="lec-body">
+            <div class="lec-title-row">
+              <span class="lec-title">Життєвий цикл та стратегія</span>
+              <span class="lec-badge badge-strat">Стратегія</span>
+            </div>
+            <p class="lec-desc">6 етапів ЖЦ проєкту, інтеграція в корпоративну стратегію та роль штучного інтелекту в управлінні.</p>
+          </div>
+          <div class="lec-action">Відкрити <span class="arrow">→</span></div>
+        </a>
+      </div>
+
+      <div class="lec-group" id="group-3">
+        <div class="lec-group-label">Оцінка, стратегія та портфель</div>
+
+        <a href="lecture-5-projects.html" class="lecture-card">
+          <div class="lec-num-box">05</div>
+          <div class="lec-body">
+            <div class="lec-title-row">
+              <span class="lec-title">Кількісна вимірюваність параметрів проєкту</span>
+              <span class="lec-badge badge-case">Кейс</span>
+            </div>
+            <p class="lec-desc">Шість груп параметрів — фінансові, стратегічні, операційні, якість, інноваційні, ESG. Методи KPI, BSC, SMART, бенчмаркінг та сценарне моделювання.</p>
+            <div class="lec-companies">
+              <span class="company-tag">DTEK</span>
+              <span class="company-tag">MHP</span>
+              <span class="company-tag">Kernel</span>
+              <span class="company-tag">Nova Post</span>
+            </div>
+          </div>
+          <div class="lec-action">Відкрити <span class="arrow">→</span></div>
+        </a>
+
+        <a href="lecture-6-projects.html" class="lecture-card">
+          <div class="lec-num-box">06</div>
+          <div class="lec-body">
+            <div class="lec-title-row">
+              <span class="lec-title">Практичні кроки зі створення проєкту</span>
+              <span class="lec-badge badge-theory">Аналіз</span>
+            </div>
+            <p class="lec-desc">SWOT/PEST/VRIO-аналіз, ФЕО з аналізом чутливості, Business Model Canvas, матриця Ансоффа, WBS, RAID-журнал, управління змінами (Kotter 8 кроків).</p>
+            <div class="lec-companies">
+              <span class="company-tag">Nova Post</span>
+              <span class="company-tag">MHP</span>
+              <span class="company-tag">Amazon</span>
+            </div>
+          </div>
+          <div class="lec-action">Відкрити <span class="arrow">→</span></div>
+        </a>
+
+        <a href="lecture-7-projects.html" class="lecture-card">
+          <div class="lec-num-box">07</div>
+          <div class="lec-body">
+            <div class="lec-title-row">
+              <span class="lec-title">Критерії вибору пріоритетних проєктів</span>
+              <span class="lec-badge badge-strat">Стратегія</span>
+              <span class="lec-badge badge-final">Фінальна</span>
+            </div>
+            <p class="lec-desc">8 критеріїв відбору з вагами, бальна система з розрахунковим прикладом, матриці BCG та GE/McKinsey, реальні опціони, типові помилки і найкращі практики портфельного управління.</p>
+          </div>
+          <div class="lec-action">Відкрити <span class="arrow">→</span></div>
+        </a>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="section" id="tooling">
+      <div class="section-head">
+        <h2>Прикладний інструментарій</h2>
+        <span class="count">3 теми</span>
+      </div>
+      <p class="section-desc">Ключові формули та концепції — для поглибленого вивчення переходьте до інтерактивних розрахунків у Лабораторії.</p>
+
+      <div class="tool-cards">
+
+        <div class="tool-card" id="topic-1">
+          <div class="tool-num">Тема 1</div>
+          <div class="tool-title">Вартість грошей у часі</div>
+          <div class="tool-formula">FV = PV × (1 + r/m)<sup>n·m</sup></div>
+          <p class="tool-desc">Однакова сума грошей має різну економічну цінність у різні моменти часу. Ставка, горизонт і частота нарахування — три ключові параметри.</p>
+          <div style="margin-top:auto; padding-top:12px; border-top:1px solid var(--border); display:flex; gap:8px; flex-wrap:wrap;">
+            <span style="font-size:12px; color:var(--text3);">PV · FV · EAR · Rule 72</span>
+          </div>
+          <a href="economic-tasks.html" class="tool-link">
+            Розрахувати в лабораторії →
+          </a>
+        </div>
+
+        <div class="tool-card" id="topic-2">
+          <div class="tool-num">Тема 2</div>
+          <div class="tool-title">Інвестиційний аналіз</div>
+          <div class="tool-formula">NPV = Σ CF<sub>t</sub> / (1+r)<sup>t</sup> − IC</div>
+          <p class="tool-desc">Показники ефективності: чиста приведена вартість (NPV), внутрішня норма дохідності (IRR), індекс прибутковості (PI) та строк окупності.</p>
+          <div style="margin-top:auto; padding-top:12px; border-top:1px solid var(--border); display:flex; gap:8px; flex-wrap:wrap;">
+            <span style="font-size:12px; color:var(--text3);">NPV · IRR · PI · PBP</span>
+          </div>
+          <a href="economic-tasks.html" class="tool-link">
+            Розрахувати в лабораторії →
+          </a>
+        </div>
+
+        <div class="tool-card" id="topic-3">
+          <div class="tool-num">Тема 3</div>
+          <div class="tool-title">Економіка будівельного проєкту</div>
+          <div class="tool-formula">Прибуток = Ціна − Собівартість</div>
+          <p class="tool-desc">Кошторис, собівартість, прямі та накладні витрати, прибуток і рентабельність будівельного контракту.</p>
+          <div style="margin-top:auto; padding-top:12px; border-top:1px solid var(--border); display:flex; gap:8px; flex-wrap:wrap;">
+            <span style="font-size:12px; color:var(--text3);">Кошторис · Рентабельність · Ризики</span>
+          </div>
+          <a href="economic-tasks.html" class="tool-link">
+            Розрахувати в лабораторії →
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="page">
+    <div class="footer">
+      <span>Кафедра економіки будівництва · КНУБА</span>
+      <span>Оновлено: 2026</span>
     </div>
-  </section>
-</main>
+  </footer>
 
-<footer class="footer">
-  <div class="footer-inner">
-    <span>Учбові матеріали</span>
-    <span>Оновлено: 2026</span>
-  </div>
-</footer>
-<script src="script.js"></script>
-<script>
-  function applySavedTheme() {
-    var currentTheme = localStorage.getItem("theme");
-    var btnText = document.getElementById("theme-text");
-    var btnEmoji = document.getElementById("theme-emoji");
-    if (currentTheme === "dark") {
-      document.body.classList.add("dark-theme");
-      if (btnText) btnText.innerText = "Темний";
-      if (btnEmoji) btnEmoji.innerText = "☀️";
+  <script>
+    // ─── THEME TOGGLE ───────────────────────────────────────
+    const btn = document.getElementById('themeBtn');
+
+    function applySavedTheme() {
+      const currentTheme = localStorage.getItem('theme');
+      if (currentTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        if (btn) btn.textContent = '☀️';
+      } else {
+        document.body.classList.remove('dark-theme');
+        if (btn) btn.textContent = '🌙';
+      }
     }
-  }
 
-  function toggleTheme() {
-    document.body.classList.toggle("dark-theme");
-    var isDark = document.body.classList.contains("dark-theme");
-    localStorage.setItem("theme", isDark ? "dark" : "light");
-    
-    document.querySelectorAll("#theme-text").forEach(el => el.innerText = isDark ? "Темний" : "Світлий");
-    document.querySelectorAll("#theme-emoji").forEach(el => el.innerText = isDark ? "☀️" : "🌙");
-  }
-  
-  applySavedTheme();
-</script>
+    if (btn) {
+      btn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-theme');
+        const isDark = document.body.classList.contains('dark-theme');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        btn.textContent = isDark ? '☀️' : '🌙';
+      });
+    }
+
+    // Ініціалізація теми при завантаженні
+    applySavedTheme();
+
+    // Навігаційне активне підсвічування для цієї сторінки
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      if (a.getAttribute('href') === 'materials.html') a.classList.add('active');
+      else a.classList.remove('active');
+    });
+  </script>
 </body>
 </html>
