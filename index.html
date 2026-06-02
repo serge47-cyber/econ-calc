@@ -21,6 +21,35 @@
   --shadow:0 18px 45px rgba(34,50,74,.11);
   --r:8px;
 }
+body.dark-theme {
+  --bg: #0A0D14 !important;
+  --paper: #111520 !important;
+  --ink: #F4F1EC !important;
+  --muted: #9A95A8 !important;
+  --line: rgba(255, 255, 255, 0.08) !important;
+  --brand: #3ECFAA !important;
+  --brand2: #D4A843 !important;
+  --deep: #F4F1EC !important;
+  --soft: #181D2C !important;
+}
+
+/* Фікс верхньої білої плашки навігації */
+body.dark-theme .top {
+  background: rgba(17, 21, 32, 0.95) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Фікс тла вбудованих калькуляторів-тренажерів */
+body.dark-theme .mini-calc-card,
+body.dark-theme div[style*="background: var(--bg2)"] {
+  background: #181D2C !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+body.dark-theme input {
+  background: #0A0D14 !important;
+  color: #F4F1EC !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
 body{margin:0;font-family:Arial,"Helvetica Neue",sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
 a{color:inherit}
 .top{border-bottom:1px solid var(--line);background:rgba(255,253,248,.92);position:sticky;top:0;z-index:10;backdrop-filter:blur(10px)}
@@ -82,16 +111,20 @@ h2{font-size:28px;line-height:1.15;margin:0;color:var(--deep)}
 </style>
 </head>
 <body>
-<header class="top">
+<div class="top">
   <div class="top-inner">
-    <a class="brand" href="index.html">Економіка будівництва</a>
-    <nav class="nav" aria-label="Основна навігація">
-      <a href="materials.html">Учбові матеріали</a>
-      <a href="economic-tasks.html">Економічні задачі</a>
-      <a href="#development">Розвиток сайту</a>
+    <a href="index.html" class="brand">Економіка будівництва</a>
+    <nav class="nav" style="display: flex; align-items: center; gap: 12px;">
+      <a href="index.html" id="nav-link-home" style="font-weight: 700; border-bottom: 2px solid var(--brand);">Головна</a>
+      <a href="materials.html" id="nav-link-materials">Учбові матеріали</a>
+      <a href="economic-tasks.html" id="nav-link-tasks">Лабораторія розрахунків</a>
+      
+      <button id="theme-toggle-btn" onclick="toggleTheme()" style="background: var(--soft); color: var(--ink); border: 1px solid var(--line); border-radius: 20px; padding: 4px 12px; cursor: pointer; font-size: 12px; display: flex; align-items: center; gap: 6px; font-weight: 600; margin-left: 8px; outline: none;">
+        <span id="theme-text">Світлий</span> <span id="theme-emoji">🌙</span>
+      </button>
     </nav>
   </div>
-</header>
+</div>
 
 <main>
   <section class="hero">
@@ -162,5 +195,28 @@ h2{font-size:28px;line-height:1.15;margin:0;color:var(--deep)}
     <span>Матеріали оновлюватимуся по мірі розвитку проєкту</span>
   </div>
 </footer>
+<script>
+  function applySavedTheme() {
+    var currentTheme = localStorage.getItem("theme");
+    var btnText = document.getElementById("theme-text");
+    var btnEmoji = document.getElementById("theme-emoji");
+    if (currentTheme === "dark") {
+      document.body.classList.add("dark-theme");
+      if (btnText) btnText.innerText = "Темний";
+      if (btnEmoji) btnEmoji.innerText = "☀️";
+    }
+  }
+
+  function toggleTheme() {
+    document.body.classList.toggle("dark-theme");
+    var isDark = document.body.classList.contains("dark-theme");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+    
+    document.querySelectorAll("#theme-text").forEach(el => el.innerText = isDark ? "Темний" : "Світлий");
+    document.querySelectorAll("#theme-emoji").forEach(el => el.innerText = isDark ? "☀️" : "🌙");
+  }
+  
+  applySavedTheme();
+</script>
 </body>
 </html>

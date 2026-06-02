@@ -8,14 +8,126 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#0A0D14;--bg2:#111520;--bg3:#181D2C;--bg4:#1E2436;
-  --line:rgba(255,255,255,0.07);--line2:rgba(255,255,255,0.13);
-  --gold:#D4A843;--gold2:#F0C96A;--gold-dim:rgba(212,168,67,0.12);
-  --teal:#3ECFAA;--red:#E05252;--blue:#5B9CF6;--purple:#A78BFA;
-  --white:#F4F1EC;--mid:#9A95A8;--muted:#5A5669;
-  --fd:'Fraunces',Georgia,serif;--fb:'DM Sans',sans-serif;--fm:'DM Mono',monospace;
-  --r:10px;--rl:16px;
+:root {
+  /* Світла тема (Максимальна читабельність) */
+  --bg: #FAF9F5;          
+  --bg2: #F0EDE6;         
+  --bg3: #E5E1D8;         
+  --bg4: #DAD5C9;         
+  --line: rgba(0, 0, 0, 0.12);   
+  --line2: rgba(0, 0, 0, 0.2);
+  --gold: #5C4308;        /* Глибоке, темне золото для залізобетонного контрасту заголовків */
+  --gold2: #7A590C;
+  --gold-dim: rgba(92, 67, 8, 0.06);
+  --teal: #006650;        /* Насичений темний смарагдовий */
+  --red: #A62424;         
+  --blue: #114B9A;        
+  --purple: #4C328C;      
+  --white: #0A0B0D;       /* Глибокий вугільно-чорний колір для всього головного коду й тексту */
+  --white-f: #0A0B0D;
+  --mid: #2B2D33;         /* Чіткий темний графіт для підзаголовків та описів (замість сірого) */
+  --muted: #565961;       /* Чіткий темно-сірий для підказок та назв слайдерів */
+  --fd: 'Fraunces', Georgia, serif;
+  --fb: 'DM Sans', sans-serif;
+  --fm: 'DM Mono', monospace;
+  --r: 10px;
+  --rl: 16px;
+}
+
+body.dark-theme {
+  /* Темна преміум тема (активується через клас) */
+  --bg: #0A0D14;
+  --bg2: #111520;
+  --bg3: #181D2C;
+  --bg4: #1E2436;
+  --line: rgba(255, 255, 255, 0.07);
+  --line2: rgba(255, 255, 255, 0.13);
+  --gold: #D4A843;
+  --gold2: #F0C96A;
+  --gold-dim: rgba(212, 168, 67, 0.12);
+  --teal: #3ECFAA;
+  --red: #E05252;
+  --blue: #5B9CF6;
+  --purple: #A78BFA;
+  --white: #F4F1EC;       /* Світлий текст для темної теми */
+  --white-f: #F4F1EC;
+  --mid: #9A95A8;
+  --muted: #5A5669;
+}
+
+/* ==========================================
+   ФІКСИ КОНТРАСТУ ДЛЯ СВІТЛОЇ ТЕМИ (ЧИТАБЕЛЬНІСТЬ)
+   ========================================== */
+body:not(.dark-theme) {
+  color: var(--white) !important;
+}
+
+/* 1. Очищення та затемнення колонтитула */
+body:not(.dark-theme) .hdr-kick {
+  color: #4A3B12 !important; /* Глибоке палене золото замість блідого */
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+/* 2. Назви всіх розділів та неактивні вкладки (робимо чіткими графітовими) */
+body:not(.dark-theme) .hdr-tags button,
+body:not(.dark-theme) .hdr-tags a,
+body:not(.dark-theme) button,
+body:not(.dark-theme) [class*="tab"],
+body:not(.dark-theme) [class*="nav"] {
+  color: #2B2D33 !important; /* Темний насичений колір замість сірого */
+  opacity: 1 !important;
+}
+
+/* Активні вкладки залишаємо максимально чорними */
+body:not(.dark-theme) .active,
+body:not(.dark-theme) [class*="active"] {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+/* 3. Зелені числа в таблицях (робимо глибоким лісовим зеленим на світлому тлі) */
+body:not(.dark-theme) td, 
+body:not(.dark-theme) th {
+  color: #0A0B0D !important;
+}
+
+/* 1. Напис "РОЗБІР ПРИКЛАДУ" (замість невидимого неонового робимо глибокий лісовий зелений) */
+body:not(.dark-theme) [style*="color: rgb(62, 207, 170)"],
+body:not(.dark-theme) [style*="color: #3ecfaa"],
+body:not(.dark-theme) [style*="color: var(--teal)"],
+body:not(.dark-theme) .text-teal,
+body:not(.dark-theme) .example-title {
+  color: #004D3D !important;
+  opacity: 1 !important;
+  font-weight: 700 !important;
+}
+
+/* 2. Легенда та перемикачі графіків ("Складні %", "Прості %") */
+body:not(.dark-theme) .legend,
+body:not(.dark-theme) .toggle-label,
+body:not(.dark-theme) label,
+body:not(.dark-theme) .chart-legend span {
+  color: #1A1D24 !important;
+  opacity: 1 !important;
+  font-weight: 600 !important;
+}
+
+/* 3. Технічні підписи "НАРОЩЕННЯ", "ДИСКОНТУВАННЯ" та назви слайдерів (PV, R, N) */
+body:not(.dark-theme) [style*="letter-spacing"],
+body:not(.dark-theme) .card-label,
+body:not(.dark-theme) .slider-title,
+body:not(.dark-theme) small {
+  color: #3A3D45 !important; /* Насичений графіт замість напівпрозорого золота/сірого */
+  opacity: 1 !important;
+  font-weight: 600 !important;
+}
+
+/* 4. Текст всередині світлих карток параметрів (праворуч від формул) */
+body:not(.dark-theme) .formula-vars,
+body:not(.dark-theme) .var-label {
+  color: #1A1D24 !important;
+  opacity: 1 !important;
 }
 body{font-family:var(--fb);background:var(--bg);color:var(--white);min-height:100vh;font-size:14px;line-height:1.6}
 .site-home{position:fixed;left:18px;bottom:18px;z-index:900;display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;border:1px solid var(--line2);background:rgba(17,21,32,.92);color:var(--white);font-family:var(--fb);font-size:13px;text-decoration:none;box-shadow:0 12px 34px rgba(0,0,0,.28);backdrop-filter:blur(8px)}
@@ -57,7 +169,7 @@ button.tag:hover{color:var(--white);border-color:var(--line2)}
 .st em{font-style:italic;font-weight:300;color:var(--gold2)}
 .sd{font-size:13px;color:var(--mid);font-weight:300;line-height:1.7}
 
-.help-btn{font-family:var(--fm);font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:8px 16px;border-radius:100px;border:1px solid rgba(91,156,246,.35);color:var(--blue);background:rgba(91,156,246,.07);cursor:pointer;transition:all .2s;white-space:nowrap;margin-top:6px}
+.help-btn{font-family:var(--fm);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px 16px;border-radius:100px;border:1px solid rgba(91,156,246,.35);color:var(--blue);background:rgba(91,156,246,.07);cursor:pointer;transition:all .2s;white-space:nowrap;margin-top:6px}
 .help-btn:hover{background:rgba(91,156,246,.15);border-color:rgba(91,156,246,.6)}
 
 .fml{background:var(--bg3);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:var(--r);padding:20px 24px;margin-bottom:28px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start}
@@ -199,6 +311,15 @@ select option{background:var(--bg3)}
 .modal-body .mf{font-family:var(--fd);font-size:16px;font-weight:300;color:var(--white);background:var(--bg4);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:var(--r);padding:12px 16px;margin:12px 0;letter-spacing:-.2px}
 .modal-body code{font-family:var(--fm);font-size:12px;color:var(--gold2);background:var(--gold-dim);padding:1px 7px;border-radius:4px}
 .modal-body .note{background:rgba(212,168,67,.07);border-radius:var(--r);padding:12px 16px;border-left:3px solid var(--gold);color:#D4A843;font-size:13px;margin-top:16px}
+
+/* ГЛОБАЛЬНЕ ВИДІЛЕННЯ АКТИВНОЇ ПОЗИЦІЇ СТУДЕНТА */
+.active, 
+[class*="active"],
+.tag[style*="opacity: 1"],
+.hdr-tags button.active {
+  font-weight: 700 !important;
+  letter-spacing: normal; /* Щоб текст не роз'їжджався при жирності */
+}
 </style>
 </head>
 <body>
@@ -215,11 +336,27 @@ select option{background:var(--bg3)}
   </div>
 </div>
 
+<div class="site-main-nav" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 40px; background: var(--bg2); border-bottom: 1px solid var(--line2); font-family: var(--fb); font-size: 14px; position: sticky; top: 0; z-index: 9999;">
+  <div style="font-weight: 700; color: var(--gold); font-family: var(--fd); font-size: 16px; letter-spacing: -0.3px;">Економіка будівництва</div>
+  <div style="display: flex; align-items: center; gap: 2rem;">
+    <a href="index.html" style="color: var(--mid); text-decoration: none; font-weight: 500; transition: color 0.2s;">Головна</a>
+    <a href="materials.html" style="color: var(--mid); text-decoration: none; font-weight: 500; transition: color 0.2s;">Учбові матеріали</a>
+    <a href="economic-tasks.html" style="color: var(--white); text-decoration: none; font-weight: 700; border-bottom: 2px solid var(--gold); padding-bottom: 4px;">Лабораторія розрахунків</a>
+    
+    <div style="display: flex; align-items: center; gap: 8px; margin-left: 1rem; border-left: 1px solid var(--line2); padding-left: 1.5rem;">
+      <span style="color: var(--muted); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Режим:</span>
+      <button id="theme-toggle-btn" onclick="toggleTheme()" style="background: var(--bg3); color: var(--white); border: 1px solid var(--line2); border-radius: 20px; padding: 5px 14px; cursor: pointer; font-size: 13px; display: flex; align-items: center; gap: 6px; font-weight: 600; transition: all 0.2s; outline: none;">
+        <span id="theme-text">Світлий</span> <span id="theme-emoji">🌙</span>
+      </button>
+    </div>
+  </div>
+</div>
+
 <header class="hdr">
   <div>
-    <div class="hdr-kick">Кафедра економіки будівництва КНУБА · Інтерактивний посібник · Викладач Шапошнікова І.О.</div>
-    <h1 class="hdr-t">Економічні<br><em>задачі</em></h1>
-    <p class="hdr-sub">Інтерактивний калькулятор для студентів вищих навчальних закладів України — бакалаврат та магістратура</p>
+    <div class="hdr-kick">Кафедра економіки будівництва КНУБА · Інтерактивний посібник</div>
+    <h1 class="hdr-t">Лабораторія фінансово-економічних<br><em>розрахунків</em></h1>
+    <p class="hdr-sub">Комплексне інженерно-аналітичне середовище: 4 стратегічні напрямки фінансового моделювання, гнучкі розрахункові вкладки та експрес-методологія до кожної теми.</p>
     <div class="hdr-tags">
       <button class="tag g" type="button" onclick="goTopNav('fm')">Фінансова математика</button>
       <button class="tag" type="button" onclick="goTopNav('ia')">Інвестиційний аналіз</button>
@@ -3993,6 +4130,36 @@ Object.assign(MODAL_DATA,{
 /* ──────────────────── INIT ─────────────────── */
 applyRouteFromHash();
 window.addEventListener('hashchange',applyRouteFromHash);
+</script>
+  <script src="script.js"></script>
+
+<script>
+  function applySavedTheme() {
+    var currentTheme = localStorage.getItem("theme");
+    var btnText = document.getElementById("theme-text");
+    var btnEmoji = document.getElementById("theme-emoji");
+    if (currentTheme === "dark") {
+      document.body.classList.add("dark-theme");
+      if (btnText) btnText.innerText = "Темний";
+      if (btnEmoji) btnEmoji.innerText = "☀️";
+    }
+  }
+  
+  function toggleTheme() {
+    document.body.classList.toggle("dark-theme");
+    var btnText = document.getElementById("theme-text");
+    var btnEmoji = document.getElementById("theme-emoji");
+    if (document.body.classList.contains("dark-theme")) {
+      localStorage.setItem("theme", "dark");
+      if (btnText) btnText.innerText = "Темний";
+      if (btnEmoji) btnEmoji.innerText = "☀️";
+    } else {
+      localStorage.setItem("theme", "light");
+      if (btnText) btnText.innerText = "Світлий";
+      if (btnEmoji) btnEmoji.innerText = "🌙";
+    }
+  }
+  applySavedTheme();
 </script>
 </body>
 </html>
