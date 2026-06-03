@@ -589,33 +589,34 @@
   </footer>
 
   <script>
-    // ─── THEME TOGGLE ───────────────────────────────────────
-    const btn = document.getElementById('themeBtn');
-    const textSpan = document.getElementById('theme-text');
-    const emojiSpan = document.getElementById('theme-emoji');
-
+       // ─── THEME TOGGLE ───────────────────────────────────────
     function applySavedTheme() {
       const currentTheme = localStorage.getItem('theme');
+      const textSpan = document.getElementById('theme-text');
+      const emojiSpan = document.getElementById('theme-emoji');
       if (currentTheme === 'dark') {
         document.body.classList.add('dark-theme');
         if (textSpan) textSpan.textContent = 'Темний';
         if (emojiSpan) emojiSpan.textContent = '☀️';
+      }
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('dark-theme');
+      const isDark = document.body.classList.contains('dark-theme');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      const textSpan = document.getElementById('theme-text');
+      const emojiSpan = document.getElementById('theme-emoji');
+      if (isDark) {
+        if (textSpan) textSpan.textContent = 'Темний';
+        if (emojiSpan) emojiSpan.textContent = '☀️';
       } else {
-        document.body.classList.remove('dark-theme');
         if (textSpan) textSpan.textContent = 'Світлий';
         if (emojiSpan) emojiSpan.textContent = '🌙';
       }
     }
 
-    if (btn) {
-      btn.addEventListener('click', () => {
-        document.body.classList.toggle('dark-theme');
-        const isDark = document.body.classList.contains('dark-theme');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        if (textSpan) textSpan.textContent = isDark ? 'Темний' : 'Світлий';
-        if (emojiSpan) emojiSpan.textContent = isDark ? '☀️' : '🌙';
-      });
-    }
+    
 
     // Ініціалізація при відкритті сторінки
     applySavedTheme();

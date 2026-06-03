@@ -136,15 +136,6 @@ function calculateConstructionProject() {
     }
   `;
   document.head.appendChild(styleTag);
-
-  // 2. Функція ініціалізації перемикача після завантаження DOM
-  
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initThemeToggle);
-  } else {
-    initThemeToggle();
-  }
 })();
 
 // Глобальна автоматична темна тема для index.html та materials.html
