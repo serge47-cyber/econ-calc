@@ -312,6 +312,21 @@ select option{background:var(--bg3)}
 .modal-body code{font-family:var(--fm);font-size:12px;color:var(--gold2);background:var(--gold-dim);padding:1px 7px;border-radius:4px}
 .modal-body .note{background:rgba(212,168,67,.07);border-radius:var(--r);padding:12px 16px;border-left:3px solid var(--gold);color:#D4A843;font-size:13px;margin-top:16px}
 
+/* ── TOP NAV ── */
+.site-main-nav{display:flex;justify-content:space-between;align-items:center;padding:14px 40px;background:var(--bg2);border-bottom:1px solid var(--line2);font-family:var(--fb);font-size:14px;position:sticky;top:0;z-index:9999}
+.nav-brand{font-weight:700;color:var(--gold);font-family:var(--fd);font-size:16px;letter-spacing:-0.3px}
+.nav-brand span{color:var(--muted);font-family:var(--fb);font-weight:400;margin-left:6px;font-size:13px}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{color:var(--mid);font-weight:500;transition:color .2s;text-decoration:none}
+.nav-links a:hover{color:var(--white)}
+.nav-links a.active{color:var(--white);font-weight:700;border-bottom:2px solid var(--gold);padding-bottom:4px}
+.nav-right{display:flex;align-items:center;gap:8px;margin-left:1rem;border-left:1px solid var(--line2);padding-left:1.5rem}
+.nav-right span{color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.theme-btn{background:var(--bg3);color:var(--white);border:1px solid var(--line2);border-radius:20px;padding:5px 14px;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px;font-weight:600;transition:all .2s;outline:none;font-family:var(--fb)}
+.theme-btn:hover{border-color:var(--gold);color:var(--gold)}
+@media(max-width:700px){.site-main-nav{padding:14px 20px;flex-wrap:wrap;gap:10px}.nav-links{gap:1rem}.nav-right{margin-left:0;padding-left:0;border-left:none}}
+@media(max-width:480px){.site-main-nav{flex-direction:column;align-items:center;gap:12px;padding:14px 16px}.nav-brand span{display:none}.nav-links{justify-content:center;width:100%;gap:14px}.nav-right{border-left:none;padding-left:0;margin-left:0;width:100%;justify-content:center;margin-top:4px}.theme-btn{padding:4px 12px;font-size:12px}}
+
 /* ГЛОБАЛЬНЕ ВИДІЛЕННЯ АКТИВНОЇ ПОЗИЦІЇ СТУДЕНТА */
 .active, 
 [class*="active"],
@@ -336,21 +351,20 @@ select option{background:var(--bg3)}
   </div>
 </div>
 
-<div class="site-main-nav" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 40px; background: var(--bg2); border-bottom: 1px solid var(--line2); font-family: var(--fb); font-size: 14px; position: sticky; top: 0; z-index: 9999;">
-  <div style="font-weight: 700; color: var(--gold); font-family: var(--fd); font-size: 16px; letter-spacing: -0.3px;">Економіка будівництва</div>
-  <div style="display: flex; align-items: center; gap: 2rem;">
-    <a href="index.html" style="color: var(--mid); text-decoration: none; font-weight: 500; transition: color 0.2s;">Головна</a>
-    <a href="materials.html" style="color: var(--mid); text-decoration: none; font-weight: 500; transition: color 0.2s;">Учбові матеріали</a>
-    <a href="economic-tasks.html" style="color: var(--white); text-decoration: none; font-weight: 700; border-bottom: 2px solid var(--gold); padding-bottom: 4px;">Лабораторія розрахунків</a>
-    
-    <div style="display: flex; align-items: center; gap: 8px; margin-left: 1rem; border-left: 1px solid var(--line2); padding-left: 1.5rem;">
-      <span style="color: var(--muted); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Режим:</span>
-      <button id="theme-toggle-btn" onclick="toggleTheme()" style="background: var(--bg3); color: var(--white); border: 1px solid var(--line2); border-radius: 20px; padding: 5px 14px; cursor: pointer; font-size: 13px; display: flex; align-items: center; gap: 6px; font-weight: 600; transition: all 0.2s; outline: none;">
-        <span id="theme-text">Світлий</span> <span id="theme-emoji">🌙</span>
-      </button>
-    </div>
+<nav class="site-main-nav">
+  <div class="nav-brand">Економіка будівництва<span>КНУБА</span></div>
+  <div class="nav-links">
+    <a href="index.html">Головна</a>
+    <a href="materials.html">Учбові матеріали</a>
+    <a href="economic-tasks.html" class="active">Лабораторія розрахунків</a>
   </div>
-</div>
+  <div class="nav-right">
+    <span>Режим:</span>
+    <button class="theme-btn" id="theme-toggle-btn" onclick="toggleTheme()">
+      <span id="theme-text">Світлий</span> <span id="theme-emoji">🌙</span>
+    </button>
+  </div>
+</nav>
 
 <header class="hdr">
   <div>
