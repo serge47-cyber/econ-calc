@@ -530,15 +530,14 @@ function openQuiz(lectureNum, event) {
     event.stopPropagation(); // Запобігає переходу по посиланню лекції
   }
   
-  // Гнучка перевірка: шукаємо як у window, так і просто глобальну змінну
+  // Гнучка перевірка бази даних
   const activeQuizData = window.quizData || (typeof quizData !== 'undefined' ? quizData : null);
   
   if (!activeQuizData) {
-    alert("Помилка: База тестів не знайдена! Перевірте, чи лежить файл `quiz-data.js` у папці проєкту поруч із `materials.html`.");
+    alert("Помилка: База тестів не знайдена!");
     return;
   }
   
-  // Автоматично адаптуємося під будь-яку структуру масиву чи об'єкта, яку видав агент
   if (Array.isArray(activeQuizData)) {
     currentQuestions = activeQuizData.filter(q => q.lecture === lectureNum || q.lectureId === lectureNum);
   } else if (activeQuizData[lectureNum]) {
@@ -549,6 +548,10 @@ function openQuiz(lectureNum, event) {
     alert("Тести для Лекції " + lectureNum + " зараз знаходяться в стадії розробки методистами.");
     return;
   }
+  
+  // 🔥 РЯТІВНИЙ ФІКС: Примусово повертаємо кнопці функцію перемикання питань
+  const btn = document.getElementById('quiz-action-btn');
+  btn.onclick = nextQuizQuestion;
   
   document.getElementById('quiz-header').innerText = "Тестування · Лекція 0" + lectureNum;
   currentQIdx = 0;
