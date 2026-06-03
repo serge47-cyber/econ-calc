@@ -427,8 +427,20 @@ select option{background:var(--bg3)}
     <div class="fml-vs"><div class="fml-v"><code>EAR</code><span>ефективна річна ставка</span></div><div class="fml-v"><code>Rule 72</code><span>72 / r% ≈ роки подвоєння</span></div></div>
   </div>
   <div class="ctrls">
-    <div class="ctrl"><div class="cl"><span class="cs">PV</span>Початкова сума</div><div class="cr"><input type="range" id="c_pv" min="1000" max="500000" step="1000" value="50000" oninput="ci()"><span class="val" id="v_pv">50 000 ₴</span></div></div>
-    <div class="ctrl"><div class="cl"><span class="cs">r</span>Річна ставка</div><div class="cr"><input type="range" id="c_r" min="1" max="30" step=".5" value="12" oninput="ci()"><span class="val" id="v_r">12%</span></div></div>
+    <div class="ctrl">
+      <div class="cl"><span class="cs">PV</span>Початкова сума</div>
+      <div class="cr" style="display: flex; align-items: center; gap: 8px; width: 100%;">
+        <input type="range" id="c_pv" min="1000" max="500000" step="1000" value="50000" oninput="syncInput('c_pv', 'c_pv_num'); ci()" style="flex: 1;">
+        <input type="number" id="c_pv_num" min="1000" max="500000" value="50000" oninput="syncSlider('c_pv_num', 'c_pv'); ci()" style="width: 90px; margin-top: 0; padding: 4px 8px; background: var(--bg4); color: var(--white); border: 1px solid var(--line2); border-radius: var(--r); font-family: var(--fb);">
+      </div>
+    </div>
+    <div class="ctrl">
+      <div class="cl"><span class="cs">r</span>Річна ставка (%)</div>
+      <div class="cr" style="display: flex; align-items: center; gap: 8px; width: 100%;">
+        <input type="range" id="c_r" min="1" max="30" step=".5" value="12" oninput="syncInput('c_r', 'c_r_num'); ci()" style="flex: 1;">
+        <input type="number" id="c_r_num" min="1" max="30" step="0.5" value="12" oninput="syncSlider('c_r_num', 'c_r'); ci()" style="width: 70px; margin-top: 0; padding: 4px 8px; background: var(--bg4); color: var(--white); border: 1px solid var(--line2); border-radius: var(--r); font-family: var(--fb);">
+      </div>
+    </div>
     <div class="ctrl"><div class="cl"><span class="cs">n</span>Термін (роки)</div><div class="cr"><input type="range" id="c_n" min="1" max="30" step="1" value="5" oninput="ci()"><span class="val" id="v_n">5 р.</span></div></div>
     <div class="ctrl"><div class="cl"><span class="cs">m</span>Нарахування на рік</div><select id="c_m" onchange="ci()"><option value="1">1 — щорічно</option><option value="2">2 — піврічно</option><option value="4" selected>4 — щоквартально</option><option value="12">12 — щомісяця</option><option value="365">365 — щодня</option></select></div>
   </div>
@@ -2806,25 +2818,49 @@ function showFA(n,opts={}){
 const charts={};
 function mkChart(id,cfg){if(charts[id])charts[id].destroy();charts[id]=new Chart(document.getElementById(id),cfg);return charts[id];}
 
+// Допоміжні функції двостороннього зв'язку (загальні для всього сайту)
+function syncInput(sliderId, inputId) {
+  const slider = document.getElementById(sliderId);
+  const input = document.getElementById(inputId);
+  if (slider && input) input.value = slider.value;
+}
+
+function syncSlider(inputId, sliderId) {
+  const input = document.getElementById(inputId);
+  const slider = document.getElementById(sliderId);
+  if (!input || !slider) return;
+  let val = parseFloat(input.value);
+  if (isNaN(val)) return;
+  // Жорстке обмеження вводу відповідно до встановлених лімітів повзунка
+  val = Math.max(parseFloat(slider.min), Math.min(parseFloat(slider.max), val));
+  slider.value = val;
+}
+
 /* ══════════════════════════════════════ TAB 1 — CI ══════════════════ */
 function ci(){
+  // Синхронізація числових полів вводу з поточними положеннями повзунків при кожнім прорахунку
+  if(document.getElementById('c_pv_num')) {
+    document.getElementById('c_pv_num').value = document.getElementById('c_pv').value;
+    document.getElementById('c_r_num').value = document.getElementById('c_r').value;
+  }
+
   const pv=+document.getElementById('c_pv').value,r=+document.getElementById('c_r').value/100;
-  const n=+document.getElementById('c_n').value,m=+document.getElementById('c_m').value;
-  document.getElementById('v_pv').textContent=f(pv)+' ₴';
-  document.getElementById('v_r').textContent=(r*100).toFixed(1)+'%';
-  document.getElementById('v_n').textContent=n+' р.';
+  const n=Math.min(100, Math.max(0, +document.getElementById('c_n').value)), m=Math.max(1, +document.getElementById('c_m').value || 1);
+  if(document.getElementById('v_pv')) document.getElementById('v_pv').textContent=f(pv)+' ₴';
+  if(document.getElementById('v_r')) document.getElementById('v_r').textContent=(r*100).toFixed(1)+'%';
+  if(document.getElementById('v_n')) document.getElementById('v_n').textContent=n+' р.';
   const fv=pv*Math.pow(1+r/m,n*m),ear=Math.pow(1+r/m,m)-1;
   document.getElementById('r_fv').textContent=f(fv);
   document.getElementById('r_int').textContent=f(fv-pv);
   document.getElementById('r_ear').textContent=(ear*100).toFixed(2)+'%';
-  document.getElementById('r_mult').textContent=(fv/pv).toFixed(3)+'×';
-  document.getElementById('r_r72').textContent=(72/(r*100)).toFixed(1)+' р.';
+  document.getElementById('r_mult').textContent=pv===0?'1.000×':(fv/pv).toFixed(3)+'×';
+  document.getElementById('r_r72').textContent=r===0?'—':(72/(r*100)).toFixed(1)+' р.';
   const c='50px 1fr 1fr 1fr 1fr';
   let h=`<div class="th" style="grid-template-columns:${c}"><span>Рік</span><span>Початок</span><span>Нараховано</span><span>Кінець</span><span>Зріст ×</span></div>`;
   let bal=pv;
-  for(let y=1;y<=Math.min(n,12);y++){
+  for(let y=1;y<=n;y++){
     const nb=bal*Math.pow(1+r/m,m);
-    h+=`<div class="tr${y===n?' hl':''}" style="grid-template-columns:${c}"><span>${y}</span><span class="n">${f(bal)} ₴</span><span class="n g">+${f(nb-bal)} ₴</span><span class="n">${f(nb)} ₴</span><span class="n b">${(nb/pv).toFixed(3)}×</span></div>`;
+    h+=`<div class="tr${y===n?' hl':''}" style="grid-template-columns:${c}"><span>${y}</span><span class="n">${f(bal)} ₴</span><span class="n g">+${f(nb-bal)} ₴</span><span class="n">${f(nb)} ₴</span><span class="n b">${pv===0?'1.000':(nb/pv).toFixed(3)}×</span></div>`;
     bal=nb;
   }
   document.getElementById('t_ci').innerHTML=h;

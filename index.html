@@ -44,14 +44,14 @@
       --border:      rgba(255, 255, 255, 0.08);
       --border2:     rgba(255, 255, 255, 0.15);
       --text:        #F4F1EC;
-      --text2:       #9A95A8;
-      --text3:       #5A5669;
+      --text2:       #A8A3B5;        /* Покращений контраст для кращої читабельності */
+      --text3:       #8B869C;        /* Покращений контраст для допоміжного тексту (WCAG AA) */
       --accent:      #D4A843;        /* Ярке золото для темного тла */
       --accent-bg:   rgba(212, 168, 67, 0.1);
       --accent2:     #3ECFAA;        /* М'який neon зелений */
       --accent2-bg:  rgba(62, 207, 170, 0.1);
-      --warn:        #E05252;
-      --warn-bg:     rgba(224, 82, 82, 0.1);
+      --warn:        #FF6B6B;        /* Яскравіший коралово-червоний для кращого контрасту */
+      --warn-bg:     rgba(255, 107, 107, 0.1);
       --shadow:      0 1px 3px rgba(0,0,0,.3), 0 2px 8px rgba(0,0,0,.2);
       --shadow-md:   0 2px 8px rgba(0,0,0,.4), 0 4px 20px rgba(0,0,0,.25);
     }
@@ -267,6 +267,67 @@
       .hero-stats { flex-direction: row; justify-content: space-around; min-width: unset; }
       .roadmap { grid-template-columns: 1fr; }
       .topics-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 520px) {
+      .nav-brand span { display: none; }
+    }
+    @media (max-width: 480px) {
+      .nav {
+        height: auto;
+        padding: 10px 16px;
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+      }
+      .nav-brand {
+        margin-right: 0;
+        text-align: center;
+        font-size: 13.5px;
+      }
+      .nav-links {
+        justify-content: center;
+        width: 100%;
+        gap: 4px;
+      }
+      .nav-links a {
+        padding: 5px 8px;
+        font-size: 12.5px;
+      }
+      .theme-btn {
+        position: absolute;
+        right: 12px;
+        top: 8px;
+      }
+      .hero-stats {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        gap: 14px;
+        padding: 16px;
+      }
+      .stat-item {
+        align-items: center;
+      }
+      .lecture-row {
+        flex-wrap: wrap;
+        padding: 12px 14px;
+        gap: 8px 12px;
+      }
+      .lec-num {
+        flex: 0 0 20px;
+        text-align: left;
+      }
+      .lec-body {
+        flex: 1 1 160px;
+      }
+      .lec-badge {
+        order: 3;
+        margin-left: 32px;
+      }
+      .lec-arrow {
+        order: 4;
+        margin-left: auto;
+      }
     }
     @media (max-width: 420px) {
       .topics-grid { grid-template-columns: 1fr; }

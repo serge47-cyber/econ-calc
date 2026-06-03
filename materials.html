@@ -44,13 +44,13 @@ body.dark-theme {
   --gold2:#F0C96A;
   --gold-dim:rgba(212,168,67,0.12);
   --teal:#3ECFAA;
-  --red:#E05252;
+  --red:#FF6B6B;  /* Яскравіший коралово-червоний для відповідності WCAG AA */
   --blue:#5B9CF6;
   --purple:#A78BFA;
   --white:#F4F1EC;
   --white-f:#F4F1EC;
-  --mid:#9A95A8;
-  --muted:#5A5669;
+  --mid:#A8A3B5;    /* Покращений контраст для описів та меню */
+  --muted:#8B869C;  /* Покращений контраст для хлібних крихт, тегів та футера (WCAG AA) */
 }
 body{font-family:var(--fb);background:var(--bg);color:var(--white);min-height:100vh;font-size:14px;line-height:1.6}
 a{text-decoration:none;color:inherit}
@@ -154,6 +154,74 @@ a{text-decoration:none;color:inherit}
 /* ── FOOTER ── */
 .site-footer{margin-top:60px;padding:22px 48px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--muted);font-family:var(--fm)}
 @media(max-width:600px){.site-footer{padding:18px 20px;flex-direction:column;gap:6px;text-align:center}}
+
+/* ── ПОКРАЩЕННЯ АДАПТИВНОСТІ ── */
+@media(max-width:600px){
+  .lecture-card {
+    grid-template-columns: 32px 1fr;
+    padding: 12px 14px;
+    gap: 0 10px;
+  }
+  .lec-num-box {
+    width: 32px;
+    height: 32px;
+    font-size: 11px;
+    margin-top: 0;
+  }
+  .lec-arrow {
+    display: none;
+  }
+}
+@media(max-width:480px){
+  .site-main-nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 10px;
+  }
+  .nav-brand span {
+    display: none;
+  }
+  .nav-links {
+    justify-content: center;
+    width: 100%;
+    gap: 14px;
+  }
+  .nav-right {
+    border-left: none;
+    padding-left: 0;
+    margin-left: 0;
+    width: 100%;
+    justify-content: center;
+    margin-top: 4px;
+  }
+  .theme-btn {
+    padding: 4px 12px;
+    font-size: 12px;
+  }
+  .page-hdr {
+    text-align: center;
+  }
+  .page-sub {
+    margin: 0 auto;
+  }
+  .toc {
+    padding: 16px;
+  }
+}
+@media(max-width:420px) {
+  .lecture-card {
+    grid-template-columns: 1fr;
+    gap: 8px 0;
+  }
+  .lec-num-box {
+    display: none;
+  }
+  .company-tag {
+    font-size: 9px;
+    padding: 1px 6px;
+  }
+}
 </style>
 </head>
 <body>
@@ -217,6 +285,7 @@ a{text-decoration:none;color:inherit}
         <div class="lec-head">
           <span class="lec-title">Проєкти розвитку компанії</span>
           <span class="lec-badge badge-theory">Основи</span>
+          <span class="lec-badge" style="border-color:var(--purple); color:var(--purple); background:rgba(167,139,250,0.07);" onclick="openQuiz(1, event)">📝 Тест</span>
         </div>
         <p class="lec-desc">Роль проєктів у бізнесі, відмінність від операційної діяльності, цілепокладання за SMART та OKR, командна взаємодія.</p>
       </div>
@@ -229,6 +298,7 @@ a{text-decoration:none;color:inherit}
         <div class="lec-head">
           <span class="lec-title">Види проєктів розвитку компанії</span>
           <span class="lec-badge badge-case">Кейс</span>
+          <span class="lec-badge" style="border-color:var(--purple); color:var(--purple); background:rgba(167,139,250,0.07);" onclick="openQuiz(2, event)">📝 Тест</span>
         </div>
         <p class="lec-desc">Класифікація проєктів за змістом, масштабом та методологією — Waterfall і Agile підходи.</p>
         <div class="lec-companies">
@@ -247,6 +317,7 @@ a{text-decoration:none;color:inherit}
         <div class="lec-head">
           <span class="lec-title">Класифікація проєктів (продовження)</span>
           <span class="lec-badge badge-case">Кейс</span>
+          <span class="lec-badge" style="border-color:var(--purple); color:var(--purple); background:rgba(167,139,250,0.07);" onclick="openQuiz(3, event)">📝 Тест</span>
         </div>
         <p class="lec-desc">Моно-, мульти- та мегапроєкти, тривалість та адаптивність до змін зовнішнього середовища.</p>
         <div class="lec-companies">
@@ -262,8 +333,9 @@ a{text-decoration:none;color:inherit}
       <div class="lec-num-box">04</div>
       <div class="lec-body">
         <div class="lec-head">
-          <span class="lec-title">Життєвий цикл та -стратегія</span>
+          <span class="lec-title">Життєвий цикл та стратегія</span>
           <span class="lec-badge badge-strat">Стратегія</span>
+          <span class="lec-badge" style="border-color:var(--purple); color:var(--purple); background:rgba(167,139,250,0.07);" onclick="openQuiz(4, event)">📝 Тест</span>
         </div>
         <p class="lec-desc">6 етапів ЖЦ проєкту, інтеграція в корпоративну стратегію та роль штучного інтелекту в управлінні.</p>
       </div>
@@ -278,6 +350,7 @@ a{text-decoration:none;color:inherit}
         <div class="lec-head">
           <span class="lec-title">Кількісна вимірюваність параметрів проєкту</span>
           <span class="lec-badge badge-case">Кейс</span>
+          <span class="lec-badge" style="border-color:var(--purple); color:var(--purple); background:rgba(167,139,250,0.07);" onclick="openQuiz(5, event)">📝 Тест</span>
         </div>
         <p class="lec-desc">Шість груп параметрів — фінансові, стратегічні, операційні, якість, інноваційні, ESG. Методи KPI, BSC, SMART, бенчмаркінг та сценарне моделювання.</p>
         <div class="lec-companies">
@@ -296,6 +369,7 @@ a{text-decoration:none;color:inherit}
         <div class="lec-head">
           <span class="lec-title">Практичні кроки зі створення проєкту</span>
           <span class="lec-badge badge-theory">Аналіз</span>
+          <span class="lec-badge" style="border-color:var(--purple); color:var(--purple); background:rgba(167,139,250,0.07);" onclick="openQuiz(6, event)">📝 Тест</span>
         </div>
         <p class="lec-desc">SWOT/PEST/VRIO-аналіз, ФЕО з аналізом чутливості, Business Model Canvas, матриця Ансоффа, WBS, RAID-журнал, управління змінами (Kotter 8 кроків).</p>
         <div class="lec-companies">
@@ -314,6 +388,7 @@ a{text-decoration:none;color:inherit}
           <span class="lec-title">Критерії вибору пріоритетних проєктів</span>
           <span class="lec-badge badge-strat">Стратегія</span>
           <span class="lec-badge badge-final">Фінальна</span>
+          <span class="lec-badge" style="border-color:var(--purple); color:var(--purple); background:rgba(167,139,250,0.07);" onclick="openQuiz(7, event)">📝 Тест</span>
         </div>
         <p class="lec-desc">8 критеріїв відбору з вагами, бальна система з розрахунковим прикладом, матриці BCG та GE/McKinsey, реальні опціони, типові помилки і найкращі практики портфельного управління.</p>
       </div>
@@ -392,7 +467,29 @@ a{text-decoration:none;color:inherit}
   <span>Оновлено: 2026</span>
 </footer>
 
+<div id="quiz-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 10000; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+  <div style="background: var(--bg2); border: 1px solid var(--line2); border-radius: var(--rl); width: 90%; max-width: 550px; padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); position: relative; font-family: var(--fb);">
+    <span onclick="closeQuiz()" style="position: absolute; top: 14px; right: 18px; cursor: pointer; font-size: 20px; color: var(--muted); transition: color 0.2s;">&times;</span>
+    <div id="quiz-header" style="font-family: var(--fm); font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 8px;">Лекція</div>
+    <div id="quiz-progress" style="font-size: 12px; color: var(--muted); font-family: var(--fm); margin-bottom: 12px;">Питання 1 з 5</div>
+    
+    <h3 id="quiz-question" style="font-family: var(--fd); font-size: 18px; font-weight: 600; color: var(--white); line-height: 1.3; margin-bottom: 20px;">Текст питання...</h3>
+    
+    <div id="quiz-options" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;"></div>
+    
+    <div id="quiz-explanation-box" style="display: none; background: var(--bg3); border-left: 3px solid var(--gold); border-radius: var(--r); padding: 12px 16px; font-size: 13px; color: var(--mid); margin-bottom: 20px; line-height: 1.6;">
+      <strong id="quiz-result-status" style="display: block; margin-bottom: 4px;">Правильно!</strong>
+      <span id="quiz-explanation-text">Пояснення бізнес-кейсу...</span>
+    </div>
+    
+    <button id="quiz-action-btn" onclick="nextQuizQuestion()" style="width: 100%; background: var(--gold); color: var(--bg); border: none; border-radius: var(--r); padding: 12px; font-weight: 600; font-size: 14px; cursor: pointer; transition: background 0.2s; font-family: var(--fb);">Перевірити відповідь</button>
+  </div>
+</div>
+
+<script src="quiz-data.js"></script>
+
 <script>
+// Логіка Керування Темами
 function applySavedTheme() {
   var currentTheme = localStorage.getItem("theme");
   var btnText = document.getElementById("theme-text");
@@ -418,8 +515,161 @@ function toggleTheme() {
     if (btnEmoji) btnEmoji.innerText = "🌙";
   }
 }
-
 applySavedTheme();
+
+// ІНТЕРАКТИВНИЙ QUIZ ENGINE КНУБА
+let currentQuestions = [];
+let currentQIdx = 0;
+let quizScore = 0;
+let isAnswered = false;
+let selectedOptIdx = null;
+
+function openQuiz(lectureNum, event) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation(); // Запобігає переходу по посиланню лекції
+  }
+  
+  // Гнучка перевірка: шукаємо як у window, так і просто глобальну змінну
+  const activeQuizData = window.quizData || (typeof quizData !== 'undefined' ? quizData : null);
+  
+  if (!activeQuizData) {
+    alert("Помилка: База тестів не знайдена! Перевірте, чи лежить файл `quiz-data.js` у папці проєкту поруч із `materials.html`.");
+    return;
+  }
+  
+  // Автоматично адаптуємося під будь-яку структуру масиву чи об'єкта, яку видав агент
+  if (Array.isArray(activeQuizData)) {
+    currentQuestions = activeQuizData.filter(q => q.lecture === lectureNum || q.lectureId === lectureNum);
+  } else if (activeQuizData[lectureNum]) {
+    currentQuestions = activeQuizData[lectureNum];
+  }
+  
+  if (currentQuestions.length === 0) {
+    alert("Тести для Лекції " + lectureNum + " зараз знаходяться в стадії розробки методистами.");
+    return;
+  }
+  
+  document.getElementById('quiz-header').innerText = "Тестування · Лекція 0" + lectureNum;
+  currentQIdx = 0;
+  quizScore = 0;
+  isAnswered = false;
+  
+  document.getElementById('quiz-modal').style.display = 'flex';
+  renderQuizQuestion();
+}
+
+function closeQuiz() {
+  document.getElementById('quiz-modal').style.display = 'none';
+}
+
+function renderQuizQuestion() {
+  isAnswered = false;
+  selectedOptIdx = null;
+  
+  const q = currentQuestions[currentQIdx];
+  document.getElementById('quiz-progress').innerText = `Питання ${currentQIdx + 1} з ${currentQuestions.length}`;
+  document.getElementById('quiz-question').innerText = q.question || q.q;
+  document.getElementById('quiz-explanation-box').style.display = 'none';
+  
+  const btn = document.getElementById('quiz-action-btn');
+  btn.innerText = "Перевірити відповідь";
+  btn.style.background = "var(--gold)";
+  
+  const optionsContainer = document.getElementById('quiz-options');
+  optionsContainer.innerHTML = '';
+  
+  const opts = q.options || q.o;
+  
+  // Підтримка формату об'єкта {A: "...", B: "..."} з файлу quiz-data.js
+  const optsArray = Array.isArray(opts) ? opts : Object.values(opts);
+  
+  optsArray.forEach((opt, idx) => {
+    const div = document.createElement('div');
+    div.innerText = opt;
+    div.style.cssText = "padding: 12px 14px; background: var(--bg3); border: 1px solid var(--line); border-radius: var(--r); cursor: pointer; font-size: 13.5px; color: var(--white); transition: all 0.2s; font-weight: 400;";
+    
+    div.onmouseover = () => { if(!isAnswered) div.style.borderColor = "var(--gold)"; };
+    div.onmouseout = () => { if(!isAnswered && selectedOptIdx !== idx) div.style.borderColor = "var(--line)"; };
+    
+    div.onclick = () => {
+      if (isAnswered) return;
+      selectedOptIdx = idx;
+      Array.from(optionsContainer.children).forEach(child => child.style.borderColor = "var(--line)");
+      div.style.borderColor = "var(--gold)";
+      div.style.background = "var(--bg4)";
+    };
+    
+    optionsContainer.appendChild(div);
+  });
+}
+
+function nextQuizQuestion() {
+  const q = currentQuestions[currentQIdx];
+  const optionsContainer = document.getElementById('quiz-options');
+  
+  // Отримуємо індекс правильної відповіді (враховуємо як числові, так і літерні варіанти)
+  let correctIdx = q.correct !== undefined ? q.correct : q.a;
+  if (correctIdx === undefined && q.correctAnswer) {
+    const keys = Object.keys(q.options || {});
+    correctIdx = keys.indexOf(q.correctAnswer);
+  }
+  
+  if (!isAnswered) {
+    if (selectedOptIdx === null) {
+      alert("Будь ласка, оберіть один із варіантів відповідей!");
+      return;
+    }
+    
+    isAnswered = true;
+    const isCorrect = selectedOptIdx === correctIdx;
+    if (isCorrect) quizScore++;
+    
+    // Підсвічування результатів колірною матрицею КНУБА
+    Array.from(optionsContainer.children).forEach((child, idx) => {
+      if (idx === correctIdx) {
+        child.style.background = "rgba(62,207,170,0.15)";
+        child.style.borderColor = "var(--teal)";
+        child.style.color = "var(--white)";
+      } else if (idx === selectedOptIdx) {
+        child.style.background = "rgba(224,82,82,0.15)";
+        child.style.borderColor = "var(--red)";
+      }
+    });
+    
+    // Вивід пояснення кейсу
+    const statusBox = document.getElementById('quiz-result-status');
+    statusBox.innerText = isCorrect ? "🎉 Правильно!" : "❌ Не зовсім так";
+    statusBox.style.color = isCorrect ? "var(--teal)" : "var(--red)";
+    
+    document.getElementById('quiz-explanation-text').innerText = q.explanation || q.exp || "Чудовий розбір кейсу!";
+    document.getElementById('quiz-explanation-box').style.display = 'block';
+    
+    const btn = document.getElementById('quiz-action-btn');
+    btn.innerText = (currentQIdx + 1 < currentQuestions.length) ? "Наступне питання →" : "Показати фінальний результат";
+    btn.style.background = "var(--purple)";
+  } else {
+    currentQIdx++;
+    if (currentQIdx < currentQuestions.length) {
+      renderQuizQuestion();
+    } else {
+      // Фінальний екран результатів
+      document.getElementById('quiz-progress').innerText = "Тестування завершено";
+      document.getElementById('quiz-question').innerText = `Ваш результат: ${quizScore} з ${currentQuestions.length} балів!`;
+      
+      let pct = (quizScore / currentQuestions.length) * 100;
+      let msg = pct >= 80 ? "Чудова підготовка! Ви повністю готові до обґрунтування реальних бізнес-проєктів розвитку." : "Рекомендуємо ще раз переглянути лекційні матеріали та звернути увагу на розбір практичних кейсів.";
+      
+      document.getElementById('quiz-options').innerHTML = `<p style='font-size:14px; color:var(--mid); line-height:1.6;'>${msg}</p>`;
+      document.getElementById('quiz-explanation-box').style.display = 'none';
+      
+      const btn = document.getElementById('quiz-action-btn');
+      btn.innerText = "Закрити тест";
+      btn.style.background = "var(--gold)";
+      btn.onclick = closeQuiz;
+    }
+  }
+}
 </script>
 </body>
 </html>
