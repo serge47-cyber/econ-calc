@@ -7,7 +7,7 @@
   <title>Економіка будівництва — навчальний сайт</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     /* ─── TOKENS (СВІТЛА ТЕМА ЗА ЗАМОВЧУВАННЯМ) ─────────── */
     :root {
@@ -73,22 +73,23 @@
     .site-main-nav {
       display: flex; justify-content: space-between; align-items: center;
       padding: 14px 40px; background: var(--bg2); border-bottom: 1px solid var(--border);
-      position: sticky; top: 0; z-index: 9999;
+      font-family: var(--font); font-size: 14px; position: sticky; top: 0; z-index: 9999;
       transition: background .25s, border-color .25s;
     }
     .nav-brand {
-      font-size: 15px; font-weight: 600; color: var(--accent);
-      white-space: nowrap;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 16px; font-weight: 700; color: var(--accent);
+      letter-spacing: -0.3px; white-space: nowrap;
     }
-    .nav-brand span { color: var(--text3); font-weight: 400; margin-left: 6px; font-size: 13px; }
+    .nav-brand span { color: var(--text3); font-family: var(--font); font-weight: 400; margin-left: 6px; font-size: 13px; }
     .nav-links { display: flex; align-items: center; gap: 2rem; }
     .nav-links a {
-      font-size: 14px; color: var(--text2); font-weight: 500;
+      font-size: 14px; color: var(--text2); font-weight: 400; /* Послаблюємо вагу до звичайної, щоб прибрати жирність */
       transition: color .2s;
     }
     .nav-links a:hover { color: var(--text); }
     .nav-links a.active {
-      color: var(--text) !important; font-weight: 700;
+      color: var(--text) !important; font-weight: 700; /* Залишаємо насичено жирним лише активний пункт */
       border-bottom: 2px solid var(--accent); padding-bottom: 4px;
     }
     .nav-right {
@@ -323,20 +324,20 @@
 </head>
 <body>
 
-  <nav class="site-main-nav">
-    <div class="nav-brand">Економіка будівництва<span>КНУБА</span></div>
-    <div class="nav-links">
-      <a href="index.html" class="active">Головна</a>
-      <a href="materials.html">Учбові матеріали</a>
-      <a href="economic-tasks.html">Лабораторія розрахунків</a>
-    </div>
-    <div class="nav-right">
-      <span>Режим:</span>
-      <button class="theme-btn" id="themeBtn" title="Перемкнути тему" aria-label="Перемкнути тему">
-        <span id="theme-text">Світлий</span> <span id="theme-emoji">🌙</span>
-      </button>
-    </div>
-  </nav>
+<nav class="site-main-nav" style="display: flex; justify-content: space-between; align-items: center; padding: 14px 40px; background: var(--bg2); border-bottom: 1px solid var(--border); font-family: var(--font); font-size: 14px; position: sticky; top: 0; z-index: 9999; transition: background .25s, border-color .25s;">
+  <div class="nav-brand" style="font-family: 'Fraunces', Georgia, serif; font-size: 16px; font-weight: 700; color: var(--accent); letter-spacing: -0.3px; white-space: nowrap;">Економіка будівництва<span style="color: var(--text3); font-family: var(--font); font-weight: 400; margin-left: 6px; font-size: 13px;">КНУБА</span></div>
+  <div class="nav-links" style="display: flex; align-items: center; gap: 2rem;">
+    <a href="index.html" class="active" style="color: var(--text) !important; font-weight: 700; border-bottom: 2px solid var(--accent); padding-bottom: 4px; font-size: 14px; transition: color .2s;">Головна</a>
+    <a href="materials.html" style="font-size: 14px; color: var(--text2); font-weight: 500; transition: color .2s;">Учбові матеріали</a>
+    <a href="economic-tasks.html" style="font-size: 14px; color: var(--text2); font-weight: 500; transition: color .2s;">Лабораторія розрахунків</a>
+  </div>
+  <div class="nav-right" style="display: flex; align-items: center; gap: 8px; margin-left: 1rem; border-left: 1px solid var(--border2); padding-left: 1.5rem;">
+    <span style="color: var(--text3); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px;">Режим:</span>
+    <button class="theme-btn" id="theme-toggle-btn" onclick="toggleTheme()" style="background: var(--bg3); color: var(--text); border: 1px solid var(--border2); border-radius: 20px; padding: 5px 14px; cursor: pointer; font-size: 13px; display: flex; align-items: center; gap: 6px; font-weight: 600; transition: all .2s; outline: none; font-family: var(--font);">
+      <span id="theme-text">Світлий</span> <span id="theme-emoji">🌙</span>
+    </button>
+  </div>
+</nav>
 
   <main class="page">
 
