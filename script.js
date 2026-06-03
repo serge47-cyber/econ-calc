@@ -138,37 +138,7 @@ function calculateConstructionProject() {
   document.head.appendChild(styleTag);
 
   // 2. Функція ініціалізації перемикача після завантаження DOM
-  function initThemeToggle() {
-    if (document.getElementById("global-theme-toggle")) return;
-
-    var currentTheme = localStorage.getItem("theme");
-    if (currentTheme === "dark") {
-      document.body.classList.add("dark-theme");
-    }
-
-    // Створюємо кнопку
-    var toggleBtn = document.createElement("button");
-    toggleBtn.id = "global-theme-toggle";
-    toggleBtn.innerHTML = currentTheme === "dark" ? "☀️" : "🌙";
-    
-    // Стилізуємо кнопку (фіксована у верхньому правому кутку, акуратна й помітна)
-    toggleBtn.setAttribute("style", "position: fixed; top: 16px; right: 24px; z-index: 99999; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line2); background: var(--bg2); color: var(--white); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: all 0.2s ease; outline: none;");
-    
-    document.body.appendChild(toggleBtn);
-
-    // Логіка перемикання за кліком
-    toggleBtn.addEventListener("click", function() {
-      document.body.classList.toggle("dark-theme");
-      var theme = "light";
-      if (document.body.classList.contains("dark-theme")) {
-        theme = "dark";
-        toggleBtn.innerHTML = "☀️";
-      } else {
-        toggleBtn.innerHTML = "🌙";
-      }
-      localStorage.setItem("theme", theme);
-    });
-  }
+  
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initThemeToggle);
